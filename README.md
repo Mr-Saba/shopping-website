@@ -19,5 +19,5 @@
 * React router
 ## პროექტის ჩამოსატვირთად :
 * git clone https://github.com/Mr-Saba/Website.git
-* npm i
+* npm install
 * npm start
