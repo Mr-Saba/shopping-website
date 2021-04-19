@@ -17,4 +17,5 @@
 * Firebase
 * i18next
 * React router
-
+## პროექტის ჩამოსატვირთად :
+* git clone 
