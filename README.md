@@ -18,4 +18,6 @@
 * i18next
 * React router
 ## პროექტის ჩამოსატვირთად :
-* git clone 
+* git clone https://github.com/Mr-Saba/Website.git
+* npm i
+* npm start
