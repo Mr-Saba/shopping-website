@@ -10,8 +10,8 @@
 ## გამოყენებული ტექნოლოგიები :
 * ReactJS
 * Redux
- - Redux-thunk
- - Redux-logger
+  - Redux-thunk
+  - Redux-logger
 * React hook form
 * MaterialUI
 * Firebase
