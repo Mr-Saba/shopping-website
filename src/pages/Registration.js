@@ -82,7 +82,7 @@ const HandleClick = () => {
             <button onClick={GoogleRegister}>google Register</button>
             <button onClick={FacebookRegister}>facebook Register</button>
 
-            <Link to="/sign-in" >Already have an account? Sign in</Link>
+            <Link to="/logIn" >Already have an account? Sign in</Link>
 
         </div>
     )
