@@ -29,7 +29,7 @@ function App() {
     <div className="App">
         <Header/>
       <Switch>
-        <Route path="/" exact component={Registration}></Route>
+        <Route path="/signUp" exact component={Registration}></Route>
         <Route path="/sign-in" component={LogIn} exact></Route>
         <Route path="/dashboard" component={Dashboard} exact></Route>
         <Route path="/forgot-password" component={ForgotPassword} exact></Route>
