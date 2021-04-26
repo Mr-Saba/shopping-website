@@ -1,7 +1,7 @@
 import React from 'react'
 import {Link} from "react-router-dom"
 import {useDispatch} from "react-redux"
-import { SignInWithEmailAndPassword } from '../redux/actions'
+import { SignInWithEmailAndPassword } from '../../redux/actions'
  
 function LogIn() {
 

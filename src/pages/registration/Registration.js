@@ -1,8 +1,9 @@
 import React from 'react'
 import {useDispatch} from "react-redux"
-import {SignUpWithEmailAndPassword, SignUpWithGoogle, SignUpWithFacebook, SignUpWithNumber} from "../redux/actions"
+import {SignUpWithEmailAndPassword, SignUpWithGoogle, SignUpWithFacebook, SignUpWithNumber} from "../../redux/actions"
 import {Link} from "react-router-dom"
-import {firebase} from "../firebase/Configuration"
+import {firebase} from "../../firebase/Configuration"
+import './registration.css'
 
 
 function Registration() {
@@ -83,7 +84,6 @@ const HandleClick = () => {
             <button onClick={FacebookRegister}>facebook Register</button>
 
             <Link to="/logIn" >Already have an account? Sign in</Link>
-
         </div>
     )
 }
