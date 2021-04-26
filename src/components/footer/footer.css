@@ -1,0 +1,50 @@
+ul{
+    list-style: none;
+    display: grid;
+}
+ul.productionUl {
+    grid-template-rows: 50px 30px 30px 30px 30px ;
+}
+ul.profileUl {
+    grid-template-rows: 50px 50px 50px;
+}
+
+ul.otherUl {
+    grid-template-rows: 50px 30px 30px;
+}
+a{
+    text-decoration: none;
+}
+/* nav.footerNav ul li a{
+    color: #034488;
+}
+nav.footerNav ul li a:first-child{
+    color: black;
+} */
+footer {
+    width: 100%;
+    background: #dbe6eb;
+    border-top: 2px solid #034488;
+    border-bottom: 2px solid #034488;
+    height: auto;
+}
+nav.footerNav {
+    display: grid;
+    grid-template-columns: 25% 25% 25% 25%;
+    justify-items: center;
+    justify-content: center;
+    padding: 20px 0;
+}
+.copyRight {
+    height: 50px;
+    background: #034488;
+    color: #dbe6eb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+ul.profileUl a.MuiButtonBase-root.MuiButton-root.MuiButton-contained {
+    background: #034488;
+    color: #f1f1f1;
+    width: 100%;
+}
