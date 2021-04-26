@@ -1,10 +1,10 @@
 import React, {useEffect} from 'react'
 import { Switch, Route, useHistory } from 'react-router'
 import {firebase, auth} from "./firebase/Configuration"
-import Registration from "./pages/Registration"
-import LogIn from "./pages/LogIn"
+import Registration from "./pages/registration/Registration"
+import LogIn from "./pages/logIn/LogIn"
 import Dashboard from "./pages/Dashboard"
-import ForgotPassword from './pages/ForgotPassword'
+import ForgotPassword from './pages/forgotPass/ForgotPassword'
 import './App.css';
 import Header from './components/header/header'
 import Footer from './components/footer/footer'
