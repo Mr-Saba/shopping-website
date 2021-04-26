@@ -69,21 +69,26 @@ const HandleClick = () => {
 
 
     return (
-        <div style={{display: "flex", flexDirection: "column", width: "400px"}}>
-            <form onSubmit={(event) => event.preventDefault()}>
-                <input type="text" placeholder="firstname" id="firstname"/>
-                <input type="text" placeholder="lastname" id="lastname"/>
-                <input type="text" placeholder="email or number" id="emailornumber"/>
-                <input type="password" placeholder="password" id="password"/>
-                <input type="password" placeholder="confirmpassword" id="confirm_password"/>
-                <div id="recaptcha"></div>
-                <button onClick={EmailAndPasswordRegister}>Register</button>
-            </form>
-                <p>or use providers</p>
-            <button onClick={GoogleRegister}>google Register</button>
-            <button onClick={FacebookRegister}>facebook Register</button>
-
-            <Link to="/logIn" >Already have an account? Sign in</Link>
+        <div className="registration">
+            <div className="center">
+                <p>Regiter now</p>
+                <form className="regForm" onSubmit={(event) => event.preventDefault()}>
+                    <input type="text" placeholder="firstname" id="firstname"/>
+                    <input type="text" placeholder="lastname" id="lastname"/>
+                    <input type="text" placeholder="email or number" id="emailornumber"/>
+                    <input type="password" placeholder="password" id="password"/>
+                    <input type="password" placeholder="confirm password" id="confirm_password"/>
+                    <div id="recaptcha"></div>
+                    <button onClick={EmailAndPasswordRegister}>Register</button>
+                </form>
+                <div className="googleFbReg">
+                    <button onClick={GoogleRegister}>Sign Up with Google</button>
+                    <button onClick={FacebookRegister}>Sign Up with Facebook</button>
+                </div>
+                <p>Already have an account?
+                <Link to="/logIn" > Sign in</Link>
+                </p>
+            </div>
         </div>
     )
 }
