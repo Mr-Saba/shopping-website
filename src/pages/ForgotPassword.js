@@ -16,7 +16,7 @@ function ForgotPassword() {
         <div>
             <input type="text" placeholder="email" id="sent_email"/>
             <button onClick={() => changePass()} >Reset Password</button>
-            <Link to="/sign-in">Back to Login Page</Link>
+            <Link to="/logIn">Back to Login Page</Link>
         </div>
     )
 }
