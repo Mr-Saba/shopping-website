@@ -24,7 +24,7 @@ function LogIn() {
 
             <Link to="/forgot-password">Forgot Password?</Link>
 
-            <Link to="/" >Need an account? Sign Up</Link>
+            <Link to="/signUp" >Need an account? Sign Up</Link>
         </div>
     )
 }
