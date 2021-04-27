@@ -41,16 +41,10 @@ function Registration() {
     //     } 
     // }
 const HandleClick = () => {
-     const recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha')
-        const number = "+995555235711"
-        firebase.auth().signInWithPhoneNumber(number, recaptchaVerifier).then((result) => {
-        let code = prompt("enter otp","")
-        if (code === null) console.log("null")
-        result.confirm(code).then((response) => {
-            console.log(response)
-            console.log("verified")
-        })
-     })
+    const data = {
+        number: document.getElementById("emailornumber")
+    }
+    dispatch(SignUpWithNumber(data))
     }
 
 
@@ -77,13 +71,13 @@ const HandleClick = () => {
                 <input type="password" placeholder="password" id="password"/>
                 <input type="password" placeholder="confirmpassword" id="confirm_password"/>
                 <div id="recaptcha"></div>
-                <button onClick={EmailAndPasswordRegister}>Register</button>
+                <button onClick={HandleClick}>Register</button>
             </form>
                 <p>or use providers</p>
             <button onClick={GoogleRegister}>google Register</button>
             <button onClick={FacebookRegister}>facebook Register</button>
 
-            <Link to="/logIn" >Already have an account? Sign in</Link>
+            <Link to="/" >Already have an account? Sign in</Link>
         </div>
     )
 }

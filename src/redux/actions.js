@@ -12,10 +12,10 @@ import { auth, firebase } from "../firebase/Configuration"
 const SignUpWithEmailAndPassword = (data) => async dispatch => {
     auth.createUserWithEmailAndPassword(data.email, data.password)
         .then(response => {
-            console.log(response.user)
+            console.log(response.user.ba.displayName)
             // response.user.displayName = data.name
             // const name = response.user.displayName
-            console.log(response.user.displayName)
+            // console.log(response.user.displayName)
             dispatch({
                 type: SIGN_UP_WITH_EMAIL_PASS,
                 payload: response.user
@@ -48,18 +48,21 @@ const SignUpWithFacebook = () => async dispatch => {
 }
 
 const SignUpWithNumber = (data) => async dispatch => {
-    // const appVerifier = window.recaptchaVerifier;
-    // auth.languageCode = 'ka';
-    // auth.signInWithPhoneNumber(data.number, appVerifier)
-    // .then((confirmationResult) => {
-    //     dispatch({
-    //         type: SIGN_UP_WITH_NUMBER,
-    //         payload: confirmationResult.user
-    //     })  
-    //    console.log(confirmationResult)
-    // }).catch((error) => {
-    //   console.log(error)
-    // });
+    const recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha')
+    auth.signInWithPhoneNumber(data.number, recaptchaVerifier).then((result) => {
+        console.log("result")
+        
+            let code = prompt("enter otp","")
+            if (code === null) console.log("null")
+            result.confirm(code).then((response) => {
+            dispatch({
+                type: SIGN_UP_WITH_NUMBER,
+                payload: result.user
+            })
+            console.log(response)
+            console.log("verified")
+        })
+ })
 }
 
 const SignOut = () => async dispatch => {

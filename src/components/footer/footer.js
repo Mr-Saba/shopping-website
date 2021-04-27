@@ -50,7 +50,7 @@ function Footer() {
                 <ul className="profileUl">
                     <li>Profile:</li>
                     <li>
-                        <Button component={Link} to="/logIn" variant="contained" >Log In</Button>
+                        <Button component={Link} to="/" variant="contained" >Log In</Button>
                     </li>
                     <li>
                         <Button component={Link} to="/signUp" variant="contained" >Sign Up</Button>

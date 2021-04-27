@@ -9,6 +9,8 @@ import './App.css';
 import Header from './components/header/header'
 import Footer from './components/footer/footer'
 import Main from './components/main/main';
+import ProtectedRoute from "./ProtectedRoute"
+
 
 function App() {
 
@@ -18,7 +20,7 @@ function App() {
     auth.onAuthStateChanged((user) => {
         if(user) {
             console.log("signed in")
-            history.push("/Dashboard")
+            history.push("/dashboard")
         }else{
           console.log("not signed in")
         }
@@ -30,8 +32,8 @@ function App() {
         <Header/>
       <Switch>
         <Route path="/signUp" exact component={Registration}></Route>
-        <Route path="/logIn" component={LogIn} exact></Route>
-        <Route path="/dashboard" component={Dashboard} exact></Route>
+        <Route path="/" component={LogIn} exact></Route>
+        <ProtectedRoute path="/dashboard" component={Dashboard} exact></ProtectedRoute>
         <Route path="/forgot-password" component={ForgotPassword} exact></Route>
       </Switch>
         <Footer/>
