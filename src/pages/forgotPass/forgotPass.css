@@ -19,7 +19,6 @@
 }
 .forgotPass .forgotPassForm input {
     padding-left: 20px;
-    text-transform: capitalize;
 }
 .forgotPass .forgotPassForm button {
     width: 45%;

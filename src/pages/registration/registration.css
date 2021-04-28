@@ -29,7 +29,6 @@ form.regForm {
 }
 form.regForm input {
     padding-left: 20px;
-    text-transform: capitalize;
 }
 .centerReg h1 {
     padding-bottom: 20px;

@@ -17,7 +17,6 @@
 }
 .logIn .logInCenter input {
     padding-left: 20px;
-    text-transform: capitalize;
 }
 .logInCenter button {
     width: 45%;
