@@ -71,7 +71,7 @@ const HandleClick = () => {
 
     return (
         <div className="registration">
-            <div className="center">
+            <div className="centerReg">
                 <h1>{t('SignUp')}</h1>
                 <span>{t('AlreadyHaveAnAccount')}?
                 <Link to="/logIn" > {t('LogIn')}</Link>

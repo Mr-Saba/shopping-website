@@ -5,6 +5,9 @@ import InstagramIcon from '@material-ui/icons/Instagram';
 import {Button} from '@material-ui/core'
 import { useTranslation } from "react-i18next";
 import i18next from '../../i18/languages/i18n'
+import {FormControl,NativeSelect} from '@material-ui/core';
+
+
 
 function Footer() {
 
@@ -68,12 +71,33 @@ function Footer() {
                 </ul>
                 <ul>
                     <li>
-                        <select  onChange={(event) => changeLanguage(event.target.value)} className="Select">
-                            <option value="en">english</option>
-                            <option value="ka">georgian</option>
-                            <option value="ru">russian</option>
-                        </select>
+                        {/* <select onChange={(event) => changeLanguage(event.target.value)} className="Select">
+                            <option value="en">English</option>
+                            <option value="ka">Georgian</option>
+                            <option value="ru">Russian</option>
+                        </select> */}
+                        <FormControl >
+                            <NativeSelect
+                            id="demo-customized-select-native"
+                            onChange={(event) => changeLanguage(event.target.value)} 
+                            >
+                            <option value="en">English</option>
+                            <option value="ka">Georgian</option>
+                            <option value="ru">Russian</option>
+                            </NativeSelect>
+                        </FormControl>
                     </li>
+                    {/* <ul>
+                        <li>
+                            <a href="" class="en">English</a>
+                        </li>
+                        <li>
+                            <a href="" class="ka">Georgian</a>
+                        </li>
+                        <li>
+                            <a href="" class="ru">Russian</a>
+                        </li>
+                    </ul> */}
                     <li>
                         <a href="https://www.instagram.com/" target='_blank'>
                             <InstagramIcon/>
