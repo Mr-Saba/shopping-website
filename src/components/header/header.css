@@ -52,7 +52,7 @@ nav.headerNav {
     width: 100%;
     height: 100%;
     display: grid;
-    grid-template-columns: 37.5% 25% 18.75% 18.75%;
+    grid-template-columns: 32.5% 35% 16.25% 16.25%;
 }
 nav.headerNav.li {
     width: 100%;
