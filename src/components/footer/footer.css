@@ -15,12 +15,7 @@ ul.otherUl {
 a{
     text-decoration: none;
 }
-/* nav.footerNav ul li a{
-    color: #034488;
-}
-nav.footerNav ul li a:first-child{
-    color: black;
-} */
+
 footer {
     width: 100%;
     background: #dbe6eb;

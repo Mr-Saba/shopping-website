@@ -1,4 +1,5 @@
 import React from 'react'
+import {Button} from "@material-ui/core"
 import {useDispatch} from "react-redux"
 import {SignUpWithEmailAndPassword, SignUpWithGoogle, SignUpWithFacebook, SignUpWithNumber} from "../../redux/actions"
 import {Link} from "react-router-dom"
@@ -6,7 +7,9 @@ import {firebase} from "../../firebase/Configuration"
 import './registration.css'
 
 
+
 function Registration() {
+
 
     const dispatch = useDispatch()
 
@@ -71,23 +74,26 @@ const HandleClick = () => {
     return (
         <div className="registration">
             <div className="center">
-                <p>Regiter now</p>
+                <h1>Sign up</h1>
+                <span>Already have an account?
+                <Link to="/logIn" > Sign in</Link>
+                </span>
+                <div className="googleFbReg">
+                    <Button variant="contained" onClick={GoogleRegister}>Sign Up with Google</Button>
+                    <Button variant="contained" onClick={FacebookRegister}>Sign Up with Facebook</Button>
+                </div>
+                <p>Or</p>
                 <form className="regForm" onSubmit={(event) => event.preventDefault()}>
-                    <input type="text" placeholder="firstname" id="firstname"/>
-                    <input type="text" placeholder="lastname" id="lastname"/>
+                    <div className="firstLastName">
+                        <input type="text" placeholder="firstname" id="firstname"/>
+                        <input type="text" placeholder="lastname" id="lastname"/>
+                    </div>
                     <input type="text" placeholder="email or number" id="emailornumber"/>
                     <input type="password" placeholder="password" id="password"/>
                     <input type="password" placeholder="confirm password" id="confirm_password"/>
                     <div id="recaptcha"></div>
-                    <button onClick={EmailAndPasswordRegister}>Register</button>
+                    <Button variant="contained" onClick={EmailAndPasswordRegister}>Register</Button>
                 </form>
-                <div className="googleFbReg">
-                    <button onClick={GoogleRegister}>Sign Up with Google</button>
-                    <button onClick={FacebookRegister}>Sign Up with Facebook</button>
-                </div>
-                <p>Already have an account?
-                <Link to="/logIn" > Sign in</Link>
-                </p>
             </div>
         </div>
     )
