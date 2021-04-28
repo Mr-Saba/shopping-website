@@ -1,8 +1,6 @@
 import { 
     SIGN_UP_WITH_EMAIL_PASS, 
     SIGN_UP_WITH_NUMBER, 
-    SIGN_UP_WITH_GOOGLE, 
-    SIGN_UP_WITH_FACEBOOK, 
     SIGN_OUT,
     SIGN_IN_WITH_EMAIL_PASS,
     RESET_PASS
@@ -23,29 +21,6 @@ const SignUpWithEmailAndPassword = (data) => async dispatch => {
         })
 }
 
-const SignUpWithGoogle = () => async dispatch => {
-    const googleProvider = new firebase.auth.GoogleAuthProvider()
-    auth.signInWithPopup(googleProvider)
-        .then(result => {
-            dispatch({
-                type: SIGN_UP_WITH_GOOGLE,
-                payload: result.user
-            })
-        })
-}
-
-const SignUpWithFacebook = () => async dispatch => {
-    const facebookProvider = new firebase.auth.FacebookAuthProvider()
-    auth.signInWithPopup(facebookProvider)
-        .then(result => {
-            dispatch({
-                type: SIGN_UP_WITH_FACEBOOK,
-                payload: result.user
-            })
-        }).catch(error => {
-            console.log(error)
-        })
-}
 
 const SignUpWithNumber = (data) => async dispatch => {
     const recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha')
@@ -97,4 +72,4 @@ const SignInWithEmailAndPassword = (data) => async dispatch => {
         })
 }
 
-export { SignUpWithEmailAndPassword, SignUpWithGoogle, SignUpWithFacebook, SignUpWithNumber, SignOut, ResetPass, SignInWithEmailAndPassword }
+export { SignUpWithEmailAndPassword, SignUpWithNumber, SignOut, ResetPass, SignInWithEmailAndPassword }

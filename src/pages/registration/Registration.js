@@ -1,7 +1,7 @@
 import React from 'react'
 import {Button} from "@material-ui/core"
 import {useDispatch} from "react-redux"
-import {SignUpWithEmailAndPassword, SignUpWithGoogle, SignUpWithFacebook, SignUpWithNumber} from "../../redux/actions"
+import {SignUpWithEmailAndPassword, SignUpWithNumber} from "../../redux/actions"
 import {Link} from "react-router-dom"
 import {firebase} from "../../firebase/Configuration"
 import './registration.css'
@@ -29,13 +29,6 @@ function Registration() {
         } 
     }
 
-    const GoogleRegister = () => {
-        dispatch(SignUpWithGoogle())
-    }
-
-    const FacebookRegister = () => {
-        dispatch(SignUpWithFacebook())
-    }
 
     // const MobileRegister = () => {
     //     const data = {
@@ -83,11 +76,6 @@ const HandleClick = () => {
                 <span>{t('AlreadyHaveAnAccount')}?
                 <Link to="/logIn" > {t('LogIn')}</Link>
                 </span>
-                <div className="googleFbReg">
-                    <Button variant="contained" onClick={GoogleRegister}>{t('GoogleRegister')}</Button>
-                    <Button variant="contained" onClick={FacebookRegister}>{t('FacebookRegister')}</Button>
-                </div>
-                <p>Or</p>
                 <form className="regForm" onSubmit={(event) => event.preventDefault()}>
                     <div className="firstLastName">
                         <input type="text" placeholder={t('FirstName')} id="firstname"/>
