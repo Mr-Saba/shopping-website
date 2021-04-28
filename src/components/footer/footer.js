@@ -60,7 +60,7 @@ function Footer() {
                 <ul className="profileUl">
                     <li>{t('Profile')}:</li>
                     <li>
-                        <Button component={Link} to="/" variant="contained" >{t('LogIn')}</Button>
+                        <Button component={Link} to="/logIn" variant="contained" >{t('LogIn')}</Button>
                     </li>
                     <li>
                         <Button component={Link} to="/signUp" variant="contained" >{t('SignUp')}</Button>

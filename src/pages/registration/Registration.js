@@ -1,10 +1,12 @@
 import React from 'react'
+import {Button} from "@material-ui/core"
 import {useDispatch} from "react-redux"
 import {SignUpWithEmailAndPassword, SignUpWithGoogle, SignUpWithFacebook, SignUpWithNumber} from "../../redux/actions"
 import {Link} from "react-router-dom"
 import {firebase} from "../../firebase/Configuration"
 import './registration.css'
 import { useTranslation } from "react-i18next";
+
 
 
 function Registration() {
@@ -75,21 +77,29 @@ const HandleClick = () => {
 
 
     return (
-        <div style={{display: "flex", flexDirection: "column", width: "400px"}}>
-            <form onSubmit={(event) => event.preventDefault()}>
-                <input type="text" placeholder={t('FirstName')} id="firstname"/>
-                <input type="text" placeholder={t('LastName')} id="lastname"/>
-                <input type="text" placeholder={t('EmailOrNumber')} id="emailornumber"/>
-                <input type="password" placeholder={t('Password')}id="password"/>
-                <input type="password" placeholder={t('ConfirmPassword')} id="confirm_password"/>
-                <div id="recaptcha"></div>
-                <button onClick={EmailAndPasswordRegister}>{t('SignUp')}</button>
-            </form>
-                <p>{t('OrUseProviders')}</p>
-            <button onClick={GoogleRegister}>{t('GoogleRegister')}</button>
-            <button onClick={FacebookRegister}>{t('FacebookRegister')}</button>
-
-            <Link to="/" >{t('AlreadyHaveAnAccount')}? {t('LogIn')}</Link>
+        <div className="registration">
+            <div className="center">
+                <h1>{t('SignUp')}</h1>
+                <span>{t('AlreadyHaveAnAccount')}?
+                <Link to="/logIn" > {t('LogIn')}</Link>
+                </span>
+                <div className="googleFbReg">
+                    <Button variant="contained" onClick={GoogleRegister}>{t('GoogleRegister')}</Button>
+                    <Button variant="contained" onClick={FacebookRegister}>{t('FacebookRegister')}</Button>
+                </div>
+                <p>Or</p>
+                <form className="regForm" onSubmit={(event) => event.preventDefault()}>
+                    <div className="firstLastName">
+                        <input type="text" placeholder={t('FirstName')} id="firstname"/>
+                        <input type="text" placeholder={t('LastName')} id="lastname"/>
+                    </div>
+                    <input type="text" placeholder={t('EmailOrNumber')} id="emailornumber"/>
+                    <input type="password" placeholder={t('Password')} id="password"/>
+                    <input type="password" placeholder={t('ConfirmPassword')} id="confirm_password"/>
+                    <div id="recaptcha"></div>
+                    <Button variant="contained" onClick={EmailAndPasswordRegister}>{t('SignUp')}</Button>
+                </form>
+            </div>
         </div>
     )
 }

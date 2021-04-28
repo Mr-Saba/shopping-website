@@ -32,7 +32,7 @@ function App() {
         <Header/>
       <Switch>
         <Route path="/signUp" exact component={Registration}></Route>
-        <Route path="/" component={LogIn} exact></Route>
+        <Route path="/logIn" component={LogIn} exact></Route>
         <ProtectedRoute path="/dashboard" component={Dashboard} exact></ProtectedRoute>
         <Route path="/forgot-password" component={ForgotPassword} exact></Route>
       </Switch>
