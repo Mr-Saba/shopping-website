@@ -1,8 +1,11 @@
 import React from 'react'
 import { useDispatch } from "react-redux"
 import { SignOut } from '../redux/actions'
+import { useTranslation } from "react-i18next";
 
 function Dashboard() {
+
+    const {t} = useTranslation()
 
     const dispatch = useDispatch()
 
@@ -12,7 +15,7 @@ function Dashboard() {
 
     return (
         <div>
-            <button onClick={LogOut}>Log Out</button>
+            <button onClick={LogOut}>{t('LogOut')}</button>
         </div>
     )
 }

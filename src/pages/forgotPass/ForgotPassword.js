@@ -2,8 +2,10 @@ import React from 'react'
 import {Link} from "react-router-dom"
 import {useDispatch} from "react-redux"
 import {ResetPass} from "../../redux/actions"
+import { useTranslation } from "react-i18next";
 
 function ForgotPassword() {
+    const {t} = useTranslation()
 
     const dispatch = useDispatch()
 
@@ -15,8 +17,8 @@ function ForgotPassword() {
     return (
         <div>
             <input type="text" placeholder="email" id="sent_email"/>
-            <button onClick={() => changePass()} >Reset Password</button>
-            <Link to="/">Back to Login Page</Link>
+            <button onClick={() => changePass()} >{t('ResetPassword')}</button>
+            <Link to="/">{t('BackToLoginPage')}</Link>
         </div>
     )
 }

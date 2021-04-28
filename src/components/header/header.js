@@ -6,9 +6,13 @@ import PersonOutlineOutlinedIcon from '@material-ui/icons/PersonOutlineOutlined'
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import { IconButton, Badge} from '@material-ui/core';
 import { ShoppingCart } from '@material-ui/icons';
+import { useTranslation } from "react-i18next";
 
 
 function Header() {
+
+    const {t} = useTranslation()
+
     return (
         <div className="header">
            <nav className="headerNav">
@@ -19,13 +23,13 @@ function Header() {
                 </ul>
                <ul className="centerUl">
                    <li>
-                       <Link to="/">Home</Link>
+                       <Link to="/">{t('Home')}</Link>
                    </li>
                    <li>
-                       <Link to="/production">Production</Link>
+                       <Link to="/production">{t('Production')}</Link>
                    </li>
                    <li>
-                       <Link to="/aboutUs">About Us</Link>
+                       <Link to="/aboutUs">{t('AboutUs')}</Link>
                    </li>
                 </ul>
                 <ul className="serach">

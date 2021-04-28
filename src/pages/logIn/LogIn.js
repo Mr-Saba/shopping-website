@@ -2,8 +2,11 @@ import React from 'react'
 import {Link} from "react-router-dom"
 import {useDispatch} from "react-redux"
 import { SignInWithEmailAndPassword } from '../../redux/actions'
- 
+import { useTranslation } from "react-i18next";
+
 function LogIn() {
+
+    const {t} = useTranslation()
 
     const dispatch = useDispatch()
 
@@ -17,14 +20,14 @@ function LogIn() {
 
     return (
         <div>   
-            <input type="text" placeholder="email or number" id="email-login" />
-            <input type="password" placeholder="password" id="password-login"/>
+            <input type="text" placeholder={t('EmailOrNumber')} id="email-login" />
+            <input type="password" placeholder={t('Password')} id="password-login"/>
 
-            <button onClick={LoginWithEmail}>Sign in</button>
+            <button onClick={LoginWithEmail}>{t('LogIn')}</button>
 
-            <Link to="/forgot-password">Forgot Password?</Link>
+            <Link to="/forgot-password">{t('ForgotPassword')}?</Link>
 
-            <Link to="/signUp" >Need an account? Sign Up</Link>
+            <Link to="/signUp" >{t('NeedAnAccount')}? {t('SignUp')}</Link>
         </div>
     )
 }

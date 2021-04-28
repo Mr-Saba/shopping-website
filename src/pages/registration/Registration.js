@@ -4,9 +4,13 @@ import {SignUpWithEmailAndPassword, SignUpWithGoogle, SignUpWithFacebook, SignUp
 import {Link} from "react-router-dom"
 import {firebase} from "../../firebase/Configuration"
 import './registration.css'
+import { useTranslation } from "react-i18next";
 
 
 function Registration() {
+
+    const {t} = useTranslation()
+
 
     const dispatch = useDispatch()
 
@@ -42,10 +46,18 @@ function Registration() {
     // }
 const HandleClick = () => {
     const data = {
-        number: document.getElementById("emailornumber")
+        name: document.getElementById("firstname").value,
+        surname: document.getElementById("lastname").value,
+        number: document.getElementById("emailornumber").value,
+        password: document.getElementById("emailornumber").value,
     }
+    if(document.getElementById("password").value === document.getElementById("confirm_password").value) {
     dispatch(SignUpWithNumber(data))
+    } else {
+        console.log("no confirmation")
     }
+    }
+    
 
 
     // const onSignInSubmit = () => {
@@ -65,19 +77,19 @@ const HandleClick = () => {
     return (
         <div style={{display: "flex", flexDirection: "column", width: "400px"}}>
             <form onSubmit={(event) => event.preventDefault()}>
-                <input type="text" placeholder="firstname" id="firstname"/>
-                <input type="text" placeholder="lastname" id="lastname"/>
-                <input type="text" placeholder="email or number" id="emailornumber"/>
-                <input type="password" placeholder="password" id="password"/>
-                <input type="password" placeholder="confirmpassword" id="confirm_password"/>
+                <input type="text" placeholder={t('FirstName')} id="firstname"/>
+                <input type="text" placeholder={t('LastName')} id="lastname"/>
+                <input type="text" placeholder={t('EmailOrNumber')} id="emailornumber"/>
+                <input type="password" placeholder={t('Password')}id="password"/>
+                <input type="password" placeholder={t('ConfirmPassword')} id="confirm_password"/>
                 <div id="recaptcha"></div>
-                <button onClick={HandleClick}>Register</button>
+                <button onClick={EmailAndPasswordRegister}>{t('SignUp')}</button>
             </form>
-                <p>or use providers</p>
-            <button onClick={GoogleRegister}>google Register</button>
-            <button onClick={FacebookRegister}>facebook Register</button>
+                <p>{t('OrUseProviders')}</p>
+            <button onClick={GoogleRegister}>{t('GoogleRegister')}</button>
+            <button onClick={FacebookRegister}>{t('FacebookRegister')}</button>
 
-            <Link to="/" >Already have an account? Sign in</Link>
+            <Link to="/" >{t('AlreadyHaveAnAccount')}? {t('LogIn')}</Link>
         </div>
     )
 }

@@ -49,6 +49,7 @@ const SignUpWithFacebook = () => async dispatch => {
 
 const SignUpWithNumber = (data) => async dispatch => {
     const recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha')
+    console.log(data.number)
     auth.signInWithPhoneNumber(data.number, recaptchaVerifier).then((result) => {
         console.log("result")
         
