@@ -5,18 +5,22 @@ import {
     SIGN_IN_WITH_EMAIL_PASS,
     RESET_PASS
     } from "./constants"
-import { auth, firebase } from "../firebase/Configuration"
+import { auth, firebase, firestore } from "../firebase/Configuration"
 
 const SignUpWithEmailAndPassword = (data) => async dispatch => {
-    auth.createUserWithEmailAndPassword(data.email, data.password)
-        .then(response => {
-            console.log(response.user.ba.displayName)
-            // response.user.displayName = data.name
-            // const name = response.user.displayName
-            // console.log(response.user.displayName)
+    await auth.createUserWithEmailAndPassword(data.email, data.password)
+        .then(cred => {
+            console.log("dasda")
+            firestore.collection("users").doc(cred.user.uid).set({
+                email: data.email,
+                firstname: data.name,
+                lastname: data.surname,
+                dateofbirth: "",
+                number: data.number
+            })
             dispatch({
                 type: SIGN_UP_WITH_EMAIL_PASS,
-                payload: response.user
+                payload: cred.user
             })
         })
 }
@@ -72,4 +76,23 @@ const SignInWithEmailAndPassword = (data) => async dispatch => {
         })
 }
 
-export { SignUpWithEmailAndPassword, SignUpWithNumber, SignOut, ResetPass, SignInWithEmailAndPassword }
+const UpdateCredentials = (data) => async dispatch => {
+    const user = auth.currentUser
+        await user.updateEmail(data.email).then(()=>{
+            console.log("email has changed")
+        }).catch((error) => {
+            console.log(error)
+        })
+        // .finally()
+        // if(data.password === data.confirm_password) {
+        //     await user.updatePassword(data.password).then(()=>{
+        //         console.log("password has changed")
+        //     }).catch((error) => {
+        //         console.log(error)
+        //     })
+        // } else {
+        //     alert("confirm error")
+        // }
+}
+
+export { SignUpWithEmailAndPassword, SignUpWithNumber, SignOut, ResetPass, SignInWithEmailAndPassword, UpdateCredentials }

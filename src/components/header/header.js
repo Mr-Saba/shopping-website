@@ -7,9 +7,20 @@ import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import { IconButton, Badge} from '@material-ui/core';
 import { ShoppingCart } from '@material-ui/icons';
 import { useTranslation } from "react-i18next";
-
+import {useDispatch} from "react-redux"
+import {SignOut} from "../../redux/actions"
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import {useSelector} from "react-redux"
 
 function Header() {
+
+    const dispatch = useDispatch()
+
+    const { isLoggedIn} = useSelector(state => state)
+
+    const LogOut = () => {
+        dispatch(SignOut())
+    }
 
     const {t} = useTranslation()
 
@@ -37,7 +48,7 @@ function Header() {
                 </ul>
                 <ul className="rightUl">
                    <li>
-                       <Link to="/loved">
+                       <Link to="/cart">
                            <FavoriteBorderIcon/>
                        </Link>
                    </li>
@@ -49,10 +60,22 @@ function Header() {
                         </IconButton>
                    </li>
                    <li>
-                       <Link to="/profile">
+                       <Link to="/profile/settings">
                            <PersonOutlineOutlinedIcon/>
                        </Link>
                    </li>
+                   { (isLoggedIn === true) ? (
+                   <li>
+                       <button onClick={LogOut}>
+                            <ExitToAppIcon/>
+                       </button>
+                   </li>
+                   ) : (
+                   <li>
+                       
+                   </li>
+                   )
+                    }
                 </ul>
            </nav>
         </div>
