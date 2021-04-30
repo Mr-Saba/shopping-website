@@ -6,63 +6,39 @@ import {Link} from "react-router-dom"
 import {firebase} from "../../firebase/Configuration"
 import './registration.css'
 import { useTranslation } from "react-i18next";
-import { useFormik } from 'formik';
+import { useForm } from "react-hook-form";
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from "yup";
+
 
 
 
 
 function Registration() {
 
-    const validate = values => {
-        const errors = {};
-        if (!values.firstName) {
-            errors.firstName = 'This field is required';
-        } else if(values.firstName.length > 20) {
-            errors.firstName = 'Name is too long';
-        }
-        if (!values.lastName) {
-            errors.lastName = 'This field is required';
-        } else if(values.lastName.length > 25) {
-            errors.lastName = 'Surname is too long';
-        }
-        if (!values.email) {
-            errors.email = 'This field is required';
-        } else if(!values.email.includes('@')) {
-            errors.email = 'Use a valid email adress'
-        }
-        if (!values.password) { 
-            errors.password = 'This field is required';
-        } else if(values.password.length < 8) {
-            errors.password = 'Password must contain at least 8 symbols'
-        } else if (values.password.length > 16){
-          errors.password = 'Password must contain less than 16 symbols'  
-        } else if(values.password.search(/(?=.*[0-9])/)) {
-          errors.password = 'Password must contain at least 1 number'
-        } else if(!values.password.search(/(?=.*[!@#$%^&*])/)) {
-          errors.password = 'You should not use any special character'
-        }
-        if (values.passwordConfirmation !== values.password) {
-            errors.passwordConfirmation = 'Passwords do not match';
-        }
-        if (values.number.search(/^(0|[1-9]\d*)$/)) {
-            errors.number = 'use mobile number'
-        }
-        return errors;
-      }
+    const schema = yup.object().shape({
+        firstName: yup.string('use a valid name')  
+                   .max(25, 'name is too long!')
+                   .required('name field is required'),
+        lastName: yup.string('use a valid surname')
+                   .max(25, 'surname is too long!')
+                   .required('surname field is required'),
+        email: yup.string()
+                   .email('Enter a valid email')
+                   .required('email field is required'),
+        password: yup.string()
+                   .required('password field is required')
+                   .min(8, 'password is too short!')
+                   .max(17, 'password is too long!')
+                   .matches(/(?=.*[0-9])/, 'password must contain some numbers'),
+        passwordConfirmation: yup.string()
+                   .required('password confirmation field is required')
+                   .oneOf([yup.ref('password'), null], 'Passwords not match'),
+        number: yup.number().typeError('use a valid number')
+    });
 
-      const formik = useFormik({
-        initialValues: {
-           firstName: '',
-           lastName: '',
-           email: '',
-           password: '',
-           passwordConfirmation: '',
-           number: ''
-        },
-        validate,
-        onSubmit: values => {
-          alert(JSON.stringify(values, null, 2));
-        }
+    const { register, formState: { errors }, handleSubmit } = useForm({
+        resolver: yupResolver(schema)
       })
     
     const {t} = useTranslation()
@@ -81,7 +57,7 @@ function Registration() {
             dispatch(SignUpWithEmailAndPassword(data)) 
     }
 
-
+    const onSubmit = (data) => console.log(data)
 
     return (
         <div className="registration">
@@ -90,22 +66,21 @@ function Registration() {
                 <span>{t('AlreadyHaveAnAccount')}?
                 <Link to="/logIn" > {t('LogIn')}</Link>
                 </span>
-                <form className="regForm" onSubmit={formik.handleSubmit}>
+                <form className="regForm" onSubmit={handleSubmit(onSubmit)}>
                     <div className="firstLastName">
-                        <input type="text" placeholder={t('FirstName')} name="firstName" onChange={formik.handleChange} id="firstname"/>
-                        {formik.errors.firstName ? <div>{formik.errors.firstName}</div> : null}
-                        <input type="text" placeholder={t('LastName')} name="lastName" id="lastname"/>
-                        {formik.errors.lastName ? <div>{formik.errors.lastName}</div> : null}
+                        <input type="text" placeholder={t('FirstName')} {...register("firstName")} id="firstname"/>
+                        <p>{errors.firstName?.message}</p>
+                        <input type="text" placeholder={t('LastName')} {...register("lastName")} id="lastname"/>
+                        <p>{errors.lastName?.message}</p>
                     </div>
-                        <input type="text" placeholder={t('Email')}  name="email" onChange={formik.handleChange} id="email"/>
-                        {formik.errors.email ? <div>{formik.errors.email}</div> : null}
-                        <input type="password" placeholder={t('Password')} name="password" onChange={formik.handleChange} id="password"/>
-                        {formik.errors.password ? <div>{formik.errors.password}</div> : null}
-                        <input type="password" placeholder={t('ConfirmPassword')} name="passwordConfirmation" onChange={formik.handleChange} id="confirm_password"/>
-                        {formik.errors.passwordConfirmation ? <div>{formik.errors.passwordConfirmation}</div> : null}
-                        <input type="text" placeholder={t('Number')} id="number" onChange={formik.handleChange} name="number"/>
-                        {formik.errors.number ? <div>{formik.errors.number}</div> : null}
-
+                        <input type="text" placeholder={t('Email')} {...register("email")} id="email"/>
+                        <p>{errors.email?.message}</p>
+                        <input type="password" placeholder={t('Password')} {...register("password")} id="password"/>
+                        <p>{errors.password?.message}</p>
+                        <input type="password" placeholder={t('ConfirmPassword')} {...register("passwordConfirmation")}  id="confirm_password"/>
+                        <p>{errors.passwordConfirmation?.message}</p>
+                        <input type="text" placeholder={t('Number')} {...register("number")} id="number" />
+                        <p>{errors.number?.message}</p>
                     <Button type="submit" variant="contained" onClick={EmailAndPasswordRegister}>{t('SignUp')}</Button>
                 </form>
             </div>
