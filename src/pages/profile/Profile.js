@@ -3,10 +3,15 @@ import { useDispatch } from "react-redux"
 import { UpdateCredentials } from '../../redux/actions'
 import {useSelector} from "react-redux"
 import {firestore} from "../../firebase/Configuration"
+import { useTranslation } from "react-i18next";
+import "./profile.css"
+import { Button } from '@material-ui/core'
 
 
 function Profile() {
 
+    const {t} = useTranslation()
+    
     const dispatch = useDispatch()
 
     const {user} = useSelector(state => state)
@@ -49,18 +54,22 @@ function Profile() {
 
 
     return (
-        <div>
-            email
-            <input type="email" id="update_email" defaultValue={user && user.email}/>
-            first name
-            <input type="text" defaultValue={state.firstName}/>
-            last name
-            <input type="text" defaultValue={state.lastName}/>
-            date of birth
-            <input type="date" defaultValue={state.date} />
-            phone number
-            <input type="number" defaultValue={state.number}/>
-            <button onClick={changeCredentials}>update details</button>
+        <div className="redactOfProfile">
+            <div className="redactCenter">
+                <form className="redactProfile">
+                    <p>{t('Email')}</p>
+                    <input type="email" id="update_email" defaultValue={user && user.email}/>
+                    <p>{t('FirstName')}</p>
+                    <input type="text" defaultValue={state.firstName}/>
+                    <p>{t('LastName')}</p>
+                    <input type="text" defaultValue={state.lastName}/>
+                    <p>{t('Date of birth')}</p>
+                    <input type="date" defaultValue={state.date} />
+                    <p>{t('Number')}</p>
+                    <input type="number" defaultValue={state.number}/>
+                    <Button type="submit" variant="contained" onClick={changeCredentials}>{t('Update details')}</Button>
+                </form>
+            </div>
         </div>
     )
 }

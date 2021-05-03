@@ -25,5 +25,8 @@
     "NeedAnAccount": "Need an Account",
     "BackToLoginPage": "Back to Login",
     "ResetPassword": "Reset Password",
-    "LogOut": "Log Out"
+    "LogOut": "Log Out",
+    "Settings": "Settings",
+    "Date of birth": "Date of birth",
+    "Update details": "Update details"
 }

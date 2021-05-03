@@ -1,7 +1,7 @@
 {
     "Home":"Главная страница",
-    "Production": "производство",
-    "AboutUs": "о нас",
+    "Production": "Производство",
+    "AboutUs": "О нас",
     "Earrings": "Серьги",
     "Rings": "Кольца",
     "Necklaces": "Ожерелья",
@@ -14,16 +14,19 @@
     "FirstName": "Имя",
     "LastName": "Фамилия",
     "Email": "Электронная почта",
-    "Number": "номер мобильного",
-    "Password": "пароль",
+    "Number": "Номер мобильного",
+    "Password": "Пароль",
     "ConfirmPassword": "Повторите пароль",
     "OrUseProviders": "Или используйте провайдеров",
     "GoogleRegister": "Google Регистрация",
     "FacebookRegister": "Facebook Регистрация",
     "AlreadyHaveAnAccount": "У вас уже есть учетная запись",
     "ForgotPassword": "Забыли Ваш пароль",
-    "NeedAnAccount": "нужна учетная запись",
+    "NeedAnAccount": "Нужна учетная запись",
     "BackToLoginPage": "Вернуться на страницу входа",
     "ResetPassword": "Измени пароль",
-    "LogOut": "выйти"
+    "LogOut": "Выйти",
+    "Settings": "Настройки",
+    "Date of birth": "Дата рождения",
+    "Update details": "Детали обновления"
 }

@@ -25,5 +25,8 @@
     "NeedAnAccount": "გჭირდება ანგარიში",
     "BackToLoginPage": "ავტორიზაციის გვერდზე დაბრუნება",
     "ResetPassword": "პაროლის შეცვლა",
-    "LogOut": "გამოსვლა"
+    "LogOut": "გამოსვლა",
+    "Settings": "პარამეტრები",
+    "Date of birth": "დაბადების თარიღი",
+    "Update details" : "დეტალების განახლება"
 }

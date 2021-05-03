@@ -6,10 +6,13 @@ import {Button} from '@material-ui/core'
 import { useTranslation } from "react-i18next";
 import i18next from '../../i18/languages/i18n'
 import {FormControl,NativeSelect} from '@material-ui/core';
+import {useSelector} from "react-redux"
 
 
 
 function Footer() {
+
+    const { isLoggedIn} = useSelector(state => state)
 
     const {t} = useTranslation()
     
@@ -61,21 +64,28 @@ function Footer() {
                     </li>
                 </ul>
                 <ul className="profileUl">
-                    <li>{t('Profile')}:</li>
+                <li>{t('Profile')}:</li>
+                { (isLoggedIn === true) ?
+                (
+                    <>
+                    <Link to="/profile/settings">
+                        {t('Settings')}
+                    </Link>
+                    </>
+                ) : (
+                    <>
                     <li>
                         <Button component={Link} to="/logIn" variant="contained" >{t('LogIn')}</Button>
                     </li>
                     <li>
                         <Button component={Link} to="/signUp" variant="contained" >{t('SignUp')}</Button>
                     </li>
+                    </>
+                )
+                }
                 </ul>
                 <ul>
                     <li>
-                        {/* <select onChange={(event) => changeLanguage(event.target.value)} className="Select">
-                            <option value="en">English</option>
-                            <option value="ka">Georgian</option>
-                            <option value="ru">Russian</option>
-                        </select> */}
                         <FormControl >
                             <NativeSelect
                             id="demo-customized-select-native"
@@ -87,17 +97,6 @@ function Footer() {
                             </NativeSelect>
                         </FormControl>
                     </li>
-                    {/* <ul>
-                        <li>
-                            <a href="" class="en">English</a>
-                        </li>
-                        <li>
-                            <a href="" class="ka">Georgian</a>
-                        </li>
-                        <li>
-                            <a href="" class="ru">Russian</a>
-                        </li>
-                    </ul> */}
                     <li>
                         <a href="https://www.instagram.com/" target='_blank'>
                             <InstagramIcon/>

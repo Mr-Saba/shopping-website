@@ -21,7 +21,7 @@ function ForgotPassword() {
             <div className="forgotPassCenter">
                 <h1>{t('ResetPassword')}</h1>
                 <div className="forgotPassForm">
-                    <input type="text" placeholder="email" id="sent_email"/>
+                    <input type="text" placeholder="Email" id="sent_email"/>
                     <Button variant="contained" onClick={() => changePass()} >{t('ResetPassword')}</Button>
                     <Link to="/logIn">{t('BackToLoginPage')}</Link>
                 </div>

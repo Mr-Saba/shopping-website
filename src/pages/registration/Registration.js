@@ -67,12 +67,10 @@ function Registration() {
                 <Link to="/logIn" > {t('LogIn')}</Link>
                 </span>
                 <form className="regForm" onSubmit={handleSubmit(onSubmit)}>
-                    <div className="firstLastName">
                         <input type="text" placeholder={t('FirstName')} {...register("firstName")} id="firstname"/>
                         <p>{errors.firstName?.message}</p>
                         <input type="text" placeholder={t('LastName')} {...register("lastName")} id="lastname"/>
                         <p>{errors.lastName?.message}</p>
-                    </div>
                         <input type="text" placeholder={t('Email')} {...register("email")} id="email"/>
                         <p>{errors.email?.message}</p>
                         <input type="password" placeholder={t('Password')} {...register("password")} id="password"/>
