@@ -66,7 +66,7 @@ function Header() {
                    </li>
                    { (isLoggedIn === true) ? (
                    <li>
-                       <button onClick={LogOut}>
+                       <button style={{cursor: "pointer"}} onClick={LogOut}>
                             <ExitToAppIcon/>
                        </button>
                    </li>

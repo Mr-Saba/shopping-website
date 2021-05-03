@@ -73,6 +73,8 @@ const SignInWithEmailAndPassword = (data) => async dispatch => {
                 type: SIGN_IN_WITH_EMAIL_PASS,
                 payload: response.user
             })
+        }).catch((error) => {
+            console.log(error.message)
         })
 }
 
@@ -80,9 +82,12 @@ const UpdateCredentials = (data) => async dispatch => {
     const user = auth.currentUser
         await user.updateEmail(data.email).then(()=>{
             console.log("email has changed")
-        }).catch((error) => {
-            console.log(error)
         })
+    if(data.password === data.confirm_password) {
+        await user.updatePassword(data.password).then(()=>{
+        console.log("password has changed")
+        })
+    }
         // .finally()
         // if(data.password === data.confirm_password) {
         //     await user.updatePassword(data.password).then(()=>{

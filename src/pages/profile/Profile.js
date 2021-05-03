@@ -44,8 +44,8 @@ function Profile() {
     const changeCredentials = async () => {
         const data = {
             email: document.getElementById("update_email").value,
-            // password: document.getElementById("update_password").value,
-            // confirm_password: document.getElementById("update_confirm_password").value
+            password: document.getElementById("update_password").value,
+            confirm_password: document.getElementById("update_confirm_password").value
         
         }
         dispatch(UpdateCredentials(data))

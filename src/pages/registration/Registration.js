@@ -1,9 +1,8 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import {Button} from "@material-ui/core"
 import {useDispatch} from "react-redux"
-import {SignUpWithEmailAndPassword, SignUpWithNumber} from "../../redux/actions"
+import {SignUpWithEmailAndPassword} from "../../redux/actions"
 import {Link} from "react-router-dom"
-import {firebase} from "../../firebase/Configuration"
 import './registration.css'
 import { useTranslation } from "react-i18next";
 import { useForm } from "react-hook-form";
@@ -15,6 +14,10 @@ import * as yup from "yup";
 
 
 function Registration() {
+
+    useEffect(() => {
+        console.log(errors.number)
+    }, [])
 
     const schema = yup.object().shape({
         firstName: yup.string('use a valid name')  
@@ -34,7 +37,8 @@ function Registration() {
         passwordConfirmation: yup.string()
                    .required('password confirmation field is required')
                    .oneOf([yup.ref('password'), null], 'Passwords not match'),
-        number: yup.number().typeError('use a valid number')
+        number: yup.string().nullable().matches(/(^[0-9]*$)/, 'use a valid number')
+        // /(^[0-9]*$)/
     });
 
     const { register, formState: { errors }, handleSubmit } = useForm({
@@ -42,7 +46,6 @@ function Registration() {
       })
     
     const {t} = useTranslation()
-    
     
     const dispatch = useDispatch()
 
@@ -78,7 +81,7 @@ function Registration() {
                         <input type="password" placeholder={t('ConfirmPassword')} {...register("passwordConfirmation")}  id="confirm_password"/>
                         <p>{errors.passwordConfirmation?.message}</p>
                         <input type="text" placeholder={t('Number')} {...register("number")} id="number" />
-                        <p>{errors.number?.message}</p>
+                        <p>{(errors.number === undefined) ? ('') : (errors.number?.message)}</p>
                     <Button type="submit" variant="contained" onClick={EmailAndPasswordRegister}>{t('SignUp')}</Button>
                 </form>
             </div>
