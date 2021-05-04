@@ -2,12 +2,13 @@ import {
     SIGN_UP_WITH_EMAIL_PASS, 
     SIGN_UP_WITH_NUMBER, 
     SIGN_OUT,
-    SIGN_IN_WITH_EMAIL_PASS
+    SIGN_IN_WITH_EMAIL_PASS,
+    RESET_PASS
 } from "./constants"
 
 const initialState = {
     user: null,
-    isLoggedIn: false
+    isLoggedIn: false,
 }
 
 const Reducer = (state=initialState, action) => {
@@ -15,22 +16,27 @@ const Reducer = (state=initialState, action) => {
         case SIGN_UP_WITH_EMAIL_PASS: return {
             ...state,
             user: action.payload,
-            isLoggedIn: true
+            isLoggedIn: true,
         }
         case SIGN_UP_WITH_NUMBER: return {
             ...state,
             user: action.payload,
-            isLoggedIn: true
+            isLoggedIn: true,
         }
         case SIGN_OUT: return {
             ...state,
             user: action.payload,
-            isLoggedIn: false
+            isLoggedIn: false,
         }
         case SIGN_IN_WITH_EMAIL_PASS: return {
             ...state,
             user: action.payload,
-            isLoggedIn: true
+            isLoggedIn: true,
+        }
+        case RESET_PASS: return {
+            ...state,
+            user: action.payload,
+            isLoggedIn: true,
         }
         default: return state
     }

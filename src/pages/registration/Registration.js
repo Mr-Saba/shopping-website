@@ -27,8 +27,8 @@ function Registration() {
                    .max(25, 'surname is too long!')
                    .required('surname field is required'),
         email: yup.string()
-                   .email('Enter a valid email')
-                   .required('email field is required'),
+                   .email('Enter a valid email-adress')
+                   .required('email-adress field is required'),
         password: yup.string()
                    .required('password field is required')
                    .min(8, 'password is too short!')
@@ -71,15 +71,15 @@ function Registration() {
                 </span>
                 <form className="regForm" onSubmit={handleSubmit(onSubmit)}>
                         <input type="text" placeholder={t('FirstName')} {...register("firstName")} id="firstname"/>
-                        <p>{errors.firstName?.message}</p>
+                        {errors.name && <p>{errors.firstName?.message}</p> }
                         <input type="text" placeholder={t('LastName')} {...register("lastName")} id="lastname"/>
-                        <p>{errors.lastName?.message}</p>
+                        {errors.lastName && <p>{errors.lastName?.message}</p> }
                         <input type="text" placeholder={t('Email')} {...register("email")} id="email"/>
-                        <p>{errors.email?.message}</p>
+                        {errors.email && <p>{errors.email?.message}</p> }
                         <input type="password" placeholder={t('Password')} {...register("password")} id="password"/>
-                        <p>{errors.password?.message}</p>
+                        {errors.password && <p>{errors.password?.message}</p> }
                         <input type="password" placeholder={t('ConfirmPassword')} {...register("passwordConfirmation")}  id="confirm_password"/>
-                        <p>{errors.passwordConfirmation?.message}</p>
+                        {errors.passwordConfirmation && <p>{errors.passwordConfirmation?.message}</p> }
                         <input type="text" placeholder={t('Number')} {...register("number")} id="number" />
                         <p>{(errors.number === undefined) ? ('') : (errors.number?.message)}</p>
                     <Button type="submit" variant="contained" onClick={EmailAndPasswordRegister}>{t('SignUp')}</Button>

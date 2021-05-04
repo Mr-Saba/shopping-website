@@ -20,7 +20,7 @@ const SignUpWithEmailAndPassword = (data) => async dispatch => {
             })
             dispatch({
                 type: SIGN_UP_WITH_EMAIL_PASS,
-                payload: cred.user
+                payload: cred.user, 
             })
         })
 }
@@ -55,11 +55,10 @@ const SignOut = () => async dispatch => {
 }
 
 const ResetPass = (email) => async dispatch => {
-    console.log(email)
     auth.sendPasswordResetEmail(email).then(response => {
         dispatch({
             type: RESET_PASS,
-            payload: response.user
+            payload: response.user,
         })
     }).catch(error =>
         console.log(error)
@@ -71,7 +70,7 @@ const SignInWithEmailAndPassword = (data) => async dispatch => {
         .then(response => {
             dispatch({
                 type: SIGN_IN_WITH_EMAIL_PASS,
-                payload: response.user
+                payload: response.user,
             })
         }).catch((error) => {
             console.log(error.message)
