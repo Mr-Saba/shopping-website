@@ -9,7 +9,11 @@ import Header from './components/header/header'
 import Footer from './components/footer/footer'
 import Main from './components/main/main';
 import ProtectedRoute from "./ProtectedRoute"
-import Profile from './pages/profile/Profile'
+import Settings from './pages/profile/settings/Settings'
+import Orders from './pages/profile/orders/Orders'
+import Payments from './pages/profile/payments/Payments.js'
+import Adresses from './pages/profile/adresses/Adresses.js'
+
 
 
 function App() {
@@ -34,7 +38,10 @@ function App() {
         <Route path="/signUp" exact component={Registration}></Route>
         <Route path="/logIn" component={LogIn} exact></Route>
         <Route path="/forgot-password" component={ForgotPassword} exact></Route>
-        <ProtectedRoute path="/profile/settings" component={Profile} exact></ProtectedRoute>
+        <ProtectedRoute path="/profile/settings" component={Settings} exact></ProtectedRoute>
+        <ProtectedRoute path="/profile/orders" component={Orders} exact></ProtectedRoute>
+        <ProtectedRoute path="/profile/payments" component={Payments} exact></ProtectedRoute>
+        <ProtectedRoute path="/profile/addresses" component={Adresses} exact></ProtectedRoute>
       </Switch>
         <Footer/>
     </div>

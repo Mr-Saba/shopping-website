@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import './footer.css'
 import {Link} from 'react-router-dom'
 import InstagramIcon from '@material-ui/icons/Instagram';
@@ -9,8 +9,28 @@ import {FormControl,NativeSelect} from '@material-ui/core';
 import {useSelector} from "react-redux"
 
 
-
 function Footer() {
+
+    // const [isVisible, setIsVisible] = useState(false);
+
+    // const toggleVisibility = () => {
+    //     if (window.pageYOffset > 300) {
+    //       setIsVisible(true);
+    //     } else {
+    //       setIsVisible(false);
+    //     }
+    // };
+
+    // useEffect(() => {
+    //     window.addEventListener("scroll", toggleVisibility);
+    // }, [])
+
+    const scrollToTop = () => {
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth"
+        });
+    };
 
     const { isLoggedIn} = useSelector(state => state)
 
@@ -21,6 +41,8 @@ function Footer() {
     }
 
     return (
+        <div>
+         <button onClick={scrollToTop}  style={{ cursor: "pointer", width: "100%", height: "20px", backgroundColor: "red"}}>back to top</button>
         <footer>
             <nav className="footerNav">
                 <ul className="productionUl">
@@ -108,6 +130,7 @@ function Footer() {
                 <p>&copy; 2021 TΛTΛ</p>
             </div>
         </footer>
+        </div>
     )
 }
 
