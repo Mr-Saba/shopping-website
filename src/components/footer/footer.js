@@ -7,7 +7,7 @@ import { useTranslation } from "react-i18next";
 import i18next from '../../i18/languages/i18n'
 import {FormControl,NativeSelect} from '@material-ui/core';
 import {useSelector} from "react-redux"
-
+import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 
 function Footer() {
 
@@ -41,9 +41,10 @@ function Footer() {
     }
 
     return (
-        <div>
-         <button onClick={scrollToTop}  style={{ cursor: "pointer", width: "100%", height: "20px", backgroundColor: "red"}}>back to top</button>
         <footer>
+            <div className="scroller">
+                <button onClick={scrollToTop} ><KeyboardArrowUpIcon/></button>
+            </div>
             <nav className="footerNav">
                 <ul className="productionUl">
                     <li>
@@ -130,7 +131,6 @@ function Footer() {
                 <p>&copy; 2021 TΛTΛ</p>
             </div>
         </footer>
-        </div>
     )
 }
 

@@ -8,15 +8,22 @@
 .logInCenter {
     width: 35%;
 }
-.logInForm{
+.logInForm {
     display: grid;
     grid-template-columns: 100%;
-    grid-template-rows: 50px 50px 21px 50px;
+    grid-template-rows: 70px 70px 21px 50px;
     grid-row-gap: 20px;
     margin: 20px 0;
 }
 .logIn .logInCenter input {
     padding-left: 20px;
+    width: 100%;
+    height: 80%;
+}
+.logIn .logInCenter .logInForm .inputLogIn p {
+    font-size: 14px;
+    color: #f50057;
+    padding: 4px 5px;
 }
 .logInCenter button {
     width: 45%;
@@ -29,4 +36,9 @@
 }
 .logInCenter h1 {
     padding-bottom: 20px;
+}
+
+.inputLogIn {
+    width: 100%;
+    height: 100%;
 }

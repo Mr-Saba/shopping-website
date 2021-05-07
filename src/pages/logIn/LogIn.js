@@ -13,10 +13,10 @@ function LogIn() {
 
     const schema = yup.object().shape({
         email: yup.string()
-                   .email('Enter a valid email-adress')
-                   .required('email-adress field is required'),
+                   .email('Enter a valid email-address')
+                   .required('Email-address field is required*'),
         password: yup.string()
-                   .required('password field is required')
+                   .required('Password field is required*')
     });
 
     const { register, formState: { errors }, handleSubmit } = useForm({
@@ -49,10 +49,14 @@ function LogIn() {
                     <Link to="/signUp" > {t('SignUp')}</Link>
                 </span>
                 <form onSubmit={handleSubmit(onSubmit)} className="logInForm">
-                    <input type="text" {...register("email")} placeholder={t('EmailOrNumber')} id="email" />
-                    {errors.email && <p>{errors.email?.message}</p> }
-                    <input type="password" {...register("password")} placeholder={t('Password')} id="password"/>
-                    {errors.password && <p>{errors.password?.message}</p> }
+                    <div className="inputLogIn">
+                        <input type="text" {...register("email")} placeholder={t('Email')} id="email" />
+                        {errors.email && <p>{errors.email?.message}</p> }
+                    </div>
+                    <div className="inputLogIn">
+                        <input type="password" {...register("password")} placeholder={t('Password')} id="password"/>
+                        {errors.password && <p>{errors.password?.message}</p> }
+                    </div>
                     <Link to="/forgot-password">{t('ForgotPassword')}?</Link>
                     <Button type="submit" variant="contained" onClick={LoginWithEmail} >{t('LogIn')}</Button>
                 </form>

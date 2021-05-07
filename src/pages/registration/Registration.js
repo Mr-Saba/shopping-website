@@ -20,24 +20,24 @@ function Registration() {
     }, [])
 
     const schema = yup.object().shape({
-        firstName: yup.string('use a valid name')  
-                   .max(25, 'name is too long!')
-                   .required('name field is required'),
-        lastName: yup.string('use a valid surname')
-                   .max(25, 'surname is too long!')
-                   .required('surname field is required'),
+        firstName: yup.string('Use a valid name')  
+                   .max(25, 'Name is too long!')
+                   .required('Name field is required*'),
+        lastName: yup.string('Use a valid surname')
+                   .max(25, 'Surname is too long!')
+                   .required('Surname field is required*'),
         email: yup.string()
                    .email('Enter a valid email-adress')
-                   .required('email-adress field is required'),
+                   .required('email-adress field is required*'),
         password: yup.string()
-                   .required('password field is required')
-                   .min(8, 'password is too short!')
-                   .max(17, 'password is too long!')
-                   .matches(/(?=.*[0-9])/, 'password must contain some numbers'),
+                   .required('Password field is required*')
+                   .min(8, 'Password is too short!')
+                   .max(17, 'Password is too long!')
+                   .matches(/(?=.*[0-9])/, 'Password must contain some numbers'),
         passwordConfirmation: yup.string()
-                   .required('password confirmation field is required')
+                   .required('Password confirmation field is required*')
                    .oneOf([yup.ref('password'), null], 'Passwords not match'),
-        number: yup.string().nullable().matches(/(^[0-9]*$)/, 'use a valid number')
+        number: yup.string().nullable().matches(/(^[0-9]*$)/, 'Use a valid number')
         // /(^[0-9]*$)/
     });
 
@@ -70,18 +70,32 @@ function Registration() {
                 <Link to="/logIn" > {t('LogIn')}</Link>
                 </span>
                 <form className="regForm" onSubmit={handleSubmit(onSubmit)}>
-                        <input type="text" placeholder={t('FirstName')} {...register("firstName")} id="firstname"/>
-                        {errors.name && <p>{errors.firstName?.message}</p> }
-                        <input type="text" placeholder={t('LastName')} {...register("lastName")} id="lastname"/>
-                        {errors.lastName && <p>{errors.lastName?.message}</p> }
-                        <input type="text" placeholder={t('Email')} {...register("email")} id="email"/>
-                        {errors.email && <p>{errors.email?.message}</p> }
-                        <input type="password" placeholder={t('Password')} {...register("password")} id="password"/>
-                        {errors.password && <p>{errors.password?.message}</p> }
-                        <input type="password" placeholder={t('ConfirmPassword')} {...register("passwordConfirmation")}  id="confirm_password"/>
-                        {errors.passwordConfirmation && <p>{errors.passwordConfirmation?.message}</p> }
-                        <input type="text" placeholder={t('Number')} {...register("number")} id="number" />
-                        <p>{(errors.number === undefined) ? ('') : (errors.number?.message)}</p>
+                    <div className="firstLastName">
+                            <div className="inputSignUp">
+                                <input type="text" placeholder={t('FirstName')} {...register("firstName")} id="firstname"/>
+                                {errors.firstName && <p>{errors.firstName?.message}</p> }
+                            </div>
+                            <div className="inputSignUp">
+                                <input type="text" placeholder={t('LastName')} {...register("lastName")} id="lastname"/>
+                                {errors.lastName && <p>{errors.lastName?.message}</p> }
+                            </div>
+                        </div>
+                        <div className="inputSignUp">
+                            <input type="text" placeholder={t('Email')} {...register("email")} id="email"/>
+                            {errors.email && <p>{errors.email?.message}</p> }
+                        </div>
+                        <div className="inputSignUp">
+                            <input type="password" placeholder={t('Password')} {...register("password")} id="password"/>
+                            {errors.password && <p>{errors.password?.message}</p> }
+                        </div>
+                        <div className="inputSignUp">
+                            <input type="password" placeholder={t('ConfirmPassword')} {...register("passwordConfirmation")}  id="confirm_password"/>
+                            {errors.passwordConfirmation && <p>{errors.passwordConfirmation?.message}</p> }
+                        </div>
+                        <div className="inputSignUp">
+                            <input type="text" placeholder={t('Number')} {...register("number")} id="number" />
+                            <p>{(errors.number === undefined) ? ('') : (errors.number?.message)}</p>
+                        </div>
                     <Button type="submit" variant="contained" onClick={EmailAndPasswordRegister}>{t('SignUp')}</Button>
                 </form>
             </div>

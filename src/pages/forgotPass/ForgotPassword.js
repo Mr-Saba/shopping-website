@@ -46,8 +46,10 @@ function ForgotPassword() {
             <div className="forgotPassCenter">
                 <h1>{t('ResetPassword')}</h1>
                 <form onSubmit={handleSubmit(onSubmit)} className="forgotPassForm">
-                    <input type="text" placeholder={t('Email')} {...register("email")} id="sent_email"/>
-                    { errors.email && <p>{errors.email?.message}</p> }
+                    <div className="inputForgotPass">
+                        <input type="text" placeholder={t('Email')} {...register("email")} id="sent_email"/>
+                        { errors.email && <p>{errors.email?.message}</p> }
+                    </div>
                     {message && <div>{message}</div>}
                     <Button type="submit" variant="contained" onClick={() => changePass()} >{t('ResetPassword')}</Button>
                     <Link to="/logIn">{t('BackToLoginPage')}</Link>
