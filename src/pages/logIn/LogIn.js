@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react'
+import React, { useEffect} from 'react'
 import {Link} from "react-router-dom"
-import {useDispatch} from "react-redux"
+import {useDispatch, useSelector} from "react-redux"
 import { SignInWithEmailAndPassword } from '../../redux/actions'
 import { useTranslation } from "react-i18next";
 import "./logIn.css"
@@ -8,11 +8,9 @@ import { Button } from '@material-ui/core';
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
-import { useHistory } from 'react-router'
+import {useHistory} from "react-router"
 
 function LogIn() {
-
-    const history = useHistory()
 
     const schema = yup.object().shape({
         email: yup.string()
@@ -26,14 +24,22 @@ function LogIn() {
         resolver: yupResolver(schema)
       })
 
-    const onSubmit = (data) => console.log(data)
+    const history = useHistory()
+      
+    const onSubmit = (data) => {
+        if(data) {
+            history.push("/")
+        }
+    }
 
     const {t} = useTranslation()
 
     const dispatch = useDispatch()
 
+    const {isLoggedIn} = useSelector(state => state)
+
     useEffect(() => {
-        console.log(localStorage.getItem("user"))
+
     }, [])
 
     const LoginWithEmail = () => {
@@ -42,8 +48,6 @@ function LogIn() {
             password: document.getElementById("password").value
         }
         dispatch(SignInWithEmailAndPassword(data))
-        history.push("/")
-
     }
 
     return (

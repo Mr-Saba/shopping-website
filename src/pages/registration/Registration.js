@@ -1,6 +1,6 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 import {Button} from "@material-ui/core"
-import {useDispatch} from "react-redux"
+import {useDispatch, useSelector} from "react-redux"
 import {SignUpWithEmailAndPassword} from "../../redux/actions"
 import {Link} from "react-router-dom"
 import './registration.css'
@@ -8,6 +8,7 @@ import { useTranslation } from "react-i18next";
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
+import {useHistory} from "react-router"
 
 
 
@@ -15,9 +16,15 @@ import * as yup from "yup";
 
 function Registration() {
 
+    const [accepted, setAccepted] = useState(false)
+
+    const {isLoggedIn} = useSelector(state => state)
+
     useEffect(() => {
-        console.log(errors.number)
+        handleSelect()
     }, [])
+
+    const history = useHistory()
 
     const schema = yup.object().shape({
         firstName: yup.string('Use a valid name')  
@@ -37,8 +44,8 @@ function Registration() {
         passwordConfirmation: yup.string()
                    .required('Password confirmation field is required*')
                    .oneOf([yup.ref('password'), null], 'Passwords not match'),
-        number: yup.string().nullable().matches(/(^[0-9]*$)/, 'Use a valid number')
-        // /(^[0-9]*$)/
+        number: yup.string().nullable().matches(/(^[0-9]*$)/, 'Use a valid number'),
+        terms: yup.bool().oneOf([true], "you should accept Terms & Conditions")
     });
 
     const { register, formState: { errors }, handleSubmit } = useForm({
@@ -55,12 +62,32 @@ function Registration() {
             password: document.getElementById("password").value,
             name: document.getElementById("firstname").value,
             surname: document.getElementById("lastname").value,
-            number: document.getElementById("number").value
+            number: `${handleSelect()}${document.getElementById("number").value}`
         }
+        console.log(data)
+        if(accepted === true) {
             dispatch(SignUpWithEmailAndPassword(data)) 
+        }
     }
 
-    const onSubmit = (data) => console.log(data)
+    const onSubmit = (data) => {
+        if(data) {
+            history.push("/")
+        }
+    }
+
+    const handleChange = () => {
+        if(document.getElementById("terms").checked) {
+            setAccepted(true)
+        } else {
+            setAccepted(false)
+        }
+    }
+
+    const handleSelect = () => {  
+        const nation = document.getElementById("select").value
+        return nation
+    }
 
     return (
         <div className="registration">
@@ -93,9 +120,39 @@ function Registration() {
                             {errors.passwordConfirmation && <p>{errors.passwordConfirmation?.message}</p> }
                         </div>
                         <div className="inputSignUp">
+                            <label>
+                                <select id="select">
+                                    <option value="995" selected>+995</option>
+                                    <option value="44">+44</option>
+                                    <option value="1">+1</option>
+                                    <option value="213">+213</option>
+                                    <option value="376">+376</option>
+                                    <option value="244">+244</option>
+                                    <option value="1264">+1264</option>
+                                    <option value="1268">+1268</option>
+                                    <option value="54">+54</option>
+                                    <option value="374">+374</option>
+                                    <option value="297">+297</option>
+                                    <option value="61">+61</option>
+                                    <option value="43">+43</option>
+                                    <option value="994">+994</option>
+                                    <option value="1242">+1242</option>
+                                    <option value="973">+973</option>
+                                    <option value="880">+880</option>
+                                    <option value="1246">+1246</option>
+                                    <option value="375">+375</option>
+                                    <option value="32">+32</option>
+                                    <option value="501">+501</option>
+                                    <option value="229">+229</option>
+                                    <option value="1441">+1441</option>
+                                </select>
+                            </label>
                             <input type="text" placeholder={t('Number')} {...register("number")} id="number" />
                             <p>{(errors.number === undefined) ? ('') : (errors.number?.message)}</p>
                         </div>
+                            <input type="checkbox" onClick={handleChange} {...register("terms")} id="terms" name="terms" />
+                            <label for="terms">I Accept Terms & Conditions</label>
+                            {errors.terms && <p>{errors.terms?.message}</p> }
                     <Button type="submit" variant="contained" onClick={EmailAndPasswordRegister}>{t('SignUp')}</Button>
                 </form>
             </div>

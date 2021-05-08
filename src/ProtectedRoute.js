@@ -15,7 +15,7 @@ function ProtectedRoute({
     return (
         <Route
         render={props => 
-            localStorage.getItem("user")!== null ? (
+            isLoggedIn==true ? (
                 <Component {...props} />
             ) : (
                 <Redirect to="/logIn" />

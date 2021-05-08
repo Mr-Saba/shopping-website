@@ -6,8 +6,8 @@ import {
 } from "./constants"
 
 const initialState = {
-    user: localStorage.getItem("user"),
-    isLoggedIn: false,
+    user: null,
+    isLoggedIn: false
 }
 
 const Reducer = (state=initialState, action) => {

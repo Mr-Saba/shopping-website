@@ -5,19 +5,20 @@ import {
     RESET_PASS
     } from "./constants"
 import { auth, firebase, firestore } from "../firebase/Configuration"
+import {Redirect} from "react-router-dom"
+
 
 const SignUpWithEmailAndPassword = (data) => async dispatch => {
     await auth.createUserWithEmailAndPassword(data.email, data.password)
-        .then(cred => {   
-            firestore.collection("users").doc(cred.user.uid).set({
-                email: data.email,
-                firstname: data.name,
-                lastname: data.surname,
-                dateofbirth: "",
-                number: data.number
-            })
-            localStorage.setItem("user", data.email)
-            dispatch({
+    .then(cred => {   
+        firestore.collection("users").doc(cred.user.uid).set({
+            email: data.email,
+            firstname: data.name,
+            lastname: data.surname,
+            dateofbirth: "",
+            number: data.number
+        })
+        dispatch({
                 type: SIGN_UP_WITH_EMAIL_PASS,
                 payload: cred.user, 
             })
@@ -26,7 +27,6 @@ const SignUpWithEmailAndPassword = (data) => async dispatch => {
 
 const SignOut = () => async dispatch => {
     auth.signOut().then(() => {
-        localStorage.removeItem("user")
         dispatch({
             type: SIGN_OUT,
             payload: null,
@@ -48,7 +48,6 @@ const ResetPass = (email) => async dispatch => {
 const SignInWithEmailAndPassword = (data) => async dispatch => {
     auth.signInWithEmailAndPassword(data.email, data.password)
         .then(response => {
-            localStorage.setItem("user", data.email)
             dispatch({
                 type: SIGN_IN_WITH_EMAIL_PASS,
                 payload: response.user,

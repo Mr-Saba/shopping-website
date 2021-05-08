@@ -32,7 +32,7 @@ function Footer() {
         });
     };
 
-    const { user } = useSelector(state => state)
+    const { isLoggedIn } = useSelector(state => state)
 
     const {t} = useTranslation()
     
@@ -88,7 +88,7 @@ function Footer() {
                 </ul>
                 <ul className="profileUl">
                 <li>{t('Profile')}:</li>
-                { (user !== null) ?
+                { (isLoggedIn === true) ?
                 (
                     <>
                     <Link to="/profile/settings">

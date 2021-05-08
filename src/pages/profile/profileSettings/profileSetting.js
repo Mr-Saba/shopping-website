@@ -68,6 +68,33 @@ function ProfileSettings() {
                     <p>{t('Date of birth')}</p>
                     <input type="date" defaultValue={state.date && state.date} /> 
                     <p>{t('Number')}</p>
+                    <label>
+                        <select id="select">
+                            <option value="995" selected>+995</option>
+                            <option value="44">+44</option>
+                            <option value="1">+1</option>
+                            <option value="213">+213</option>
+                            <option value="376">+376</option>
+                            <option value="244">+244</option>
+                            <option value="1264">+1264</option>
+                            <option value="1268">+1268</option>
+                            <option value="54">+54</option>
+                            <option value="374">+374</option>
+                            <option value="297">+297</option>
+                            <option value="61">+61</option>
+                            <option value="43">+43</option>
+                            <option value="994">+994</option>
+                            <option value="1242">+1242</option>
+                            <option value="973">+973</option>
+                            <option value="880">+880</option>
+                            <option value="1246">+1246</option>
+                            <option value="375">+375</option>
+                            <option value="32">+32</option>
+                            <option value="501">+501</option>
+                            <option value="229">+229</option>
+                            <option value="1441">+1441</option>
+                        </select>
+                    </label> 
                     <input type="number" defaultValue={state.number && state.number}/> 
                     <Button type="submit" variant="contained" onClick={changeCredentials}>{t('Update details')}</Button>
                 </form>
