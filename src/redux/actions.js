@@ -1,6 +1,5 @@
 import { 
     SIGN_UP_WITH_EMAIL_PASS, 
-    SIGN_UP_WITH_NUMBER, 
     SIGN_OUT,
     SIGN_IN_WITH_EMAIL_PASS,
     RESET_PASS
@@ -9,8 +8,7 @@ import { auth, firebase, firestore } from "../firebase/Configuration"
 
 const SignUpWithEmailAndPassword = (data) => async dispatch => {
     await auth.createUserWithEmailAndPassword(data.email, data.password)
-        .then(cred => {
-            console.log("dasda")
+        .then(cred => {   
             firestore.collection("users").doc(cred.user.uid).set({
                 email: data.email,
                 firstname: data.name,
@@ -18,6 +16,7 @@ const SignUpWithEmailAndPassword = (data) => async dispatch => {
                 dateofbirth: "",
                 number: data.number
             })
+            localStorage.setItem("user", data.email)
             dispatch({
                 type: SIGN_UP_WITH_EMAIL_PASS,
                 payload: cred.user, 
@@ -25,28 +24,9 @@ const SignUpWithEmailAndPassword = (data) => async dispatch => {
         })
 }
 
-
-const SignUpWithNumber = (data) => async dispatch => {
-    const recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha')
-    console.log(data.number)
-    auth.signInWithPhoneNumber(data.number, recaptchaVerifier).then((result) => {
-        console.log("result")
-        
-            let code = prompt("enter otp","")
-            if (code === null) console.log("null")
-            result.confirm(code).then((response) => {
-            dispatch({
-                type: SIGN_UP_WITH_NUMBER,
-                payload: result.user
-            })
-            console.log(response)
-            console.log("verified")
-        })
- })
-}
-
 const SignOut = () => async dispatch => {
     auth.signOut().then(() => {
+        localStorage.removeItem("user")
         dispatch({
             type: SIGN_OUT,
             payload: null,
@@ -68,10 +48,11 @@ const ResetPass = (email) => async dispatch => {
 const SignInWithEmailAndPassword = (data) => async dispatch => {
     auth.signInWithEmailAndPassword(data.email, data.password)
         .then(response => {
+            localStorage.setItem("user", data.email)
             dispatch({
                 type: SIGN_IN_WITH_EMAIL_PASS,
                 payload: response.user,
-            })
+            }) 
         }).catch((error) => {
             console.log(error.message)
         })
@@ -99,4 +80,4 @@ const UpdateCredentials = (data) => async dispatch => {
         // }
 }
 
-export { SignUpWithEmailAndPassword, SignUpWithNumber, SignOut, ResetPass, SignInWithEmailAndPassword, UpdateCredentials }
+export { SignUpWithEmailAndPassword, SignOut, ResetPass, SignInWithEmailAndPassword, UpdateCredentials }

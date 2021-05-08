@@ -8,8 +8,11 @@ import { Button } from '@material-ui/core';
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
+import { useHistory } from 'react-router'
 
 function LogIn() {
+
+    const history = useHistory()
 
     const schema = yup.object().shape({
         email: yup.string()
@@ -25,12 +28,12 @@ function LogIn() {
 
     const onSubmit = (data) => console.log(data)
 
-
     const {t} = useTranslation()
 
     const dispatch = useDispatch()
 
     useEffect(() => {
+        console.log(localStorage.getItem("user"))
     }, [])
 
     const LoginWithEmail = () => {
@@ -39,6 +42,8 @@ function LogIn() {
             password: document.getElementById("password").value
         }
         dispatch(SignInWithEmailAndPassword(data))
+        history.push("/")
+
     }
 
     return (

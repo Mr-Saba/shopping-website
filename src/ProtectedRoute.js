@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import {Route, Redirect} from "react-router-dom"
 import {useSelector} from "react-redux"
 
@@ -8,11 +8,14 @@ function ProtectedRoute({
 
     const {isLoggedIn} = useSelector(state => state)
 
+    useEffect(() => {
+
+    }, [])
 
     return (
         <Route
         render={props => 
-            isLoggedIn===true ? (
+            localStorage.getItem("user")!== null ? (
                 <Component {...props} />
             ) : (
                 <Redirect to="/logIn" />

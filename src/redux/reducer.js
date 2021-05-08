@@ -1,24 +1,18 @@
 import {
-    SIGN_UP_WITH_EMAIL_PASS, 
-    SIGN_UP_WITH_NUMBER, 
+    SIGN_UP_WITH_EMAIL_PASS,  
     SIGN_OUT,
     SIGN_IN_WITH_EMAIL_PASS,
     RESET_PASS
 } from "./constants"
 
 const initialState = {
-    user: null,
+    user: localStorage.getItem("user"),
     isLoggedIn: false,
 }
 
 const Reducer = (state=initialState, action) => {
     switch(action.type) {
         case SIGN_UP_WITH_EMAIL_PASS: return {
-            ...state,
-            user: action.payload,
-            isLoggedIn: true,
-        }
-        case SIGN_UP_WITH_NUMBER: return {
             ...state,
             user: action.payload,
             isLoggedIn: true,

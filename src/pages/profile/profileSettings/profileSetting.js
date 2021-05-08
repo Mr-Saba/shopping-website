@@ -25,7 +25,7 @@ function ProfileSettings() {
 
     useEffect(() => {
         getCredentials()
-        console.log(state)
+        console.log(user)
     }, [user])
 
     
@@ -62,13 +62,13 @@ function ProfileSettings() {
                     <p>{t('Email')}</p>
                     <input type="email" id="update_email" defaultValue={user && user.email}/>
                     <p>{t('FirstName')}</p>
-                    <input type="text" defaultValue={state.firstName}/>
+                    <input type="text" defaultValue={state.firstName && state.firstName}/> 
                     <p>{t('LastName')}</p>
-                    <input type="text" defaultValue={state.lastName}/>
+                    <input type="text" defaultValue={state.lastName && state.lastName}/> 
                     <p>{t('Date of birth')}</p>
-                    <input type="date" defaultValue={state.date} />
+                    <input type="date" defaultValue={state.date && state.date} /> 
                     <p>{t('Number')}</p>
-                    <input type="number" defaultValue={state.number}/>
+                    <input type="number" defaultValue={state.number && state.number}/> 
                     <Button type="submit" variant="contained" onClick={changeCredentials}>{t('Update details')}</Button>
                 </form>
                     <h3>Change password</h3>

@@ -16,7 +16,7 @@ function Header() {
 
     const dispatch = useDispatch()
 
-    const { isLoggedIn} = useSelector(state => state)
+    const { user } = useSelector(state => state)
 
     const LogOut = () => {
         dispatch(SignOut())
@@ -64,7 +64,7 @@ function Header() {
                            <PersonOutlineOutlinedIcon/>
                        </Link>
                    </li>
-                   { (isLoggedIn === true) ? (
+                   { (user !== null) ? (
                    <li>
                        <button style={{cursor: "pointer"}} onClick={LogOut}>
                             <ExitToAppIcon/>
