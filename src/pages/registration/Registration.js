@@ -9,20 +9,18 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 import {useHistory} from "react-router"
-
-
-
+import numberNations from "../../data/numberNations.json"
 
 
 function Registration() {
 
+    useEffect(() => {
+        
+    }, [])
+
     const [accepted, setAccepted] = useState(false)
 
     const {isLoggedIn} = useSelector(state => state)
-
-    useEffect(() => {
-        handleSelect()
-    }, [])
 
     const history = useHistory()
 
@@ -57,12 +55,16 @@ function Registration() {
     const dispatch = useDispatch()
 
     const EmailAndPasswordRegister = () => {
+        const passwordHash = require('password-hash');
+        const hashedPassword = passwordHash.generate(document.getElementById("password").value);
         const data = {
             email: document.getElementById("email").value,
             password: document.getElementById("password").value,
             name: document.getElementById("firstname").value,
             surname: document.getElementById("lastname").value,
-            number: `${handleSelect()}${document.getElementById("number").value}`
+            nation: document.getElementById("select").value,
+            number: document.getElementById("number").value,
+            password: hashedPassword
         }
         console.log(data)
         if(accepted === true) {
@@ -82,11 +84,6 @@ function Registration() {
         } else {
             setAccepted(false)
         }
-    }
-
-    const handleSelect = () => {  
-        const nation = document.getElementById("select").value
-        return nation
     }
 
     return (
@@ -121,30 +118,10 @@ function Registration() {
                         </div>
                         <div className="inputSignUp">
                             <label>
-                                <select id="select">
-                                    <option value="995" selected>+995</option>
-                                    <option value="44">+44</option>
-                                    <option value="1">+1</option>
-                                    <option value="213">+213</option>
-                                    <option value="376">+376</option>
-                                    <option value="244">+244</option>
-                                    <option value="1264">+1264</option>
-                                    <option value="1268">+1268</option>
-                                    <option value="54">+54</option>
-                                    <option value="374">+374</option>
-                                    <option value="297">+297</option>
-                                    <option value="61">+61</option>
-                                    <option value="43">+43</option>
-                                    <option value="994">+994</option>
-                                    <option value="1242">+1242</option>
-                                    <option value="973">+973</option>
-                                    <option value="880">+880</option>
-                                    <option value="1246">+1246</option>
-                                    <option value="375">+375</option>
-                                    <option value="32">+32</option>
-                                    <option value="501">+501</option>
-                                    <option value="229">+229</option>
-                                    <option value="1441">+1441</option>
+                                <select id="select" defaultValue="+995">
+                                    {numberNations.map((item) => (
+                                        <option value={item.value}>{item.label}</option>
+                                    ))}
                                 </select>
                             </label>
                             <input type="text" placeholder={t('Number')} {...register("number")} id="number" />

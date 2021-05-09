@@ -2,7 +2,8 @@ import {
     SIGN_UP_WITH_EMAIL_PASS,  
     SIGN_OUT,
     SIGN_IN_WITH_EMAIL_PASS,
-    RESET_PASS
+    RESET_PASS,
+    UPDATE_EMAIL
 } from "./constants"
 
 const initialState = {
@@ -28,6 +29,11 @@ const Reducer = (state=initialState, action) => {
             isLoggedIn: true,
         }
         case RESET_PASS: return {
+            ...state,
+            user: action.payload,
+            isLoggedIn: true,
+        }
+        case UPDATE_EMAIL: return {
             ...state,
             user: action.payload,
             isLoggedIn: true,

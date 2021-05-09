@@ -2,11 +2,10 @@ import {
     SIGN_UP_WITH_EMAIL_PASS, 
     SIGN_OUT,
     SIGN_IN_WITH_EMAIL_PASS,
-    RESET_PASS
+    RESET_PASS,
+    UPDATE_EMAIL
     } from "./constants"
 import { auth, firebase, firestore } from "../firebase/Configuration"
-import {Redirect} from "react-router-dom"
-
 
 const SignUpWithEmailAndPassword = (data) => async dispatch => {
     await auth.createUserWithEmailAndPassword(data.email, data.password)
@@ -16,7 +15,9 @@ const SignUpWithEmailAndPassword = (data) => async dispatch => {
             firstname: data.name,
             lastname: data.surname,
             dateofbirth: "",
-            number: data.number
+            nation: data.nation,
+            number: data.number,
+            password: data.password
         })
         dispatch({
                 type: SIGN_UP_WITH_EMAIL_PASS,
@@ -59,24 +60,24 @@ const SignInWithEmailAndPassword = (data) => async dispatch => {
 
 const UpdateCredentials = (data) => async dispatch => {
     const user = auth.currentUser
+    console.log("dada")
         await user.updateEmail(data.email).then(()=>{
             console.log("email has changed")
+            firestore.collection("users").doc(user.uid).update({
+                email: data.email,
+                firstname: data.firstName,
+                lastname: data.lastName,
+                dateofbirth: data.date,
+                nation: data.nation,
+                number: data.number
+            })       
+            dispatch({
+                type: UPDATE_EMAIL,
+                payload: user,
+            }) 
+        }).catch((error) => {
+            console.log(error)
         })
-    if(data.password === data.confirm_password) {
-        await user.updatePassword(data.password).then(()=>{
-        console.log("password has changed")
-        })
-    }
-        // .finally()
-        // if(data.password === data.confirm_password) {
-        //     await user.updatePassword(data.password).then(()=>{
-        //         console.log("password has changed")
-        //     }).catch((error) => {
-        //         console.log(error)
-        //     })
-        // } else {
-        //     alert("confirm error")
-        // }
 }
 
 export { SignUpWithEmailAndPassword, SignOut, ResetPass, SignInWithEmailAndPassword, UpdateCredentials }
