@@ -42,3 +42,23 @@ form.redactProfile {
 .redactOfProfile input {
     padding: 0px 20px;
 }
+
+.phoneSettings {
+    display: flex;
+    height: 100%;
+    width: 100%;
+}
+
+.phoneSettings label {
+    height: 100%;
+}
+
+.phoneSettings input#number {
+    height: 100%;
+    width: 100%;
+}
+
+.phoneSettings select#nation {
+    height: 100%;
+    border-right: unset;
+}

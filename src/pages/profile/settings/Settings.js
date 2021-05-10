@@ -71,16 +71,18 @@ function Settings() {
                     <p>{t('Date of birth')}</p>
                     <input type="date" id="date" defaultValue={state.date && state.date} /> 
                     <p>{t('Number')}</p>
-                    {state.nation &&
-                    <label>
-                        <select id="nation" defaultValue={state.nation}>
-                            {numberNations.map((item) => ( 
-                                <option value={item.value}>{item.label}</option>
-                            ))}
-                        </select>
-                    </label>
-                    } 
-                    <input type="number" id="number" defaultValue={state.number && state.number}/> 
+                    <div className="phoneSettings">
+                        {state.nation &&
+                        <label>
+                            <select id="nation" defaultValue={state.nation}>
+                                {numberNations.map((item) => ( 
+                                    <option value={item.value}>{item.label}</option>
+                                ))}
+                            </select>
+                        </label>
+                        } 
+                        <input type="number" id="number" defaultValue={state.number && state.number}/> 
+                    </div>
                     <Button type="submit" variant="contained" onClick={changeCredentials}>{t('Update details')}</Button>
                 </form>
                     <h3>Change password</h3>
