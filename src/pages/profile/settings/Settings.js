@@ -7,8 +7,28 @@ import { useTranslation } from "react-i18next";
 import "./settings.css"
 import { Button } from '@material-ui/core'
 import numberNations from "../../../data/numberNations.json"
+import { useForm } from "react-hook-form";
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from "yup";
 
 function Settings() {
+
+    const schema = yup.object().shape({
+        firstName: yup.string('Use a valid name')  
+                   .max(25, 'Name is too long!')
+                   .required('You should enter first name*'),
+        lastName: yup.string('Use a valid surname')
+                   .max(25, 'Surname is too long!')
+                   .required('You should enter last name*'),
+        email: yup.string()
+                   .email('Enter a valid email-adress')
+                   .required('You should enter an email-adress*'),
+        number: yup.string().nullable().matches(/(^[0-9]*$)/, 'Use a valid number'),
+    });
+
+    const { register, formState: { errors }, handleSubmit } = useForm({
+        resolver: yupResolver(schema)
+      })
 
     const {t} = useTranslation()
     
@@ -66,19 +86,26 @@ function Settings() {
         const hashedCurrentPassword = passwordHash.generate(currentPassword);
         console.log(hashedCurrentPassword)
     }
+
+    const onSubmit = (data) => {
+        
+    }
     
     return (
         <div className="redactOfProfile">
             <div className="redactCenter">
                     <h1>My details</h1>
                     <h3>Personal information</h3>
-                <form className="redactProfile" onSubmit={e => e.preventDefault()}>
+                <form className="redactProfile" onSubmit={handleSubmit(onSubmit)}>
                     <p>{t('Email')}</p>
-                    <input type="email" id="email" defaultValue={user && user.email}/>
+                    <input type="email" id="email" {...register("email")} defaultValue={user && user.email}/>
+                    {errors.email && <p>{errors.email?.message}</p> }
                     <p>{t('FirstName')}</p>
-                    <input type="text" id="firstName" defaultValue={state.firstName && state.firstName}/> 
+                    <input type="text" id="firstName" {...register("firstName")} defaultValue={state.firstName && state.firstName}/> 
+                    {errors.firstName && <p>{errors.firstName?.message}</p> }
                     <p>{t('LastName')}</p>
-                    <input type="text" id="lastName" defaultValue={state.lastName && state.lastName}/> 
+                    <input type="text" id="lastName" {...register("lastName")} defaultValue={state.lastName && state.lastName}/> 
+                    {errors.lastName && <p>{errors.lastName?.message}</p> }
                     <p>{t('Date of birth')}</p>
                     <input type="date" id="date" defaultValue={state.date && state.date} /> 
                     <p>{t('Number')}</p>
@@ -91,7 +118,8 @@ function Settings() {
                         </select>
                     </label>
                     } 
-                    <input type="number" id="number" defaultValue={state.number && state.number}/> 
+                    <input type="number" {...register("number")} id="number" defaultValue={state.number && state.number}/> 
+                    <p>{(errors.number === undefined) ? ('') : (errors.number?.message)}</p>
                     <Button type="submit" variant="contained" onClick={changeCredentials}>{t('Update details')}</Button>
                 </form>
                     <h3>Change password</h3>

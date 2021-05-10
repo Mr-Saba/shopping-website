@@ -18,12 +18,14 @@ import Adresses from './pages/profile/adresses/Adresses.js'
 
 function App() { 
 
+  const history = useHistory()
+
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
         if(user) {
             console.log("signed in")
         }else{
-          console.log("not signed in")
+            console.log("not signed in")
         }
     })
 }, [])
