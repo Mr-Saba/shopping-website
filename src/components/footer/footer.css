@@ -40,6 +40,8 @@ nav.footerNav {
 }
 .scroller button svg.MuiSvgIcon-root {
     font-size: 30px;
+    cursor: pointer;
+    width: 100%;
 }
 .copyRight {
     height: 50px;

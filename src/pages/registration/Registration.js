@@ -43,7 +43,7 @@ function Registration() {
                    .required('Password confirmation field is required*')
                    .oneOf([yup.ref('password'), null], 'Passwords not match'),
         number: yup.string().nullable().matches(/(^[0-9]*$)/, 'Use a valid number'),
-        terms: yup.bool().oneOf([true], "you should accept Terms & Conditions")
+        terms: yup.bool().oneOf([true], "You should accept Terms & Conditions*")
     });
 
     const { register, formState: { errors }, handleSubmit } = useForm({
@@ -116,7 +116,7 @@ function Registration() {
                             <input type="password" placeholder={t('ConfirmPassword')} {...register("passwordConfirmation")}  id="confirm_password"/>
                             {errors.passwordConfirmation && <p>{errors.passwordConfirmation?.message}</p> }
                         </div>
-                        <div className="inputSignUp">
+                        <div className="inputPhoneSignUp">
                             <label>
                                 <select id="select" defaultValue="+995">
                                     {numberNations.map((item) => (
@@ -127,9 +127,15 @@ function Registration() {
                             <input type="text" placeholder={t('Number')} {...register("number")} id="number" />
                             <p>{(errors.number === undefined) ? ('') : (errors.number?.message)}</p>
                         </div>
-                            <input type="checkbox" onClick={handleChange} {...register("terms")} id="terms" name="terms" />
-                            <label for="terms">I Accept Terms & Conditions</label>
+                        <div className="termsAndConditionsSignUp">
+                            <div className="termsAndConditionsCheckBoxSignUp">
+                                <label for="terms">
+                                    I Accept<Link to="/termsAndConditions"> Terms & Conditions</Link>
+                                </label>
+                                <input type="checkbox" onClick={handleChange} {...register("terms")} id="terms" name="terms" />
+                            </div>
                             {errors.terms && <p>{errors.terms?.message}</p> }
+                        </div>
                     <Button type="submit" variant="contained" onClick={EmailAndPasswordRegister}>{t('SignUp')}</Button>
                 </form>
             </div>
