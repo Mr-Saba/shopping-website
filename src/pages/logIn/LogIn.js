@@ -50,6 +50,14 @@ function LogIn() {
         dispatch(SignInWithEmailAndPassword(data))
     }
 
+    const showPassword = () => {
+        const passwordField = document.getElementById("password")
+        if(passwordField.getAttribute("type") === "password") {
+            passwordField.setAttribute("type", "text")
+        } else {
+            passwordField.setAttribute("type", "password")
+        }
+    }
     return (
         <div className="logIn">
             <div className="logInCenter">
@@ -66,6 +74,7 @@ function LogIn() {
                         <input type="password" {...register("password")} placeholder={t('Password')} id="password"/>
                         {errors.password && <p>{errors.password?.message}</p> }
                     </div>
+                    <div onClick={() => showPassword()}>show password logo</div>
                     <Link to="/forgot-password">{t('ForgotPassword')}?</Link>
                     <Button type="submit" variant="contained" onClick={LoginWithEmail} >{t('LogIn')}</Button>
                 </form>

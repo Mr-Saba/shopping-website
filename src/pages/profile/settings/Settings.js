@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch } from "react-redux"
 import { UpdateCredentials } from '../../../redux/actions'
 import {useSelector} from "react-redux"
-import {firestore} from "../../../firebase/Configuration"
+import {firestore, auth} from "../../../firebase/Configuration"
 import { useTranslation } from "react-i18next";
 import "./settings.css"
 import { Button } from '@material-ui/core'
@@ -22,6 +22,7 @@ function Settings() {
         date: '',
         nation: '',
         number: '',
+        password: ''
     })
 
     useEffect(() => {
@@ -39,6 +40,7 @@ function Settings() {
                 date: doc.data().dateOfBirth,
                 nation: doc.data().nation,
                 number: doc.data().number,
+                password: doc.data().password
             })
         })   
     }
@@ -54,6 +56,15 @@ function Settings() {
         }
         dispatch(UpdateCredentials(data))
         console.log(state)
+    }
+
+    const changePassword = () => {
+        const user = auth.currentUser
+        const passwordHash = require('password-hash');
+        const currentPassword = document.getElementById("current-pass").value
+        const newPassword = document.getElementById("new-pass").value
+        const hashedCurrentPassword = passwordHash.generate(currentPassword);
+        console.log(hashedCurrentPassword)
     }
     
     return (
@@ -85,13 +96,13 @@ function Settings() {
                 </form>
                     <h3>Change password</h3>
                 <div className="changePass">
-                    <p>Old password</p>
-                    <input type="password" />
+                    <p>Current password</p>
+                    <input type="password" id="current-pass" />
                     <p>New password</p>
-                    <input type="password" />
+                    <input type="password" id="new-pass"/>
                     <p>Confirm new password</p>
-                    <input type="password" />
-                    <Button type="submit" variant="contained" >Update password</Button>
+                    <input type="password" id="confirm-pass"/>
+                    <Button onClick={() => changePassword()} variant="contained" >Update password</Button>
                 </div>
             </div>
         </div>
