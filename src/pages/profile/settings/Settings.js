@@ -10,8 +10,12 @@ import numberNations from "../../../data/numberNations.json"
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
+import {useParams} from "react-router-dom"
 
 function Settings() {
+
+    let { profileId } = useParams();
+
 
     const schema = yup.object().shape({
         firstName: yup.string('Use a valid name')  
@@ -49,6 +53,10 @@ function Settings() {
         getCredentials()
         console.log(state)
     }, [user])
+    useEffect(() => {
+    console.log(profileId)
+    }, [])
+    
 
     
     const getCredentials = () => {
@@ -109,16 +117,18 @@ function Settings() {
                     <p>{t('Date of birth')}</p>
                     <input type="date" id="date" defaultValue={state.date && state.date} /> 
                     <p>{t('Number')}</p>
-                    {state.nation &&
-                    <label>
-                        <select id="nation" defaultValue={state.nation}>
-                            {numberNations.map((item) => ( 
-                                <option value={item.value}>{item.label}</option>
-                            ))}
-                        </select>
-                    </label>
-                    } 
-                    <input type="number" {...register("number")} id="number" defaultValue={state.number && state.number}/> 
+                    <div className="phoneSettings">
+                        {state.nation &&
+                        <label>
+                            <select id="nation" defaultValue={state.nation}>
+                                {numberNations.map((item) => ( 
+                                    <option value={item.value}>{item.label}</option>
+                                ))}
+                            </select>
+                        </label>
+                        } 
+                        <input type="number" id="number"  {...register("number")} defaultValue={state.number && state.number}/> 
+                    </div>
                     <p>{(errors.number === undefined) ? ('') : (errors.number?.message)}</p>
                     <Button type="submit" variant="contained" onClick={changeCredentials}>{t('Update details')}</Button>
                 </form>

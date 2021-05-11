@@ -1,9 +1,10 @@
 import React from 'react'
+import { useParams } from 'react-router'
 
 function Orders() {
     return (
         <div>
-            orders
+            <h1>My Orders</h1>
         </div>
     )
 }
