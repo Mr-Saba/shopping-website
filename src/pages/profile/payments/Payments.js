@@ -3,7 +3,7 @@ import { useParams } from 'react-router'
 
 function Payments() {
     return (
-        <h1>
+        <h1 style={{marginLeft: "40%"}}>
             Payment Methods
         </h1>
     )

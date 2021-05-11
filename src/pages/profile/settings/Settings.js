@@ -14,9 +14,6 @@ import {useParams} from "react-router-dom"
 
 function Settings() {
 
-    let { profileId } = useParams();
-
-
     const schema = yup.object().shape({
         firstName: yup.string('Use a valid name')  
                    .max(25, 'Name is too long!')
@@ -53,11 +50,6 @@ function Settings() {
         getCredentials()
         console.log(state)
     }, [user])
-    useEffect(() => {
-    console.log(profileId)
-    }, [])
-    
-
     
     const getCredentials = () => {
         firestore.collection("users").doc(user.uid).get().then(doc => {

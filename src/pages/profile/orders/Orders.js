@@ -3,7 +3,7 @@ import { useParams } from 'react-router'
 
 function Orders() {
     return (
-        <div>
+        <div style={{marginLeft: "40%"}}>
             <h1>My Orders</h1>
         </div>
     )

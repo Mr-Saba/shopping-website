@@ -3,7 +3,7 @@ import { useParams } from 'react-router'
 
 function Adresses() {
     return (
-        <h1>
+        <h1 style={{marginLeft: "40%"}}>
             My Adresses
         </h1>
     )

@@ -10,39 +10,51 @@ import Adresses from './adresses/Adresses';
 import Orders from './orders/Orders';
 import Payments from './payments/Payments';
 import Settings from './settings/Settings';
-import Topic from "./Topic"
 
 function Profile() {
 
+    const red = {
+        color: "red"
+    }
+
     let { path, url } = useRouteMatch();
-    let {profile} = useParams()
+
+    const route = () => {
+        if (window.location.pathname == "/profile/settings") return "Edit Profile"
+        if (window.location.pathname == "/profile/orders") return "My Orders"
+        if (window.location.pathname == "/profile/payments") return "Payment Methods"
+        if (window.location.pathname == "/profile/addresses") return "Delivery Adresses"
+    }
+    const styling = () => {
+        console.log(path)
+    }
 
     useEffect(() => {
-        console.log(profile)
+        console.log(path)
     }, [])
 
     return (
         <div>
-        <h3>{`Profile > `}</h3>
+        <h3>{`Profile > ${route()}`}</h3>
         <ul>
         <li>
-          <Link to={`${url}/settings`}>Edit Profile</Link>
+          <Link id="Link1"  to={`${url}/settings`}>Edit Profile</Link>
         </li>
         <li>
-          <Link to={`${url}/orders`}>My Orders</Link>
+          <Link id="Link2"  to={`${url}/orders`}>My Orders</Link>
         </li>
         <li>
-          <Link to={`${url}/payments`}>Payment Methods</Link>
+          <Link id="Link3"  to={`${url}/payments`}>Payment Methods</Link>
         </li>
         <li>
-          <Link to={`${url}/addresses`}>Delivery Adresses</Link>
+          <Link id="Link4"  to={`${url}/addresses`}>Delivery Adresses</Link>
         </li>
       </ul>
 
       <Switch>
         <Route exact path={`${path}`} component={Settings}></Route>
 
-        
+
         <Route path={`${path}/settings`} component={Settings} ></Route>
         <Route path={`${path}/orders`} component={Orders} ></Route>
         <Route path={`${path}/payments`} component={Payments} ></Route>
