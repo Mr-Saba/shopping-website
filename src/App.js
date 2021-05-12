@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react'
-import { Switch, Route, useHistory } from 'react-router'
+import { Switch, Route, useHistory, useRouteMatch } from 'react-router'
 import {firebase, auth} from "./firebase/Configuration"
 import Registration from "./pages/registration/Registration"
 import LogIn from "./pages/logIn/LogIn"
@@ -13,17 +13,20 @@ import Settings from './pages/profile/settings/Settings'
 import Orders from './pages/profile/orders/Orders'
 import Payments from './pages/profile/payments/Payments.js'
 import Adresses from './pages/profile/adresses/Adresses.js'
+import Profile from './pages/profile/Profile'
 
 
 
 function App() { 
+
+  const history = useHistory()
 
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
         if(user) {
             console.log("signed in")
         }else{
-          console.log("not signed in")
+            console.log("not signed in")
         }
     })
 }, [])
@@ -35,10 +38,11 @@ function App() {
         <Route path="/signUp" exact component={Registration}></Route>
         <Route path="/logIn" component={LogIn} exact></Route>
         <Route path="/forgot-password" component={ForgotPassword} exact></Route>
-        <ProtectedRoute path="/profile/settings" component={Settings} exact></ProtectedRoute>
-        <ProtectedRoute path="/profile/orders" component={Orders} exact></ProtectedRoute>
-        <ProtectedRoute path="/profile/payments" component={Payments} exact></ProtectedRoute>
-        <ProtectedRoute path="/profile/addresses" component={Adresses} exact></ProtectedRoute>
+        <Route path="/profile" component={Profile}></Route>
+        {/* <Route path="/profile/settings" component={Settings} exact></Route>
+        <Route path="/profile/orders" component={Orders} exact></Route>
+        <Route path="/profile/payments" component={Payments} exact></Route>
+        <Route path="/profile/addresses" component={Adresses} exact></Route> */}
       </Switch>
         <Footer/>
     </div>

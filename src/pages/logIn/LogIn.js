@@ -11,6 +11,7 @@ import * as yup from "yup";
 import {useHistory} from "react-router"
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
+import {auth} from "../../firebase/Configuration"
 
 function LogIn() {
 
@@ -28,8 +29,11 @@ function LogIn() {
 
     const history = useHistory()
       
+    const {isLoggedIn} = useSelector(state => state)
+    
     const onSubmit = (data) => {
-        if(data) {
+        console.log(data)
+        if(isLoggedIn == true) {
             history.push("/")
         }
     }
@@ -38,10 +42,13 @@ function LogIn() {
 
     const dispatch = useDispatch()
 
-    const {isLoggedIn} = useSelector(state => state)
 
     useEffect(() => {
-
+        auth.onAuthStateChanged((user) => {
+            if(user) {
+                history.push("/")
+            }
+        })
     }, [])
 
     const LoginWithEmail = () => {
