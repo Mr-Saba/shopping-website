@@ -10,6 +10,8 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 import {useHistory} from "react-router"
 import numberNations from "../../data/numberNations.json"
+import VisibilityIcon from '@material-ui/icons/Visibility';
+import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
 
 
 function Registration() {
@@ -86,6 +88,20 @@ function Registration() {
         }
     }
 
+    const [values, setValues] = useState({
+        password: "",
+        showPassword: false,
+      });
+    
+      const handleChangePassShowHide = (prop) => (event) => {
+        setValues({ ...values, [prop]: event.target.value });
+      };
+
+      const handleClickShowPassword = () => {
+        setValues({ ...values, showPassword: !values.showPassword });
+      };
+
+
     return (
         <div className="registration">
             <div className="centerReg">
@@ -109,11 +125,37 @@ function Registration() {
                             {errors.email && <p>{errors.email?.message}</p> }
                         </div>
                         <div className="inputSignUp">
-                            <input type="password" placeholder={t('Password')} {...register("password")} id="password"/>
+                            <input 
+                            type="password" 
+                            placeholder={t('Password')} 
+                            {...register("password")} 
+                            id="password"
+                            type={values.showPassword ? "text" : "password"}
+                            value={values.password}
+                            onChange={handleChangePassShowHide("password")}
+                            />
+                            <i
+                            onClick={handleClickShowPassword}
+                            >
+                            {values.showPassword ? <VisibilityIcon /> : <VisibilityOffIcon />}
+                            </i>
                             {errors.password && <p>{errors.password?.message}</p> }
                         </div>
                         <div className="inputSignUp">
-                            <input type="password" placeholder={t('ConfirmPassword')} {...register("passwordConfirmation")}  id="confirm_password"/>
+                            <input 
+                            type="password" 
+                            placeholder={t('ConfirmPassword')} 
+                            {...register("passwordConfirmation")}  
+                            id="confirm_password"
+                            // type={values.showPassword ? "text" : "password"}
+                            // value={values.password}
+                            // onChange={handleChangePassShowHide("password")}
+                            />
+                            {/* <i
+                            onClick={handleClickShowPassword}
+                            >
+                            {values.showPassword ? <VisibilityIcon /> : <VisibilityOffIcon />}
+                            </i> */}
                             {errors.passwordConfirmation && <p>{errors.passwordConfirmation?.message}</p> }
                         </div>
                         <div className="inputPhoneSignUp">

@@ -8,6 +8,7 @@ import "./settings.css"
 import { Button } from '@material-ui/core'
 import numberNations from "../../../data/numberNations.json"
 
+
 function Settings() {
 
     const {t} = useTranslation()
