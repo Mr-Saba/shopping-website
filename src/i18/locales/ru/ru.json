@@ -28,5 +28,15 @@
     "LogOut": "Выйти",
     "Settings": "Настройки",
     "Date of birth": "Дата рождения",
-    "Update details": "Детали обновления"
+    "Update details": "Детали обновления",
+    "My orders": "Мои заказы",
+    "Payment methods": "Способы оплаты",
+    "Delivery adresses": "Адреса доставки",
+    "English":"Английский",
+    "Russian": "Русский",
+    "Georgian": "Грузинский",
+    "Order ID": "Номер заказа",
+    "Date Shipped": "Дата отправки",
+    "Address": "Адрес",
+    "My adresses": "Мои адреса"
 }

@@ -98,41 +98,57 @@ function Settings() {
                     <h1>My details</h1>
                     <h3>Personal information</h3>
                 <form className="redactProfile" onSubmit={handleSubmit(onSubmit)}>
-                    <p>{t('Email')}</p>
-                    <input type="email" id="email" {...register("email")} defaultValue={user && user.email}/>
-                    {errors.email && <p>{errors.email?.message}</p> }
-                    <p>{t('FirstName')}</p>
-                    <input type="text" id="firstName" {...register("firstName")} defaultValue={state.firstName && state.firstName}/> 
-                    {errors.firstName && <p>{errors.firstName?.message}</p> }
-                    <p>{t('LastName')}</p>
-                    <input type="text" id="lastName" {...register("lastName")} defaultValue={state.lastName && state.lastName}/> 
-                    {errors.lastName && <p>{errors.lastName?.message}</p> }
-                    <p>{t('Date of birth')}</p>
-                    <input type="date" id="date" defaultValue={state.date && state.date} /> 
-                    <p>{t('Number')}</p>
-                    <div className="phoneSettings">
-                        {state.nation &&
-                        <label>
-                            <select id="nation" defaultValue={state.nation}>
-                                {numberNations.map((item) => ( 
-                                    <option value={item.value}>{item.label}</option>
-                                ))}
-                            </select>
-                        </label>
-                        } 
-                        <input type="number" id="number"  {...register("number")} defaultValue={state.number && state.number}/> 
+                    <div className="settingsEditForm">
+                        <p>{t('Email')}</p>
+                        <input type="email" id="email" {...register("email")} defaultValue={user && user.email}/>
+                        {errors.email && <p className="errorPSettingForm">{errors.email?.message}</p> }
                     </div>
-                    <p>{(errors.number === undefined) ? ('') : (errors.number?.message)}</p>
+                    <div className="settingsEditForm">
+                        <p>{t('FirstName')}</p>
+                        <input type="text" id="firstName" {...register("firstName")} defaultValue={state.firstName && state.firstName}/> 
+                        {errors.firstName && <p className="errorPSettingForm">{errors.firstName?.message}</p> }
+                    </div>
+                    <div className="settingsEditForm">
+                        <p>{t('LastName')}</p>
+                        <input type="text" id="lastName" {...register("lastName")} defaultValue={state.lastName && state.lastName}/> 
+                        {errors.lastName && <p className="errorPSettingForm">{errors.lastName?.message}</p> }
+                    </div>
+                    <div className="settingsEditForm">
+                        <p>{t('Date of birth')}</p>
+                        <input type="date" id="date" defaultValue={state.date && state.date} /> 
+                    </div>
+                    <div className="settingsEditForm">
+                        <p>{t('Number')}</p>
+                        <div className="phoneSettings">
+                            {state.nation &&
+                            <label>
+                                <select id="nation" defaultValue={state.nation}>
+                                    {numberNations.map((item) => ( 
+                                        <option value={item.value}>{item.label}</option>
+                                    ))}
+                                </select>
+                            </label>
+                            } 
+                            <input type="number" id="number"  {...register("number")} defaultValue={state.number && state.number}/> 
+                        </div>
+                        <p className="errorPSettingForm">{(errors.number === undefined) ? ('') : (errors.number?.message)}</p>
+                    </div>
                     <Button type="submit" variant="contained" onClick={changeCredentials}>{t('Update details')}</Button>
                 </form>
                     <h3>Change password</h3>
                 <div className="changePass">
-                    <p>Current password</p>
-                    <input type="password" id="current-pass" />
-                    <p>New password</p>
-                    <input type="password" id="new-pass"/>
-                    <p>Confirm new password</p>
-                    <input type="password" id="confirm-pass"/>
+                    <div className="changePassInputs">
+                        <p>Current password</p>
+                        <input type="password" id="current-pass" />
+                    </div>
+                    <div className="changePassInputs">
+                        <p>New password</p>
+                        <input type="password" id="new-pass"/>
+                    </div>
+                    <div className="changePassInputs">
+                        <p>Confirm new password</p>
+                        <input type="password" id="confirm-pass"/>
+                    </div>
                     <Button onClick={() => changePassword()} variant="contained" >Update password</Button>
                 </div>
             </div>

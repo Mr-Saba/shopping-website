@@ -28,5 +28,15 @@
     "LogOut": "გამოსვლა",
     "Settings": "პარამეტრები",
     "Date of birth": "დაბადების თარიღი",
-    "Update details" : "დეტალების განახლება"
+    "Update details" : "დეტალების განახლება",
+    "My orders": "ჩემი შეკვეთები",
+    "Payment methods": "გადახდის მეთოდები",
+    "Delivery adresses": "მიწოდების მისამართები",
+    "English":"ინგლისური",
+    "Russian": "რუსული",
+    "Georgian": "ქართული",
+    "Order ID": "შეკვეთის ID",
+    "Date Shipped": "გამოწერის თარიღი",
+    "Address": "მისამართი",
+    "My adresses": "ჩემი მისამართები"
 }

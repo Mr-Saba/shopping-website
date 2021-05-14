@@ -6,7 +6,7 @@
     height: auto;
 }
 .logInCenter {
-    width: 35%;
+    width: 380px;
 }
 .logInForm {
     display: grid;
@@ -31,7 +31,7 @@
     left: 430px;
     height: 80%;
 }
-relative
+
 .logIn .logInCenter .logInForm .inputLogIn p {
     font-size: 14px;
     color: #f50057;

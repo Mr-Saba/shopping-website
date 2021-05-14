@@ -1,32 +1,32 @@
-.redactOfProfile{
+.redactOfProfile {
     width: 100%;
-    justify-items: center;
     display: grid;
-    margin: 20px 0;
+    padding-left: 210px;
     height: auto;
 }
 
-
 div.redactOfProfile .redactCenter {
-    width: 35%;
+    width: 480px;
 }
-div.redactOfProfile .redactCenter h1{
+div.redactOfProfile .redactCenter h1 {
     margin-bottom: 10px;
+    font-size: 25px;
+}
+div.redactOfProfile .redactCenter h3 {
+    font-size: 20px;
 }
 form.redactProfile {
     display: grid;
     grid-template-columns: 100%;
-    grid-template-rows: 20px 50px 20px 50px 20px 50px 20px 50px 20px 50px 50px;
+    grid-template-rows: 100px 100px 100px 100px 100px 50px;
     grid-row-gap: 20px;
-    row-gap: 20px;
     margin: 20px 0 50px 0;
 }
-.changePass{
+.changePass {
     display: grid;
     grid-template-columns: 100%;
-    grid-template-rows: 20px 50px 20px 50px 20px 50px 50px;
+    grid-template-rows: 100px 100px 100px 50px;
     grid-row-gap: 20px;
-    row-gap: 20px;
     margin: 20px 0;
 }
 .redactOfProfile .MuiButton-contained:hover {
@@ -41,16 +41,23 @@ form.redactProfile {
 }
 .redactOfProfile input {
     padding: 0px 20px;
+    width: 100%;
+    margin-top: 10px;
+    height: 60%;
 }
 
 .phoneSettings {
     display: flex;
-    height: 100%;
+    height: 60%;
     width: 100%;
 }
-
+.settingsEditForm {
+    width: 100%;
+    height: 100%;
+}
 .phoneSettings label {
     height: 100%;
+    margin-top: 10px;
 }
 
 .phoneSettings input#number {
@@ -61,4 +68,10 @@ form.redactProfile {
 .phoneSettings select#nation {
     height: 100%;
     border-right: unset;
+}
+
+.errorPSettingForm{
+    font-size: 14px;
+    color: #f50057;
+    padding: 4px 5px;
 }
