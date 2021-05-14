@@ -47,22 +47,47 @@ function Settings() {
     })
 
     useEffect(() => {
-        getCredentials()
-        console.log(state)
-    }, [user])
+        // renderAccount(doc)
+    }, [])
     
-    const getCredentials = () => {
-        firestore.collection("users").doc(user.uid).get().then(doc => {
-            // console.log(doc.data())
-            setState({
-                firstName: doc.data().firstname,
-                lastName: doc.data().lastname,
-                date: doc.data().dateOfBirth,
-                nation: doc.data().nation,
-                number: doc.data().number,
-                password: doc.data().password
+    // const getCredentials = () => {
+    //     firestore.collection("users").doc(user.uid).get().then(doc => {
+    //         // console.log(doc.data())
+    //         setState({
+    //             firstName: doc.data().firstname,
+    //             lastName: doc.data().lastname,
+    //             date: doc.data().dateOfBirth,
+    //             nation: doc.data().nation,
+    //             number: doc.data().number,
+    //             password: doc.data().password
+    //         })
+    //     })   
+    // }
+
+    
+    function renderAccount(doc){
+        firestore.collection('users').get().then((snapshot) => {
+            snapshot.docs.forEach(doc => {
+                renderAccount(doc);
             })
-        })   
+        })
+        const accountList = document.getElementsByClassName("redactProfile")
+        let tr = document.createElement('tr');
+        let td_firstName = document.createElement('td');
+        // let td_full_name = document.createElement('td');
+        // let td_uni_id = document.createElement('td');
+
+        tr.setAttribute('data-id', doc.id);
+        td_firstName.textContent = doc.data().firstname;
+        // td_full_name.textContent = doc.data().full_name;
+        // td_uni_id.textContent = doc.data().uni_id;
+
+        tr.appendChild(td_firstName);
+        // tr.appendChild(td_full_name);
+        // tr.appendChild(td_uni_id);
+
+        accountList.appendChild(tr);
+
     }
 
     const changeCredentials = async () => {
@@ -101,7 +126,7 @@ function Settings() {
                     <input type="email" id="email" {...register("email")} defaultValue={user && user.email}/>
                     {errors.email && <p>{errors.email?.message}</p> }
                     <p>{t('FirstName')}</p>
-                    <input type="text" id="firstName" {...register("firstName")} defaultValue={state.firstName && state.firstName}/> 
+                    {/* <input type="text" id="firstName" {...register("firstName")} defaultValue={doc.data().firstname}/>  */}
                     {errors.firstName && <p>{errors.firstName?.message}</p> }
                     <p>{t('LastName')}</p>
                     <input type="text" id="lastName" {...register("lastName")} defaultValue={state.lastName && state.lastName}/> 

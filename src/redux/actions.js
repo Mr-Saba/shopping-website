@@ -54,13 +54,12 @@ const SignInWithEmailAndPassword = (data) => async dispatch => {
                 payload: response.user,
             }) 
         }).catch((error) => {
-            console.log(error.message)
+            console.log(error)
         })
 }
 
 const UpdateCredentials = (data) => async dispatch => {
     const user = auth.currentUser
-    console.log("dada")
         await user.updateEmail(data.email).then(()=>{
             console.log("email has changed")
             firestore.collection("users").doc(user.uid).update({

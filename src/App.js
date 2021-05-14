@@ -34,16 +34,12 @@ function App() {
   return (
     <div className="App">
         <Header/>
-      <Switch>
-        <Route path="/signUp" exact component={Registration}></Route>
-        <Route path="/logIn" component={LogIn} exact></Route>
-        <Route path="/forgot-password" component={ForgotPassword} exact></Route>
-        <Route path="/profile" component={Profile}></Route>
-        {/* <Route path="/profile/settings" component={Settings} exact></Route>
-        <Route path="/profile/orders" component={Orders} exact></Route>
-        <Route path="/profile/payments" component={Payments} exact></Route>
-        <Route path="/profile/addresses" component={Adresses} exact></Route> */}
-      </Switch>
+        <Switch>
+          <Route path="/signUp" exact component={Registration}></Route>
+          <Route path="/logIn" component={LogIn} exact></Route>
+          <Route path="/forgot-password" component={ForgotPassword} exact></Route>
+          <Route path="/profile" component={Profile} ></Route>
+        </Switch>
         <Footer/>
     </div>
   )

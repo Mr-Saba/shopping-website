@@ -1,4 +1,4 @@
-import React, { useEffect} from 'react'
+import React, { useEffect, useState} from 'react'
 import {Link} from "react-router-dom"
 import {useDispatch, useSelector} from "react-redux"
 import { SignInWithEmailAndPassword } from '../../redux/actions'
@@ -12,6 +12,11 @@ import {useHistory} from "react-router"
 import {auth} from "../../firebase/Configuration"
 
 function LogIn() {
+
+    const [message, setMessage] = useState({
+        incorrectPassword: '',
+        userNotFound: ''
+    })
 
     const schema = yup.object().shape({
         email: yup.string()
@@ -30,10 +35,10 @@ function LogIn() {
     const {isLoggedIn} = useSelector(state => state)
     
     const onSubmit = (data) => {
-        console.log(data)
         if(isLoggedIn == true) {
             history.push("/")
         }
+
     }
 
     const {t} = useTranslation()
