@@ -16,7 +16,7 @@
     margin: 20px 0;
 }
 .logIn .logInCenter input {
-    padding-left: 20px;
+    padding: 0 50px 0 20px;
     width: 100%;
     position: absolute;
     height: 80%;
@@ -28,10 +28,9 @@
     color: #034488;
     padding-right: 20px;
     justify-content: flex-end;
-    left: 430px;
+    left: 340px;
     height: 80%;
 }
-
 .logIn .logInCenter .logInForm .inputLogIn p {
     font-size: 14px;
     color: #f50057;
