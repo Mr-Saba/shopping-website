@@ -29,7 +29,7 @@ function Profile() {
 
     const bold = {
       color: "#034488",
-        fontWeight: "bold"
+      fontWeight: "bold"
     }
 
     let { path, url } = useRouteMatch();
@@ -50,28 +50,28 @@ function Profile() {
 
     return (
         <div className="profile">
-        <p className="urlShowPProfile">Profile > <span>{route()}</span></p>
+        <p className="urlShowPProfile">{t('Profile')} > <span>{route()}</span></p>
         <div className="profileFormUrls">
           <div className="profileUrls">
             <ul >
               <li>
                 <Link style={pathName == "/profile/settings" ? bold : {}}  to={`${url}/settings`}>
-                  <EditOutlinedIcon/><p>{t('Edit Profile')}</p>
+                  <EditOutlinedIcon/><p>{t('Edit profile')}</p>
                 </Link>
               </li>
               <li>
                 <Link style={pathName === "/profile/orders" ? bold : {}}  to={`${url}/orders`}>
-                  <DescriptionOutlinedIcon/><p>{t('My Orders')}</p>
+                  <DescriptionOutlinedIcon/><p>{t('My orders')}</p>
                 </Link>
               </li>
               <li>
                 <Link style={pathName === "/profile/payments" ? bold : {}}  to={`${url}/payments`}>
-                  <PaymentOutlinedIcon/><p>{t('Payment Methods')}</p>
+                  <PaymentOutlinedIcon/><p>{t('Payment methods')}</p>
                 </Link>
               </li>
               <li>
                 <Link style={pathName === "/profile/addresses" ? bold: {}}  to={`${url}/addresses`}>
-                  <HomeOutlinedIcon/><p>{t('Delivery Adresses')}</p>
+                  <HomeOutlinedIcon/><p>{t('Delivery adresses')}</p>
                 </Link>
               </li>
           </ul>

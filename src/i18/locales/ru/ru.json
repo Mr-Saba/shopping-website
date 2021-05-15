@@ -38,5 +38,13 @@
     "Order ID": "Номер заказа",
     "Date Shipped": "Дата отправки",
     "Address": "Адрес",
-    "My adresses": "Мои адреса"
+    "My adresses": "Мои адреса",
+    "Edit profile": "Редактировать профиль",
+    "My details": "Мои детали",
+    "Personal information": "Персональная информация",
+    "Change password": "Измени пароль",
+    "Current password": "Текущий пароль",
+    "New password": "Новый пароль",
+    "Confirm new password": "Подтвердите новый пароль",
+    "Update password": "Обновить пароль"
 }

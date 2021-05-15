@@ -160,21 +160,21 @@ function Settings() {
                     </div>
                     <Button type="submit" variant="contained" onClick={changeCredentials}>{t('Update details')}</Button>
                 </form>
-                    <h3>Change password</h3>
+                    <h3>{t('Change password')}</h3>
                 <div className="changePass">
                     <div className="changePassInputs">
-                        <p>Current password</p>
+                        <p>{t('Current password')}</p>
                         <input type="password" id="current-pass" />
                     </div>
                     <div className="changePassInputs">
-                        <p>New password</p>
+                        <p>{t('New password')}</p>
                         <input type="password" id="new-pass"/>
                     </div>
                     <div className="changePassInputs">
-                        <p>Confirm new password</p>
+                        <p>{t('Confirm new password')}</p>
                         <input type="password" id="confirm-pass"/>
                     </div>
-                    <Button onClick={() => changePassword()} variant="contained" >Update password</Button>
+                    <Button onClick={() => changePassword()} variant="contained" >{t('Update password')}</Button>
                 </div>
             </div>
         </div>
