@@ -28,5 +28,15 @@
     "LogOut": "Log Out",
     "Settings": "Settings",
     "Date of birth": "Date of birth",
-    "Update details": "Update details"
+    "Update details": "Update details",
+    "My orders": "My orders",
+    "Payment methods": "Payment methods",
+    "Delivery adresses": "Delivery adresses",
+    "English":"English",
+    "Russian": "Russian",
+    "Georgian": "Georgian",
+    "Order ID": "Order ID",
+    "Date Shipped": "Date Shipped",
+    "Address": "Address",
+    "My adresses": "My adresses"
 }

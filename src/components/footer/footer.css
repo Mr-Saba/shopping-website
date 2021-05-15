@@ -64,3 +64,11 @@ ul.profileUl a.MuiButtonBase-root.MuiButton-root.MuiButton-contained {
     align-items: center;
     justify-content: center;
 }
+.routesFooterLogin {
+    display: grid;
+    grid-template-rows: 30px 30px 30px 30px;
+}
+.buttonsFooterEverybody{
+    display: grid;
+    grid-template-rows: 50px 50px;
+}

@@ -90,20 +90,29 @@ function Footer() {
                 <li>{t('Profile')}:</li>
                 { (isLoggedIn === true) ?
                 (
-                    <>
-                    <Link to="/profile/settings">
-                        {t('Settings')}
-                    </Link>
-                    </>
+                    <div className="routesFooterLogin">
+                        <Link to="/profile/settings">
+                            {t('Settings')}
+                        </Link>
+                        <Link to="/profile/orders">
+                            {t('My orders')}
+                        </Link>
+                        <Link to="/profile/payments">
+                            {t('Payment methods')}
+                        </Link>
+                        <Link to="/profile/addresses">
+                            {t('Delivery adresses')}
+                        </Link>
+                    </div>
                 ) : (
-                    <>
-                    <li>
-                        <Button component={Link} to="/logIn" variant="contained" >{t('LogIn')}</Button>
-                    </li>
-                    <li>
-                        <Button component={Link} to="/signUp" variant="contained" >{t('SignUp')}</Button>
-                    </li>
-                    </>
+                    <div className="buttonsFooterEverybody">
+                        <li>
+                            <Button component={Link} to="/logIn" variant="contained" >{t('LogIn')}</Button>
+                        </li>
+                        <li>
+                            <Button component={Link} to="/signUp" variant="contained" >{t('SignUp')}</Button>
+                        </li>
+                    </div>
                 )
                 }
                 </ul>
@@ -114,9 +123,9 @@ function Footer() {
                             id="demo-customized-select-native"
                             onChange={(event) => changeLanguage(event.target.value)} 
                             >
-                            <option value="en">English</option>
-                            <option value="ka">Georgian</option>
-                            <option value="ru">Russian</option>
+                            <option value="en">{t('English')}</option>
+                            <option value="ka">{t('Georgian')}</option>
+                            <option value="ru">{t('Russian')}</option>
                             </NativeSelect>
                         </FormControl>
                     </li>

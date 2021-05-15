@@ -13,12 +13,24 @@ import Adresses from './adresses/Adresses';
 import Orders from './orders/Orders';
 import Payments from './payments/Payments';
 import Settings from './settings/Settings';
+import './profile.css'
+import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
+import DescriptionOutlinedIcon from '@material-ui/icons/DescriptionOutlined';
+import PaymentOutlinedIcon from '@material-ui/icons/PaymentOutlined';
+import HomeOutlinedIcon from '@material-ui/icons/HomeOutlined';
+import { useTranslation } from "react-i18next";
 import {useSelector} from "react-redux"
-
 
 function Profile() {
 
     const history = useHistory()
+
+    const {t} = useTranslation()
+
+    const bold = {
+        color: "#001e3f",
+        fontWeight: "bold"
+    }
 
     let { path, url } = useRouteMatch();
 
@@ -37,22 +49,33 @@ function Profile() {
     }, [])
 
     return (
-        <div>
-        <h3>{`Profile > ${route()}`}</h3>
+        <div className="profile">
+        <p className="urlShowPProfile">Profile > <span>{route()}</span></p>
+        <div className="profileFormUrls">
+        <div className="profileUrls">
         <ul >
         <li>
-        <Link style={pathName == "/profile/settings" ? {color: "red"} : {}}  to={`${url}/settings`}>Edit Profile</Link>
+        <Link style={pathName == "/profile/settings" ? bold : {}}  to={`${url}/settings`}>
+          <EditOutlinedIcon/><p>{t('Edit Profile')}</p>
+        </Link>
         </li>
         <li>
-        <Link style={pathName === "/profile/orders" ? {color: "red"} : {}}  to={`${url}/orders`}>My Orders</Link>
+        <Link style={pathName === "/profile/orders" ? bold : {}}  to={`${url}/orders`}>
+          <DescriptionOutlinedIcon/><p>{t('My Orders')}</p>
+        </Link>
         </li>
         <li>
-        <Link style={pathName === "/profile/payments" ? {color: "red"} : {}}  to={`${url}/payments`}>Payment Methods</Link>
+        <Link style={pathName === "/profile/payments" ? bold : {}}  to={`${url}/payments`}>
+          <PaymentOutlinedIcon/><p>{t('Payment Methods')}</p>
+        </Link>
         </li>
         <li>
-        <Link style={pathName === "/profile/addresses" ? {color: "red"} : {}}  to={`${url}/addresses`}>Delivery Adresses</Link>
+        <Link style={pathName === "/profile/addresses" ? bold: {}}  to={`${url}/addresses`}>
+          <HomeOutlinedIcon/><p>{t('Delivery Adresses')}</p>
+        </Link>
         </li>
       </ul>
+      </div>
 
       <Switch>
         <ProtectedRoute path={`${path}`} component={Settings} exact></ProtectedRoute>
@@ -62,7 +85,7 @@ function Profile() {
         <ProtectedRoute path={`${path}/payments`} component={Payments} exact ></ProtectedRoute>
         <ProtectedRoute path={`${path}/addresses`} component={Adresses} exact ></ProtectedRoute>     
       </Switch>
-
+      </div>
       </div>
     )
 }

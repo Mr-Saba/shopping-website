@@ -1,11 +1,14 @@
 import React from 'react'
 import { useParams } from 'react-router'
+import './adresses.css'
+import { useTranslation } from "react-i18next";
 
 function Adresses() {
+    const {t} = useTranslation()
     return (
-        <h1 style={{marginLeft: "40%"}}>
-            My Adresses
-        </h1>
+        <div className="adressesSettings">
+            <h1>{t('My adresses')}</h1>
+        </div>
     )
 }
 

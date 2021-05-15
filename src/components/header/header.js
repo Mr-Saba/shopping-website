@@ -56,7 +56,7 @@ function Header() {
                    <li>
                         <IconButton  component={Link} to='/cart' area-label='Show cart items' color='inherit'>
                             <Badge badgeContent="0" color='secondary'>
-                                <ShoppingCart/>
+                                <ShoppingCartOutlinedIcon/>
                             </Badge>
                         </IconButton>
                    </li>
