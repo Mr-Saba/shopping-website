@@ -66,7 +66,7 @@ function Registration() {
             surname: document.getElementById("lastname").value,
             nation: document.getElementById("select").value,
             number: document.getElementById("number").value,
-            password: hashedPassword
+            password: document.getElementById("password").value
         }
         console.log(data)
         if(accepted === true) {
@@ -92,6 +92,10 @@ function Registration() {
         password: "",
         showPassword: false,
       });
+    const [ConfirmValues, setConfirmValues] = useState({
+        password: "",
+        showPassword: false,
+      });
     
       const handleChangePassShowHide = (prop) => (event) => {
         setValues({ ...values, [prop]: event.target.value });
@@ -99,6 +103,13 @@ function Registration() {
 
       const handleClickShowPassword = () => {
         setValues({ ...values, showPassword: !values.showPassword });
+      };
+      const handleChangeConfirmPassShowHide = (prop) => (event) => {
+        setConfirmValues({ ...ConfirmValues, [prop]: event.target.value });
+      };
+
+      const handleClickShowConfirmPassword = () => {
+        setConfirmValues({ ...ConfirmValues, showPassword: !ConfirmValues.showPassword });
       };
 
 
@@ -147,15 +158,15 @@ function Registration() {
                             placeholder={t('ConfirmPassword')} 
                             {...register("passwordConfirmation")}  
                             id="confirm_password"
-                            // type={values.showPassword ? "text" : "password"}
-                            // value={values.password}
-                            // onChange={handleChangePassShowHide("password")}
+                            type={ConfirmValues.showPassword ? "text" : "password"}
+                            value={ConfirmValues.password}
+                            onChange={handleChangeConfirmPassShowHide("password")}
                             />
-                            {/* <i
-                            onClick={handleClickShowPassword}
+                            <i
+                            onClick={handleClickShowConfirmPassword}
                             >
-                            {values.showPassword ? <VisibilityIcon /> : <VisibilityOffIcon />}
-                            </i> */}
+                            {ConfirmValues.showPassword ? <VisibilityIcon /> : <VisibilityOffIcon />}
+                            </i>
                             {errors.passwordConfirmation && <p>{errors.passwordConfirmation?.message}</p> }
                         </div>
                         <div className="inputPhoneSignUp">

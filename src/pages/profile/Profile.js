@@ -39,7 +39,7 @@ function Profile() {
     const {isLoggedIn} = useSelector(state => state)
 
     const route = () => {
-        if (pathName == "/profile/settings" || pathName == "/profile") return "Edit Profile"
+        if (pathName == "/profile/settings" || pathName == "/profile") return `${t('Number')}`
         if (pathName == "/profile/orders") return "My Orders"
         if (pathName == "/profile/payments") return "Payment Methods"
         if (pathName == "/profile/addresses") return "Delivery Adresses"
