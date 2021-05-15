@@ -15,6 +15,11 @@ import {auth} from "../../firebase/Configuration"
 
 function LogIn() {
 
+    const [message, setMessage] = useState({
+        incorrectPassword: '',
+        userNotFound: ''
+    })
+
     const schema = yup.object().shape({
         email: yup.string()
                    .email('Enter a valid email-address')
@@ -32,10 +37,10 @@ function LogIn() {
     const {isLoggedIn} = useSelector(state => state)
     
     const onSubmit = (data) => {
-        console.log(data)
         if(isLoggedIn == true) {
             history.push("/")
         }
+
     }
 
     const {t} = useTranslation()

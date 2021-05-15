@@ -26,19 +26,13 @@ function ForgotPassword() {
 
     const dispatch = useDispatch()
 
-    const [message, setMessage] = useState("")
-
     const changePass = () => {
-        // const email = document.getElementById("sent_email").value
-        // auth.sendPasswordResetEmail(email).then(response => {
-        //     setMessage("Password-reset link has sent")
-        // }).catch(function(error){
-        //     if(error.code === "auth/user-not-found") setMessage("Email-address is not authorized")
-        // });
         const email = document.getElementById("sent_email").value
         dispatch(ResetPass(email))
     }
-    const onSubmit = (data) => console.log(data)
+    const onSubmit = (data) => {
+
+    }
 
 
     return (
@@ -50,7 +44,6 @@ function ForgotPassword() {
                         <input type="text" placeholder={t('Email')} {...register("email")} id="sent_email"/>
                         { errors.email && <p>{errors.email?.message}</p> }
                     </div>
-                    {message && <div>{message}</div>}
                     <Button type="submit" variant="contained" onClick={() => changePass()} >{t('ResetPassword')}</Button>
                     <Link to="/logIn">{t('BackToLoginPage')}</Link>
                 </form>

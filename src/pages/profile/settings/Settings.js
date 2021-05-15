@@ -54,7 +54,6 @@ function Settings() {
     
     const getCredentials = () => {
         firestore.collection("users").doc(user.uid).get().then(doc => {
-            // console.log(doc.data())
             setState({
                 firstName: doc.data().firstname,
                 lastName: doc.data().lastname,
@@ -65,6 +64,32 @@ function Settings() {
             })
         })   
     }
+
+    
+    // function renderAccount(doc){
+    //     firestore.collection('users').get().then((snapshot) => {
+    //         snapshot.docs.forEach(doc => {
+    //             renderAccount(doc);
+    //         })
+    //     })
+    //     const accountList = document.getElementsByClassName("redactProfile")
+    //     let tr = document.createElement('tr');
+    //     let td_firstName = document.createElement('td');
+    //     // let td_full_name = document.createElement('td');
+    //     // let td_uni_id = document.createElement('td');
+
+    //     tr.setAttribute('data-id', doc.id);
+    //     td_firstName.textContent = doc.data().firstname;
+    //     // td_full_name.textContent = doc.data().full_name;
+    //     // td_uni_id.textContent = doc.data().uni_id;
+
+    //     tr.appendChild(td_firstName);
+    //     // tr.appendChild(td_full_name);
+    //     // tr.appendChild(td_uni_id);
+
+    //     accountList.appendChild(tr);
+
+    // }
 
     const changeCredentials = async () => {
         const data = {

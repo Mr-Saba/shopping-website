@@ -171,7 +171,7 @@ function Registration() {
                         </div>
                         <div className="termsAndConditionsSignUp">
                             <div className="termsAndConditionsCheckBoxSignUp">
-                                <label for="terms">
+                                <label for="terms" style={{width: "225px"}}>
                                     I Accept<Link to="/termsAndConditions"> Terms & Conditions</Link>
                                 </label>
                                 <input type="checkbox" onClick={handleChange} {...register("terms")} id="terms" name="terms" />

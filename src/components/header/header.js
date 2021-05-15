@@ -1,6 +1,6 @@
 import React from 'react'
 import './header.css'
-import {Link} from 'react-router-dom'
+import {Link, useHistory} from 'react-router-dom'
 import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
 import PersonOutlineOutlinedIcon from '@material-ui/icons/PersonOutlineOutlined';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
@@ -13,6 +13,7 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import {useSelector} from "react-redux"
 
 function Header() {
+
 
     const dispatch = useDispatch()
 
