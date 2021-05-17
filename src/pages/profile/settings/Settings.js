@@ -120,8 +120,8 @@ function Settings() {
     return (
         <div className="redactOfProfile">
             <div className="redactCenter">
-                    <h1>My details</h1>
-                    <h3>Personal information</h3>
+                    <h1>{t('My details')}</h1>
+                    <h3>{t('Personal information')}</h3>
                 <form className="redactProfile" onSubmit={handleSubmit(onSubmit)}>
                     <div className="settingsEditForm">
                         <p>{t('Email')}</p>

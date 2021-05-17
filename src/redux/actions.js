@@ -36,26 +36,17 @@ const SignOut = () => async dispatch => {
 }
 
 const ResetPass = (email) => async dispatch => {
-    auth.sendPasswordResetEmail(email).then(response => {
-        dispatch({
-            type: RESET_PASS,
-            payload: response.user,
-        })
-    }).catch(error =>
-        console.log(error)
-    );
+    dispatch({
+        type: RESET_PASS,
+        payload: email
+    }) 
 }
 
 const SignInWithEmailAndPassword = (data) => async dispatch => {
-    auth.signInWithEmailAndPassword(data.email, data.password)
-        .then(response => {
-            dispatch({
-                type: SIGN_IN_WITH_EMAIL_PASS,
-                payload: response.user,
-            }) 
-        }).catch((error) => {
-            console.log(error)
-        })
+    dispatch({
+        type: SIGN_IN_WITH_EMAIL_PASS,
+        payload: data
+    }) 
 }
 
 const UpdateCredentials = (data) => async dispatch => {

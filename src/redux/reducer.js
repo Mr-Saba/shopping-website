@@ -31,7 +31,7 @@ const Reducer = (state=initialState, action) => {
         case RESET_PASS: return {
             ...state,
             user: action.payload,
-            isLoggedIn: true,
+            isLoggedIn: false,
         }
         case UPDATE_EMAIL: return {
             ...state,

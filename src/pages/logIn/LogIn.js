@@ -13,17 +13,12 @@ import VisibilityIcon from '@material-ui/icons/Visibility';
 import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
 import {auth} from "../../firebase/Configuration"
 
-function LogIn() {
 
-    const [message, setMessage] = useState({
-        incorrectPassword: '',
-        userNotFound: ''
-    })
+function LogIn() {
 
     const schema = yup.object().shape({
         email: yup.string()
-                   .email('Enter a valid email-address')
-                   .required('Email-address field is required*'),
+                   .required('email-adress field is required*'),
         password: yup.string()
                    .required('Password field is required*')
     });
@@ -32,11 +27,13 @@ function LogIn() {
         resolver: yupResolver(schema)
       })
 
+    const [state, setState] = useState('')
+
     const history = useHistory()
       
     const {isLoggedIn} = useSelector(state => state)
     
-    const onSubmit = (data) => {
+    const onSubmit = () => {
         if(isLoggedIn == true) {
             history.push("/")
         }
@@ -56,22 +53,28 @@ function LogIn() {
         })
     }, [])
 
-    const LoginWithEmail = () => {
+    const LoginWithEmail = async () => {
         const data = {
             email: document.getElementById("email").value,
             password: document.getElementById("password").value
         }
-        dispatch(SignInWithEmailAndPassword(data))
+        await auth.signInWithEmailAndPassword(data.email, data.password)
+        .then(response => {
+            dispatch(SignInWithEmailAndPassword(data))
+        }).catch((error) => {
+            console.log(error)
+            console.log(errors.email)
+            if(error.code == "auth/invalid-email") {
+                setState("Enter a valid email-adress")
+            }
+            if(error.code == "auth/wrong-password") {
+                setState("password is incorrect")
+            }
+            if(error.code == "auth/user-not-found") {
+                setState("There is not any user with this credentials")
+            }
+        })
     }
-
-    // const showPassword = () => {
-    //     const passwordField = document.getElementById("password")
-    //     if(passwordField.getAttribute("type") === "password") {
-    //         passwordField.setAttribute("type", "text")
-    //     } else {
-    //         passwordField.setAttribute("type", "password")
-    //     }
-    // }
 
     const [values, setValues] = useState({
         password: "",
@@ -95,26 +98,27 @@ function LogIn() {
                 </span>
                 <form onSubmit={handleSubmit(onSubmit)} className="logInForm">
                     <div className="inputLogIn">
-                        <input type="text" {...register("email")} placeholder={t('Email')} id="email" />
-                        {errors.email && <p>{errors.email?.message}</p> }
+                        <input type="text" {...register("email")} placeholder={t('Email')} id="email"/>
                     </div>
+                        {errors.email && <p>{errors.email?.message}</p> }
                     <div className="inputLogIn">
                         <input 
                         type="password" 
-                        {...register("password")} 
                         placeholder={t('Password')} 
                         id="password"
                         type={values.showPassword ? "text" : "password"}
-                        value={values.password}
+                        defaultValue={values.password}
                         onChange={handleChange("password")}
+                        {...register("password")} 
                         />
                         <i
                         onClick={handleClickShowPassword}
                         >
                         {values.showPassword ? <VisibilityIcon /> : <VisibilityOffIcon />}
                         </i>
-                        {errors.password && <p>{errors.password?.message}</p> }
                     </div>
+                        {errors.password && <p>{errors.password?.message}</p> }
+                        {errors.email == undefined && errors.password == undefined && state && <p>{state}</p>}
                     <Link to="/forgot-password">{t('ForgotPassword')}?</Link>
                     <Button type="submit" variant="contained" onClick={LoginWithEmail} >{t('LogIn')}</Button>
                 </form>

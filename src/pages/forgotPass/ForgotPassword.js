@@ -13,6 +13,8 @@ import { auth, firebase, firestore } from "../../firebase/Configuration"
 
 function ForgotPassword() {
 
+    const [state, setState] = useState('')
+
     const schema = yup.object().shape({
         email: yup.string()
                    .email('Enter a valid email-adress')
@@ -26,12 +28,23 @@ function ForgotPassword() {
 
     const dispatch = useDispatch()
 
-    const changePass = () => {
+    const changePass = async () => {
         const email = document.getElementById("sent_email").value
-        dispatch(ResetPass(email))
-    }
-    const onSubmit = (data) => {
+        await auth.sendPasswordResetEmail(email).then(response => {
+            dispatch(ResetPass(email))
+            setState("Link has sent successfully")
+        }).catch(error => {
+            if(error.code == "auth/user-not-found") {
+                setState("There is not any user with this email")
+            }
+        })
 
+    }
+
+
+
+    const onSubmit = (data) => {
+        console.log(data)
     }
 
 
@@ -44,6 +57,7 @@ function ForgotPassword() {
                         <input type="text" placeholder={t('Email')} {...register("email")} id="sent_email"/>
                         { errors.email && <p>{errors.email?.message}</p> }
                     </div>
+                    {errors.email == undefined && state && <p>{state}</p>}
                     <Button type="submit" variant="contained" onClick={() => changePass()} >{t('ResetPassword')}</Button>
                     <Link to="/logIn">{t('BackToLoginPage')}</Link>
                 </form>

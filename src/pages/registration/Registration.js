@@ -32,7 +32,7 @@ function Registration() {
                    .required('Name field is required*'),
         lastName: yup.string('Use a valid surname')
                    .max(25, 'Surname is too long!')
-                   .required('Surname field is required*'),
+                   .required('This field is required*'),
         email: yup.string()
                    .email('Enter a valid email-adress')
                    .required('email-adress field is required*'),
