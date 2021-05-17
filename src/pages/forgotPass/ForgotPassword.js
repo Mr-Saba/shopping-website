@@ -29,6 +29,7 @@ function ForgotPassword() {
     const dispatch = useDispatch()
 
     const changePass = async () => {
+        console.log(state)
         const email = document.getElementById("sent_email").value
         await auth.sendPasswordResetEmail(email).then(response => {
             dispatch(ResetPass(email))
@@ -37,6 +38,10 @@ function ForgotPassword() {
             if(error.code == "auth/user-not-found") {
                 setState("There is not any user with this email")
             }
+            if(error.code == "auth/too-many-requests") {
+                setState("You have sent too many requests")
+            }
+            console.log(error)
         })
 
     }
