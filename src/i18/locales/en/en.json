@@ -38,5 +38,13 @@
     "Order ID": "Order ID",
     "Date Shipped": "Date Shipped",
     "Address": "Address",
-    "My adresses": "My adresses"
+    "My adresses": "My adresses",
+    "Edit profile": "Edit profile",
+    "My details": "My details",
+    "Personal information": "Personal information",
+    "Change password": "Change password",
+    "Current password": "Current password",
+    "New password": "New password",
+    "Confirm new password": "Confirm new password",
+    "Update password": "Update password"
 }
