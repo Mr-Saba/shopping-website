@@ -61,8 +61,8 @@ function ForgotPassword() {
                     <div className="inputForgotPass">
                         <input type="text" placeholder={t('Email')} {...register("email")} id="sent_email"/>
                         { errors.email && <p>{errors.email?.message}</p> }
+                        {errors.email == undefined && state && <p>{state}</p>}
                     </div>
-                    {errors.email == undefined && state && <p>{state}</p>}
                     <Button type="submit" variant="contained" onClick={() => changePass()} >{t('ResetPassword')}</Button>
                     <Link to="/logIn">{t('BackToLoginPage')}</Link>
                 </form>

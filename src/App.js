@@ -14,6 +14,7 @@ import Orders from './pages/profile/orders/Orders'
 import Payments from './pages/profile/payments/Payments.js'
 import Adresses from './pages/profile/adresses/Adresses.js'
 import Profile from './pages/profile/Profile'
+import NoMatch from './noMatch/noMatch.js'
 
 
 
@@ -35,10 +36,12 @@ function App() {
     <div className="App">
         <Header/>
         <Switch>
+          <Route path="/" exact component={Main}></Route>
           <Route path="/signUp" exact component={Registration}></Route>
           <Route path="/logIn" component={LogIn} exact></Route>
           <Route path="/forgot-password" component={ForgotPassword} exact></Route>
           <Route path="/profile" component={Profile} ></Route>
+          <Route path="*" component={NoMatch}></Route>
         </Switch>
         <Footer/>
     </div>
