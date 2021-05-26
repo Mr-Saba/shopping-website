@@ -6,7 +6,7 @@
     height: auto;
 }
 .logInCenter {
-    width: 380px;
+    width: 400px;
 }
 .logInForm {
     display: grid;
@@ -18,23 +18,20 @@
 .logIn .logInCenter input {
     padding: 0 50px 0 20px;
     width: 100%;
-    position: absolute;
+    position: relative;
     height: 80%;
 }
 .logIn .logInCenter .logInForm .inputLogIn i {
     position: absolute;
-    display: flex;
-    align-items: center;
     color: #034488;
-    padding-right: 20px;
-    justify-content: flex-end;
-    left: 340px;
-    height: 80%;
+    left: 355px;
+    top: 16px;
 }
 .logIn .logInCenter .logInForm .inputLogIn p {
     font-size: 14px;
     color: #f50057;
     padding: 4px 5px;
+    position: relative;
 }
 .logInCenter button {
     width: 45%;

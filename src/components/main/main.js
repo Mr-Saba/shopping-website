@@ -4,7 +4,7 @@ import './main.css'
 function Main() {
     return (
         <div className="main">
-            {/* <img src={Colors} alt=""/> */}
+            {/* <img src={Colors} alt=""/> */}nothing
         </div>
     )
 }

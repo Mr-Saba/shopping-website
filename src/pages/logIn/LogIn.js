@@ -68,7 +68,7 @@ function LogIn() {
                 setState("Enter a valid email-adress")
             }
             if(error.code == "auth/wrong-password") {
-                setState("password is incorrect")
+                setState("Password is incorrect")
             }
             if(error.code == "auth/user-not-found") {
                 setState("There is not any user with this credentials")
@@ -99,8 +99,8 @@ function LogIn() {
                 <form onSubmit={handleSubmit(onSubmit)} className="logInForm">
                     <div className="inputLogIn">
                         <input type="text" {...register("email")} placeholder={t('Email')} id="email"/>
-                    </div>
                         {errors.email && <p>{errors.email?.message}</p> }
+                    </div>
                     <div className="inputLogIn">
                         <input 
                         type="password" 
@@ -116,9 +116,9 @@ function LogIn() {
                         >
                         {values.showPassword ? <VisibilityIcon /> : <VisibilityOffIcon />}
                         </i>
-                    </div>
                         {errors.password && <p>{errors.password?.message}</p> }
                         {errors.email == undefined && errors.password == undefined && state && <p>{state}</p>}
+                    </div>
                     <Link to="/forgot-password">{t('ForgotPassword')}?</Link>
                     <Button type="submit" variant="contained" onClick={LoginWithEmail} >{t('LogIn')}</Button>
                 </form>

@@ -6,7 +6,7 @@
     height: auto;
 }
 div.registration .centerReg {
-    width: 380px;
+    width: 400px;
 }
 form.regForm {
     display: grid;
@@ -49,8 +49,7 @@ form.regForm input {
 .registration .centerReg .regForm .inputSignUp i {
     position: absolute;
     color: #034488;
-    padding-right: 20px;
-    left: 340px;
+    left: 355px;
     top: 16px;
 }
 .centerReg h1 {

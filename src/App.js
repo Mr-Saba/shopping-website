@@ -16,7 +16,7 @@ import Adresses from './pages/profile/adresses/Adresses.js'
 import Profile from './pages/profile/Profile'
 import AboutUs from './pages/aboutUs/AboutUs'
 import Terms from './pages/terms/Terms'
-import NotFound from './pages/notFound/NotFound'
+import NoMatch from './pages/noMatch/noMatch.js'
 
 
 
@@ -44,7 +44,8 @@ function App() {
           <Route path="/profile" component={Profile} ></Route>
           <Route path="/about-us" component={AboutUs} ></Route>
           <Route path="/terms-and-conditions" component={Terms} ></Route>
-          <Route path='*' exact component={NotFound} />
+          <Route path="/" exact component={Main}></Route>
+          <Route path="*" component={NoMatch}></Route>
         </Switch>
         <Footer/>
     </div>
