@@ -94,7 +94,7 @@ function LogIn() {
             <div className="logInCenter">
                 <h1>{t('LogIn')}</h1>  
                 <span>{t('NeedAnAccount')}?
-                    <Link to="/signUp" > {t('SignUp')}</Link>
+                    <Link to="/sign-up" > {t('SignUp')}</Link>
                 </span>
                 <form onSubmit={handleSubmit(onSubmit)} className="logInForm">
                     <div className="inputLogIn">

@@ -118,7 +118,7 @@ function Registration() {
             <div className="centerReg">
                 <h1>{t('SignUp')}</h1>
                 <span>{t('AlreadyHaveAnAccount')}?
-                <Link to="/logIn" > {t('LogIn')}</Link>
+                <Link to="/log-in" > {t('LogIn')}</Link>
                 </span>
                 <form className="regForm" onSubmit={handleSubmit(onSubmit)}>
                     <div className="firstLastName">
@@ -183,7 +183,7 @@ function Registration() {
                         <div className="termsAndConditionsSignUp">
                             <div className="termsAndConditionsCheckBoxSignUp">
                                 <label for="terms" style={{width: "225px"}}>
-                                    I Accept<Link to="/termsAndConditions"> Terms & Conditions</Link>
+                                    I Accept<Link target="_blank" to="/terms-and-conditions"> Terms & Conditions</Link>
                                 </label>
                                 <input type="checkbox" onClick={handleChange} {...register("terms")} id="terms" name="terms" />
                             </div>

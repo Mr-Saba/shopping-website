@@ -76,12 +76,12 @@ function Footer() {
                 <ul className="otherUl">
                     <li>{t('Other')}:</li>
                     <li>
-                        <Link to="/aboutUs">
+                        <Link to="/about-us">
                         {t('AboutUs')}
                         </Link>
                     </li>
                     <li>
-                        <Link to="/termsAndConditions">
+                        <Link to="/terms-and-conditions">
                         {t('TermsAndConditions')}
                         </Link>
                     </li>
@@ -107,10 +107,10 @@ function Footer() {
                 ) : (
                     <div className="buttonsFooterEverybody">
                         <li>
-                            <Button component={Link} to="/logIn" variant="contained" >{t('LogIn')}</Button>
+                            <Button component={Link} to="/log-in" variant="contained" >{t('LogIn')}</Button>
                         </li>
                         <li>
-                            <Button component={Link} to="/signUp" variant="contained" >{t('SignUp')}</Button>
+                            <Button component={Link} to="/sign-up" variant="contained" >{t('SignUp')}</Button>
                         </li>
                     </div>
                 )

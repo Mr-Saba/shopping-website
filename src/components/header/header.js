@@ -41,7 +41,7 @@ function Header() {
                        <Link to="/production">{t('Production')}</Link>
                    </li>
                    <li>
-                       <Link to="/aboutUs">{t('AboutUs')}</Link>
+                       <Link to="/about-us">{t('AboutUs')}</Link>
                    </li>
                 </ul>
                 <ul className="serach">
