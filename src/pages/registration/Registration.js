@@ -57,17 +57,20 @@ function Registration() {
     const dispatch = useDispatch()
 
     const EmailAndPasswordRegister = () => {
-        const passwordHash = require('password-hash');
-        const hashedPassword = passwordHash.generate(document.getElementById("password").value);
-        const data = {
-            email: document.getElementById("email").value,
-            password: document.getElementById("password").value,
-            name: document.getElementById("firstname").value,
-            surname: document.getElementById("lastname").value,
-            nation: document.getElementById("select").value,
-            number: document.getElementById("number").value,
-            password: document.getElementById("password").value
-        }
+        const bcrypt = require('bcryptjs')
+        // const saltRounds = 10;
+        // const myPlaintextPassword = 's0/\/\P4$$w0rD';
+        // bcrypt.hash(myPlaintextPassword, saltRounds)
+        const hashedPassword = bcrypt.hashSync(document.getElementById("password").value, bcrypt.genSaltSync());
+            const data = {
+                email: document.getElementById("email").value,
+                password: document.getElementById("password").value,
+                name: document.getElementById("firstname").value,
+                surname: document.getElementById("lastname").value,
+                nation: document.getElementById("select").value,
+                number: document.getElementById("number").value,
+                password: hashedPassword
+            }
         console.log(data)
         if(accepted === true) {
             dispatch(SignUpWithEmailAndPassword(data)) 

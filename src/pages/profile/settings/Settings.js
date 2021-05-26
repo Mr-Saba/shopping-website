@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch } from "react-redux"
-import { UpdateCredentials } from '../../../redux/actions'
+import { UpdateCredentials, UpdatePassword } from '../../../redux/actions'
 import {useSelector} from "react-redux"
 import {firestore, auth} from "../../../firebase/Configuration"
 import { useTranslation } from "react-i18next";
@@ -50,7 +50,7 @@ function Settings() {
     useEffect(() => {
         getCredentials()
         console.log(state)
-    }, [state])
+    }, [])
     
     const getCredentials = () => {
         firestore.collection("users").doc(user.uid).get().then(doc => {
@@ -79,12 +79,15 @@ function Settings() {
     }
 
     const changePassword = () => {
-        const user = auth.currentUser
-        const passwordHash = require('password-hash');
-        const currentPassword = document.getElementById("current-pass").value
-        const newPassword = document.getElementById("new-pass").value
-        const hashedCurrentPassword = passwordHash.generate(currentPassword);
-        console.log(hashedCurrentPassword)
+        const bcrypt = require('bcryptjs')
+        const enteredPassword = document.getElementById("current-pass").value
+        const hashedEnteredPassword = bcrypt.hashSync(enteredPassword, bcrypt.genSaltSync());
+        const doesPasswordMatch = bcrypt.compareSync(enteredPassword, state.password)
+        if(doesPasswordMatch == true) {
+            dispatch(UpdatePassword())
+        } else {
+            alert("current password is incorrect")
+        }
     }
 
     const onSubmit = (data) => {

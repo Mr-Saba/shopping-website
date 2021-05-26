@@ -3,4 +3,5 @@ export const SIGN_OUT = "SIGN_OUT"
 export const RESET_PASS = "RESET_PASS"
 export const SIGN_IN_WITH_EMAIL_PASS = "SIGN_IN_WITH_EMAIL_PASS"
 export const UPDATE_EMAIL = "UPDATE_EMAIL"
+export const UPDATE_PASSWORD = "UPDATE_PASSWORD"
 

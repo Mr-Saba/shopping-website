@@ -1,10 +1,9 @@
 import React from 'react'
 
 function AboutUs() {
+
     return (
-        <div>
-            bla bla bla
-        </div>
+        <div>about</div>
     )
 }
 

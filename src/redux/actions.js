@@ -69,5 +69,8 @@ const UpdateCredentials = (data) => async dispatch => {
             console.log(error)
         })
 }
+const UpdatePassword = (data) => async dispatch => {
+    console.log("update")    
+}
 
-export { SignUpWithEmailAndPassword, SignOut, ResetPass, SignInWithEmailAndPassword, UpdateCredentials }
+export { SignUpWithEmailAndPassword, SignOut, ResetPass, SignInWithEmailAndPassword, UpdateCredentials, UpdatePassword }
