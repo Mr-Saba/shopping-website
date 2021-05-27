@@ -36,8 +36,15 @@ function Footer() {
 
     const {t} = useTranslation()
     
+    const currentLanguage = localStorage.getItem("language") 
+
+    useEffect(() => {
+        changeLanguage(currentLanguage)
+    }, [])
+
     const changeLanguage = (lang) => {
         i18next.changeLanguage(lang)
+        localStorage.setItem("language", lang)
     }
 
     return (
@@ -122,6 +129,7 @@ function Footer() {
                             <NativeSelect
                             id="demo-customized-select-native"
                             onChange={(event) => changeLanguage(event.target.value)} 
+                            defaultValue={currentLanguage}
                             >
                             <option value="en">{t('English')}</option>
                             <option value="ka">{t('Georgian')}</option>

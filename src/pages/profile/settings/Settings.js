@@ -15,6 +15,10 @@ import {useParams} from "react-router-dom"
 
 function Settings() {
 
+    const [errorMessage, setErrorMessage] = useState(null)
+    const [successMessage, setSuccessMessage] = useState(null)
+
+
     const schema = yup.object().shape({
         firstName: yup.string('Use a valid name')  
                    .max(25, 'Name is too long!')
@@ -25,7 +29,19 @@ function Settings() {
         email: yup.string()
                    .email('Enter a valid email-adress')
                    .required('You should enter an email-adress*'),
-        number: yup.string().nullable().matches(/(^[0-9]*$)/, 'Use a valid number'),
+        number: yup.string()
+                   .nullable()
+                   .matches(/(^[0-9]*$)/, 'Use a valid number'),
+        currentPassword: yup.string()
+                   .required('Current Password field is required*'),
+        password: yup.string()
+                   .required('Password field is required*')
+                   .min(8, 'Password is too short!')
+                   .max(17, 'Password is too long!')
+                   .matches(/(?=.*[0-9])/, 'Password must contain some numbers'),
+        passwordConfirmation: yup.string()
+                   .required('Password confirmation field is required*')
+                   .oneOf([yup.ref('password'), null], 'Passwords not match'),
     });
 
     const { register, formState: { errors }, handleSubmit } = useForm({
@@ -79,14 +95,19 @@ function Settings() {
     }
 
     const changePassword = () => {
+        const data = {
+            currentPassword: document.getElementById("new-pass").value,
+            password: document.getElementById("confirm-pass").value,
+        }
         const bcrypt = require('bcryptjs')
         const enteredPassword = document.getElementById("current-pass").value
         const hashedEnteredPassword = bcrypt.hashSync(enteredPassword, bcrypt.genSaltSync());
         const doesPasswordMatch = bcrypt.compareSync(enteredPassword, state.password)
         if(doesPasswordMatch == true) {
-            dispatch(UpdatePassword())
+            dispatch(UpdatePassword(data))
+            setSuccessMessage("password has changed successfully")
         } else {
-            alert("current password is incorrect")
+            setErrorMessage("current password is incorrect")
         }
     }
 
@@ -138,21 +159,26 @@ function Settings() {
                     <Button type="submit" variant="contained" onClick={changeCredentials}>{t('Update details')}</Button>
                 </form>
                     <h3>{t('Change password')}</h3>
-                <div className="changePass">
+                {successMessage && <p>{successMessage}</p> }
+                <form className="changePass" onSubmit={handleSubmit(onSubmit)} >
                     <div className="changePassInputs">
                         <p>{t('Current password')}</p>
-                        <input type="password" id="current-pass" />
+                        <input type="password" id="current-pass" {...register("currentPassword")} />
                     </div>
+                    {errors.currentPassword && <p>{errors.currentPassword?.message}</p> }
+                    {errors.currentPassword == undefined && errorMessage && <p>{errorMessage}</p>}
                     <div className="changePassInputs">
                         <p>{t('New password')}</p>
-                        <input type="password" id="new-pass"/>
+                        <input type="password" id="new-pass" {...register("password")}/>
                     </div>
+                    {errors.password && <p>{errors.password?.message}</p> }
                     <div className="changePassInputs">
                         <p>{t('Confirm new password')}</p>
-                        <input type="password" id="confirm-pass"/>
+                        <input type="password" id="confirm-pass" {...register("passwordConfirmation")}/>
                     </div>
-                    <Button onClick={() => changePassword()} variant="contained" >{t('Update password')}</Button>
-                </div>
+                    {errors.passwordConfirmation && <p>{errors.passwordConfirmation?.message}</p> }
+                    <Button type="submit" onClick={() => changePassword()} variant="contained" >{t('Update password')}</Button>
+                </form>
             </div>
         </div>
     )

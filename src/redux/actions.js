@@ -70,7 +70,17 @@ const UpdateCredentials = (data) => async dispatch => {
         })
 }
 const UpdatePassword = (data) => async dispatch => {
-    console.log("update")    
+    const user = auth.currentUser
+    await user.updatePassword(data.password).then(()=>{
+        firestore.collection("users").doc(user.uid).update({
+            password: data.password
+        })
+        console.log("pass changed")       
+        dispatch({
+            type: UPDATE_EMAIL,
+            payload: user,
+        }) 
+    }) 
 }
 
 export { SignUpWithEmailAndPassword, SignOut, ResetPass, SignInWithEmailAndPassword, UpdateCredentials, UpdatePassword }
