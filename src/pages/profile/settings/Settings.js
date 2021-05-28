@@ -17,21 +17,25 @@ function Settings() {
 
     const [errorMessage, setErrorMessage] = useState(null)
     const [successMessage, setSuccessMessage] = useState(null)
+    const [blankName, setBlankName] = useState(null)
+    const [blankLastName, setBlankLastName] = useState(null)
 
 
     const schema = yup.object().shape({
-        firstName: yup.string('Use a valid name')  
-                   .max(25, 'Name is too long!')
-                   .required('You should enter first name*'),
+        firstName: yup.string('Use a valid name')
+                //    .matches(/^(?!\s*$).+/, 'This field is required*')
+                //    .required("this field is required")  
+                   .max(25, 'Name is too long!'),
         lastName: yup.string('Use a valid surname')
-                   .max(25, 'Surname is too long!')
-                   .required('You should enter last name*'),
+                //    .matches(/(?=.*[a-z])/, 'This field is required*')  
+                //    .required("this field is required")   
+                   .max(25, 'Surname is too long!'),
         email: yup.string()
                    .email('Enter a valid email-adress')
                    .required('You should enter an email-adress*'),
         number: yup.string()
                    .nullable()
-                   .matches(/(^[0-9]*$)/, 'Use a valid number'),
+                   .matches(/(^[0-9]*$)/, 'Use a valid number*'),
         currentPassword: yup.string()
                    .required('Current Password field is required*'),
         password: yup.string()
@@ -90,21 +94,35 @@ function Settings() {
             nation: document.getElementById("nation").value,
             number: document.getElementById("number").value
         }
-        dispatch(UpdateCredentials(data))
+            if(document.getElementById("firstName").value == "" && document.getElementById("lastName").value == "") {
+                setBlankName("this field is required")
+                setBlankLastName("this field is required")
+            } else if (document.getElementById("firstName").value == "") {
+                setBlankName("this field is required")
+            } else if (document.getElementById("lastName").value == "") {
+                setBlankLastName("this field is required")
+            } else {
+            dispatch(UpdateCredentials(data))
+            setBlankName("")
+            setBlankLastName("")
+            }
         console.log(state)
     }
 
     const changePassword = () => {
         const data = {
-            currentPassword: document.getElementById("new-pass").value,
-            password: document.getElementById("confirm-pass").value,
+            password: document.getElementById("new-pass").value,
         }
         const bcrypt = require('bcryptjs')
         const enteredPassword = document.getElementById("current-pass").value
         const hashedEnteredPassword = bcrypt.hashSync(enteredPassword, bcrypt.genSaltSync());
         const doesPasswordMatch = bcrypt.compareSync(enteredPassword, state.password)
         if(doesPasswordMatch == true) {
+            //if(data.password == state.password) you entered an old password 
             dispatch(UpdatePassword(data))
+            document.getElementById("current-pass").value = ""
+            document.getElementById("new-pass").value = ""
+            document.getElementById("confirm-pass").value = ""
             setSuccessMessage("password has changed successfully")
         } else {
             setErrorMessage("current password is incorrect")
@@ -130,11 +148,13 @@ function Settings() {
                         <p>{t('FirstName')}</p>
                         <input type="text" id="firstName" {...register("firstName")} defaultValue={state.firstName && state.firstName}/> 
                         {errors.firstName && <p className="errorPSettingForm">{errors.firstName?.message}</p> }
+                        {blankName && <p className="errorPSettingForm">{blankName}</p>}
                     </div>
                     <div className="settingsEditForm">
                         <p>{t('LastName')}</p>
                         <input type="text" id="lastName" {...register("lastName")} defaultValue={state.lastName && state.lastName}/> 
                         {errors.lastName && <p className="errorPSettingForm">{errors.lastName?.message}</p> }
+                        {blankLastName && <p className="errorPSettingForm">{blankLastName}</p>}
                     </div>
                     <div className="settingsEditForm">
                         <p>{t('Date of birth')}</p>
@@ -152,7 +172,7 @@ function Settings() {
                                 </select>
                             </label>
                             } 
-                            <input type="number" id="number"  {...register("number")} defaultValue={state.number && state.number}/> 
+                            <input type="text" id="number"  {...register("number")} defaultValue={state.number && state.number}/> 
                         </div>
                         <p className="errorPSettingForm">{(errors.number === undefined) ? ('') : (errors.number?.message)}</p>
                     </div>
@@ -160,7 +180,7 @@ function Settings() {
                 </form>
                     <h3>{t('Change password')}</h3>
                 {successMessage && <p>{successMessage}</p> }
-                <form className="changePass" onSubmit={handleSubmit(onSubmit)} >
+                <form className="changePass" onSubmit={handleSubmit(onSubmit)}>
                     <div className="changePassInputs">
                         <p>{t('Current password')}</p>
                         <input type="password" id="current-pass" {...register("currentPassword")} />

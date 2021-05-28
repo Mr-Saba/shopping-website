@@ -71,9 +71,11 @@ const UpdateCredentials = (data) => async dispatch => {
 }
 const UpdatePassword = (data) => async dispatch => {
     const user = auth.currentUser
+    const bcrypt = require('bcryptjs')
     await user.updatePassword(data.password).then(()=>{
+        // const hashedPassword = bcrypt.hashSync(data.password, bcrypt.genSaltSync());
         firestore.collection("users").doc(user.uid).update({
-            password: data.password
+            password: bcrypt.hashSync(data.password, bcrypt.genSaltSync())
         })
         console.log("pass changed")       
         dispatch({
