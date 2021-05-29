@@ -75,3 +75,8 @@ form.redactProfile {
     color: #f50057;
     padding: 4px 5px;
 }
+.changePass .changePassInputs .errorChangePassp{
+    font-size: 14px;
+    color: #f50057;
+    padding: 4px 5px;
+}
