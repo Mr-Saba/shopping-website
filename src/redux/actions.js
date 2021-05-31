@@ -8,22 +8,10 @@ import {
 import { auth, firebase, firestore } from "../firebase/Configuration"
 
 const SignUpWithEmailAndPassword = (data) => async dispatch => {
-    await auth.createUserWithEmailAndPassword(data.email, data.password)
-    .then(cred => {   
-        firestore.collection("users").doc(cred.user.uid).set({
-            email: data.email,
-            firstname: data.name,
-            lastname: data.surname,
-            dateofbirth: "",
-            nation: data.nation,
-            number: data.number,
-            password: data.password
-        })
         dispatch({
                 type: SIGN_UP_WITH_EMAIL_PASS,
-                payload: cred.user, 
+                payload: data, 
             })
-        })
 }
 
 const SignOut = () => async dispatch => {

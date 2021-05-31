@@ -12,6 +12,7 @@ import {useHistory} from "react-router"
 import numberNations from "../../data/numberNations.json"
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
+import { auth, firestore } from "../../firebase/Configuration"
 
 
 function Registration() {
@@ -21,6 +22,7 @@ function Registration() {
     }, [])
 
     const [accepted, setAccepted] = useState(false)
+    const [state, setState] = useState('')
 
     const {isLoggedIn} = useSelector(state => state)
 
@@ -56,11 +58,8 @@ function Registration() {
     
     const dispatch = useDispatch()
 
-    const EmailAndPasswordRegister = () => {
+    const EmailAndPasswordRegister = async () => {
         const bcrypt = require('bcryptjs')
-        // const saltRounds = 10;
-        // const myPlaintextPassword = 's0/\/\P4$$w0rD';
-        // bcrypt.hash(myPlaintextPassword, saltRounds)
         const hashedPassword = bcrypt.hashSync(document.getElementById("password").value, bcrypt.genSaltSync());
             const data = {
                 email: document.getElementById("email").value,
@@ -71,14 +70,31 @@ function Registration() {
                 number: document.getElementById("number").value,
                 password: hashedPassword
             }
-        console.log(data)
+            await auth.createUserWithEmailAndPassword(data.email, data.password)
+            .then(cred => {   
+            firestore.collection("users").doc(cred.user.uid).set({
+                email: data.email,
+                firstname: data.name,
+                lastname: data.surname,
+                dateofbirth: "",
+                nation: data.nation,
+                number: data.number,
+                password: data.password
+            })
+            dispatch(SignUpWithEmailAndPassword(data))
+                }).catch(error => {
+                    if(error.code == "auth/email-already-in-use") {
+                        setState("This email already exists")
+                    }
+                })
+        
         if(accepted === true) {
             dispatch(SignUpWithEmailAndPassword(data)) 
         }
     }
 
     const onSubmit = (data) => {
-        if(data) {
+        if(isLoggedIn==true) {
             history.push("/")
         }
     }
@@ -137,6 +153,7 @@ function Registration() {
                         <div className="inputSignUp">
                             <input type="text" placeholder={t('Email')} {...register("email")} id="email"/>
                             {errors.email && <p>{errors.email?.message}</p> }
+                            {errors.email == undefined && state && <p>{state}</p>}
                         </div>
                         <div className="inputSignUp">
                             <input 

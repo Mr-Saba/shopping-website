@@ -184,19 +184,19 @@ function Settings() {
                     <div className="changePassInputs">
                         <p>{t('Current password')}</p>
                         <input type="password" id="current-pass" {...register("currentPassword")} />
+                        {errors.currentPassword && <p className="errorChangePassp">{errors.currentPassword?.message}</p> }
+                        {errors.currentPassword == undefined && errorMessage && <p className="errorChangePassp">{errorMessage}</p>}
                     </div>
-                    {errors.currentPassword && <p>{errors.currentPassword?.message}</p> }
-                    {errors.currentPassword == undefined && errorMessage && <p>{errorMessage}</p>}
                     <div className="changePassInputs">
                         <p>{t('New password')}</p>
                         <input type="password" id="new-pass" {...register("password")}/>
+                        {errors.password && <p className="errorChangePassp">{errors.password?.message}</p> }
                     </div>
-                    {errors.password && <p>{errors.password?.message}</p> }
                     <div className="changePassInputs">
                         <p>{t('Confirm new password')}</p>
                         <input type="password" id="confirm-pass" {...register("passwordConfirmation")}/>
+                        {errors.passwordConfirmation && <p className="errorChangePassp">{errors.passwordConfirmation?.message}</p> }
                     </div>
-                    {errors.passwordConfirmation && <p>{errors.passwordConfirmation?.message}</p> }
                     <Button type="submit" onClick={() => changePassword()} variant="contained" >{t('Update password')}</Button>
                 </form>
             </div>
@@ -205,4 +205,3 @@ function Settings() {
 }
 
 export default Settings
-
