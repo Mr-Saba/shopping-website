@@ -39,6 +39,18 @@ function Settings() {
         number: yup.string()
                    .nullable()
                    .matches(/(^[0-9]*$)/, 'Use a valid number*'),
+        // currentPassword: yup.string()
+        //            .required('Current Password field is required*'),
+        // password: yup.string()
+        //            .required('Password field is required*')
+        //            .min(8, 'Password is too short!')
+        //            .max(17, 'Password is too long!')
+        //            .matches(/(?=.*[0-9])/, 'Password must contain some numbers'),
+        // passwordConfirmation: yup.string()
+        //            .required('Password confirmation field is required*')
+        //            .oneOf([yup.ref('password'), null], 'Passwords not match'),
+    })
+    const schema2 = yup.object().shape({
         currentPassword: yup.string()
                    .required('Current Password field is required*'),
         password: yup.string()
@@ -49,28 +61,16 @@ function Settings() {
         passwordConfirmation: yup.string()
                    .required('Password confirmation field is required*')
                    .oneOf([yup.ref('password'), null], 'Passwords not match'),
-    })
-    // const schema2 = yup.object().shape({
-    //     currentPassword: yup.string()
-    //                .required('Current Password field is required*'),
-    //     password: yup.string()
-    //                .required('Password field is required*')
-    //                .min(8, 'Password is too short!')
-    //                .max(17, 'Password is too long!')
-    //                .matches(/(?=.*[0-9])/, 'Password must contain some numbers'),
-    //     passwordConfirmation: yup.string()
-    //                .required('Password confirmation field is required*')
-    //                .oneOf([yup.ref('password'), null], 'Passwords not match'),
-    // });
+    });
 
 
     const { register, formState: { errors }, handleSubmit } = useForm({
         resolver: yupResolver(schema)
       })
 
-    // const { register: register2, errors: errors2, handleSubmit: handleSubmit2 } = useForm({
-    //     resolver: yupResolver(schema2)
-    //   })
+    const { register: register2, formState: { errors2 }, handleSubmit: handleSubmit2 } = useForm({
+        resolver: yupResolver(schema2)
+      })
     
 
     const {t} = useTranslation()
@@ -198,22 +198,22 @@ function Settings() {
                 </form>
                     <h3>{t('Change password')}</h3>
                 {successMessage && <p>{successMessage}</p> }
-                <form className="changePass" onSubmit={handleSubmit(onSubmit)}>
+                <form className="changePass" onSubmit={handleSubmit2(onSubmitSecond)}>
                     <div className="changePassInputs">
                         <p>{t('Current password')}</p>
-                        <input type="password" id="current-pass" {...register("currentPassword")} />
-                        {errors.currentPassword && <p className="errorChangePassp">{errors.currentPassword?.message}</p> }
-                        {errors.currentPassword == undefined && errorMessage && <p className="errorChangePassp">{errorMessage}</p>}
+                        <input type="password" id="current-pass" {...register2("currentPassword")} />
+                        {errors2.currentPassword && <p className="errorChangePassp">{errors2.currentPassword?.message}</p> }
+                        {errors2.currentPassword == undefined && errorMessage && <p className="errorChangePassp">{errorMessage}</p>}
                     </div>
                     <div className="changePassInputs">
                         <p>{t('New password')}</p>
-                        <input type="password" id="new-pass" {...register("password")}/>
-                        {errors.password && <p className="errorChangePassp">{errors.password?.message}</p> }
+                        <input type="password" id="new-pass" {...register2("password")}/>
+                        {errors2.password && <p className="errorChangePassp">{errors2.password?.message}</p> }
                     </div>
                     <div className="changePassInputs">
                         <p>{t('Confirm new password')}</p>
-                        <input type="password" id="confirm-pass" {...register("passwordConfirmation")}/>
-                        {errors.passwordConfirmation && <p className="errorChangePassp">{errors.passwordConfirmation?.message}</p> }
+                        <input type="password" id="confirm-pass" {...register2("passwordConfirmation")}/>
+                        {errors2.passwordConfirmation && <p className="errorChangePassp">{errors2.passwordConfirmation?.message}</p> }
                     </div>
                     <Button type="submit" onClick={() => changePassword()} variant="contained" >{t('Update password')}</Button>
                 </form>
