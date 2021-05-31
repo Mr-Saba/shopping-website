@@ -19,16 +19,19 @@ function Settings() {
     const [successMessage, setSuccessMessage] = useState(null)
     const [blankName, setBlankName] = useState(null)
     const [blankLastName, setBlankLastName] = useState(null)
-
+    const [state, setState] = useState({
+        firstName: '',
+        lastName: '',
+        date: '',
+        nation: '',
+        number: '',
+        password: ''
+    })
 
     const schema = yup.object().shape({
         firstName: yup.string('Use a valid name')
-                //    .matches(/^(?!\s*$).+/, 'This field is required*')
-                //    .required("this field is required")  
                    .max(25, 'Name is too long!'),
         lastName: yup.string('Use a valid surname')
-                //    .matches(/(?=.*[a-z])/, 'This field is required*')  
-                //    .required("this field is required")   
                    .max(25, 'Surname is too long!'),
         email: yup.string()
                    .email('Enter a valid email-adress')
@@ -46,11 +49,29 @@ function Settings() {
         passwordConfirmation: yup.string()
                    .required('Password confirmation field is required*')
                    .oneOf([yup.ref('password'), null], 'Passwords not match'),
-    });
+    })
+    // const schema2 = yup.object().shape({
+    //     currentPassword: yup.string()
+    //                .required('Current Password field is required*'),
+    //     password: yup.string()
+    //                .required('Password field is required*')
+    //                .min(8, 'Password is too short!')
+    //                .max(17, 'Password is too long!')
+    //                .matches(/(?=.*[0-9])/, 'Password must contain some numbers'),
+    //     passwordConfirmation: yup.string()
+    //                .required('Password confirmation field is required*')
+    //                .oneOf([yup.ref('password'), null], 'Passwords not match'),
+    // });
+
 
     const { register, formState: { errors }, handleSubmit } = useForm({
         resolver: yupResolver(schema)
       })
+
+    // const { register: register2, errors: errors2, handleSubmit: handleSubmit2 } = useForm({
+    //     resolver: yupResolver(schema2)
+    //   })
+    
 
     const {t} = useTranslation()
     
@@ -58,14 +79,6 @@ function Settings() {
 
     const {user} = useSelector(state => state)
 
-    const [state, setState] = useState({
-        firstName: '',
-        lastName: '',
-        date: '',
-        nation: '',
-        number: '',
-        password: ''
-    })
 
     useEffect(() => {
         getCredentials()
@@ -132,6 +145,11 @@ function Settings() {
     const onSubmit = (data) => {
         
     }
+
+    const onSubmitSecond = (data) => {
+        
+    }
+
     
     return (
         <div className="redactOfProfile">
