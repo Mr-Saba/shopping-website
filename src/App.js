@@ -17,6 +17,7 @@ import Profile from './pages/profile/Profile'
 import AboutUs from './pages/aboutUs/AboutUs'
 import Terms from './pages/terms/Terms'
 import NoMatch from './pages/noMatch/noMatch.js'
+import Production from './pages/production/Production'
 
 
 
@@ -45,6 +46,7 @@ function App() {
           <Route path="/about-us" component={AboutUs} ></Route>
           <Route path="/terms-and-conditions" component={Terms} ></Route>
           <Route path="/" exact component={Main}></Route>
+          <Route path="/production" component={Production}></Route>
           <Route path="*" component={NoMatch}></Route>
         </Switch>
         <Footer/>

@@ -1,0 +1,38 @@
+[
+    {
+        "title": "title",
+        "category": "earring",
+        "photo": "colors.jpg",
+        "price": "300$"
+    },
+    {
+        "title": "title12",
+        "category": "necklace",
+        "photo": "colors.jpg",
+        "price": "350$"
+    },
+    {
+        "title": "title123",
+        "category": "earring",
+        "photo": "colors.jpg",
+        "price": "320$"
+    },
+    {
+        "title": "title",
+        "category": "ring",
+        "photo": "colors.jpg",
+        "price": "300$"
+    },
+    {
+        "title": "title12",
+        "category": "necklace",
+        "photo": "colors.jpg",
+        "price": "350$"
+    },
+    {
+        "title": "title123",
+        "category": "ring",
+        "photo": "colors.jpg",
+        "price": "320$"
+    }
+]

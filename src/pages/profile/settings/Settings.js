@@ -68,7 +68,7 @@ function Settings() {
         resolver: yupResolver(schema)
       })
 
-    const { register: register2, formState: { errors2 }, handleSubmit: handleSubmit2 } = useForm({
+    const { register: register2, formState: { errors: errors2 }, handleSubmit: handleSubmit2 } = useForm({
         resolver: yupResolver(schema2)
       })
     
@@ -80,23 +80,23 @@ function Settings() {
     const {user} = useSelector(state => state)
 
 
-    useEffect(() => {
-        getCredentials()
-        console.log(state)
-    }, [])
-    
-    const getCredentials = () => {
-        firestore.collection("users").doc(user.uid).get().then(doc => {
+    const getCredentials = async () => {
+        await firestore.collection("users").doc(auth.currentUser.uid).get().then(doc => {
             setState({
                 firstName: doc.data().firstname,
                 lastName: doc.data().lastname,
-                date: doc.data().dateOfBirth,
+                date: doc.data().dateofbirth,
                 nation: doc.data().nation,
                 number: doc.data().number,
                 password: doc.data().password
             })
         })   
     }
+    useEffect(() => {
+        getCredentials()
+        console.log(state)
+    }, [auth.currentUser])
+    
 
     const changeCredentials = async () => {
         const data = {
@@ -119,7 +119,6 @@ function Settings() {
             setBlankName("")
             setBlankLastName("")
             }
-        console.log(state)
     }
 
     const changePassword = () => {
@@ -137,13 +136,15 @@ function Settings() {
             document.getElementById("new-pass").value = ""
             document.getElementById("confirm-pass").value = ""
             setSuccessMessage("password has changed successfully")
+            setErrorMessage("")
         } else {
+            setSuccessMessage("")
             setErrorMessage("current password is incorrect")
         }
     }
 
     const onSubmit = (data) => {
-        
+        console.log(state)
     }
 
     const onSubmitSecond = (data) => {
@@ -151,7 +152,7 @@ function Settings() {
     }
 
     
-    return (
+   return (  state.firstName !== "" ? (
         <div className="redactOfProfile">
             <div className="redactCenter">
                     <h1>{t('My details')}</h1>
@@ -176,7 +177,7 @@ function Settings() {
                     </div>
                     <div className="settingsEditForm">
                         <p>{t('Date of birth')}</p>
-                        <input type="date" id="date" defaultValue={state.date && state.date} /> 
+                        <input type="date" id="date"  value={state.date && state.date} /> 
                     </div>
                     <div className="settingsEditForm">
                         <p>{t('Number')}</p>
@@ -197,7 +198,7 @@ function Settings() {
                     <Button type="submit" variant="contained" onClick={changeCredentials}>{t('Update details')}</Button>
                 </form>
                     <h3>{t('Change password')}</h3>
-                {successMessage && <p>{successMessage}</p> }
+                {successMessage && <p style={{color: "green"}}>{successMessage}</p> }
                 <form className="changePass" onSubmit={handleSubmit2(onSubmitSecond)}>
                     <div className="changePassInputs">
                         <p>{t('Current password')}</p>
@@ -219,6 +220,7 @@ function Settings() {
                 </form>
             </div>
         </div>
+        ) : ("")
     )
 }
 

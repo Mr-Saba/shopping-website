@@ -68,10 +68,10 @@ function Registration() {
                 surname: document.getElementById("lastname").value,
                 nation: document.getElementById("select").value,
                 number: document.getElementById("number").value,
-                password: hashedPassword
             }
             await auth.createUserWithEmailAndPassword(data.email, data.password)
             .then(cred => {   
+                console.log(cred)
             firestore.collection("users").doc(cred.user.uid).set({
                 email: data.email,
                 firstname: data.name,
@@ -79,7 +79,7 @@ function Registration() {
                 dateofbirth: "",
                 nation: data.nation,
                 number: data.number,
-                password: data.password
+                password: hashedPassword
             })
             dispatch(SignUpWithEmailAndPassword(data))
                 }).catch(error => {
