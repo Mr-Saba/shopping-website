@@ -6,6 +6,7 @@ import PersonOutlineOutlinedIcon from '@material-ui/icons/PersonOutlineOutlined'
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import { IconButton, Badge} from '@material-ui/core';
 import { ShoppingCart } from '@material-ui/icons';
+import SearchIcon from '@material-ui/icons/Search';
 import { useTranslation } from "react-i18next";
 import {useDispatch} from "react-redux"
 import {SignOut} from "../../redux/actions"
@@ -24,6 +25,10 @@ function Header() {
     }
 
     const {t} = useTranslation()
+
+    const searchProducts = () => {
+        
+    }
 
     return (
         <div className="header">
@@ -45,7 +50,10 @@ function Header() {
                    </li>
                 </ul>
                 <ul className="serach">
-                    
+                    <li>
+                        <input onChange={searchProducts} type="text" placeholder="Search..." />
+                        {/* <button style={{border: "none" }}><SearchIcon/></button> */}
+                   </li>
                 </ul>
                 <ul className="rightUl">
                    <li>
