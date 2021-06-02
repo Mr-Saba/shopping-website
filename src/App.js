@@ -18,7 +18,10 @@ import AboutUs from './pages/aboutUs/AboutUs'
 import Terms from './pages/terms/Terms'
 import NoMatch from './pages/noMatch/noMatch.js'
 import Production from './pages/production/Production'
-
+import Rings from "./pages/production/rings/Rings"
+import Earrings from "./pages/production/earrings/Earrings"
+import Necklaces from "./pages/production/necklaces/Necklaces"
+import Brooches from "./pages/production/brooches/Brooches"
 
 
 function App() { 
@@ -46,7 +49,11 @@ function App() {
           <Route path="/about-us" component={AboutUs} ></Route>
           <Route path="/terms-and-conditions" component={Terms} ></Route>
           <Route path="/" exact component={Main}></Route>
-          <Route path="/production" component={Production}></Route>
+          <Route path="/production" component={Production} exact></Route>
+          <Route path="/production/rings" component={Rings} exact ></Route>
+          <Route path="/production/brooches" component={Brooches} exact></Route>
+          <Route path="/production/necklaces" component={Necklaces} exact></Route>
+          <Route path="/production/earrings" component={Earrings} exact></Route>
           <Route path="*" component={NoMatch}></Route>
         </Switch>
         <Footer/>

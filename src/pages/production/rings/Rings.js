@@ -1,22 +1,15 @@
 import React, {useEffect} from 'react'
-import "./production.css"
-import products from "../../data/products.json"
-import { Switch, Route, useHistory, useRouteMatch } from 'react-router'
+import products from "../../../data/products.json"
 
-function Production() {
-
-    let { path, url } = useRouteMatch();
-
-    let pathName = window.location.pathname
+function Rings() {
 
     useEffect(() => {
-        console.log(path)
     }, [])
 
-
     return (
-        <div>
+        <div>   
         { products.map(item => {
+            if(item.category == "ring") {
                 return (
                     <>
                     <div>{item.title}</div>
@@ -28,9 +21,9 @@ function Production() {
                     <br/>
                     </>
                 )
-            })}
+            }})}
         </div>
     )
-    }
+}
 
-export default Production
+export default Rings

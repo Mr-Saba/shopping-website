@@ -55,27 +55,27 @@ function Footer() {
             <nav className="footerNav">
                 <ul className="productionUl">
                     <li>
-                        <Link to="/production">
+                        <Link to="/production" onClick={scrollToTop}>
                         {t('Production')}:
                         </Link>
                     </li>
                     <li>
-                        <Link to="/earrings">
+                        <Link to="/production/earrings" onClick={scrollToTop}>
                         {t('Earrings')}
                         </Link>
                     </li>
                     <li>
-                        <Link to="/rings">
+                        <Link to="/production/rings" onClick={scrollToTop}>
                         {t('Rings')}
                         </Link>
                     </li>
                     <li>
-                        <Link to="/necklaces">
+                        <Link to="/production/necklaces" onClick={scrollToTop}>
                         {t('Necklaces')}
                         </Link>
                     </li>
                     <li>
-                        <Link to="/brooches">
+                        <Link to="/production/brooches" onClick={scrollToTop}>
                         {t('Brooches')}
                         </Link>
                     </li>

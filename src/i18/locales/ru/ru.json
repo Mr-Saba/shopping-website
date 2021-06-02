@@ -46,5 +46,7 @@
     "Current password": "Текущий пароль",
     "New password": "Новый пароль",
     "Confirm new password": "Подтвердите новый пароль",
-    "Update password": "Обновить пароль"
+    "Update password": "Обновить пароль",
+    "THE PAGE CAN'T BE FOUND": "Страница не найдена",
+    "Go to home page": "Вернуться на главную страницу"
 }
