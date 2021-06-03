@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import './header.css'
 import {Link, useHistory} from 'react-router-dom'
 import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
@@ -12,6 +12,10 @@ import {useDispatch} from "react-redux"
 import {SignOut} from "../../redux/actions"
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import {useSelector} from "react-redux"
+import Production from '../../pages/production/Production';
+import FilteredProducts from '../../pages/production/FilteredProducts';
+import products from "../../data/products.json"
+import Products from '../../pages/production/Products';
 
 function Header() {
 
@@ -20,18 +24,45 @@ function Header() {
 
     const { isLoggedIn } = useSelector(state => state)
 
+    const [searched, setSearched] = useState("")
+
+    const [buttonVisible, setButtonVisible] = useState(true)
+    const [inputVisible, setInputVisible] = useState(false)
+
+
     const LogOut = () => {
         dispatch(SignOut())
     }
 
     const {t} = useTranslation()
 
-    const searchProducts = () => {
-        
+    const buttonFocus = () => {
+        setInputVisible(true)
+        setButtonVisible(false)
+    }
+    const inputBlur = () => {
+        // setInputVisible(false)
+        // setButtonVisible(true)
+    }
+    const inputFocus = () => {
+        // setInputVisible(true)
+    }
+
+    const handleSearch = (e) => {
+        setSearched(e)
+    }
+
+    const filterSearch = () => {
+        return products.filter(item => item.category.toLowerCase().includes(searched.toLowerCase()))
     }
 
     return (
         <div className="header">
+            {(searched === "") ? (
+                <Products />
+            ) : (
+                <FilteredProducts filtered={filterSearch()}/>
+            ) }
            <nav className="headerNav">
                <ul className="logoUl">
                     <li>
@@ -51,8 +82,14 @@ function Header() {
                 </ul>
                 <ul className="serach">
                     <li>
-                        <input onChange={searchProducts} type="text" placeholder="Search..." />
-                        {/* <button style={{border: "none" }}><SearchIcon/></button> */}
+                        { inputVisible == true ? (
+                        <div>
+                            <input value={searched} onChange={(e) => handleSearch(e.target.value)} style={{height: "40px"}} autoFocus={true} onBlur={()=> inputBlur()} onFocus={() => inputFocus()}  type="text" placeholder="Search..." id="search" />
+                            <button style={{opacity: "0.3"}} onClick={() => handleSearch()}><SearchIcon/></button>
+                        </div>
+                        ) : ("")
+                        }
+                        { buttonVisible == true ? (<button onFocus={() => buttonFocus()} ><SearchIcon/></button>) : ("") }
                    </li>
                 </ul>
                 <ul className="rightUl">

@@ -4,12 +4,13 @@ import {
     SIGN_IN_WITH_EMAIL_PASS,
     RESET_PASS,
     UPDATE_EMAIL,
-    UPDATE_PASSWORD
+    UPDATE_PASSWORD,
+    SEARCH_PRODUCTS
 } from "./constants"
 
 const initialState = {
     user: null,
-    isLoggedIn: false
+    isLoggedIn: false,
 }
 
 const Reducer = (state=initialState, action) => {
@@ -44,7 +45,6 @@ const Reducer = (state=initialState, action) => {
             user: action.payload,
             isLoggedIn: true,
         }
-        default: return state
     }
 }
 

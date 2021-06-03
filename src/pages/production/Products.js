@@ -1,18 +1,8 @@
 import React, {useEffect} from 'react'
 import "./production.css"
 import products from "../../data/products.json"
-import { Switch, Route, useHistory, useRouteMatch } from 'react-router'
  
-function Production() {
-
-    let { path, url } = useRouteMatch();
-
-    let pathName = window.location.pathname
-
-    useEffect(() => {
-        console.log(path)
-    }, [])
-
+function Products() {
 
     return (
         <div>
@@ -33,4 +23,4 @@ function Production() {
     )
     }
 
-export default Production
+export default Products
