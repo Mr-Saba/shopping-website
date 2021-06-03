@@ -3,7 +3,7 @@ import "./production.css"
 import products from "../../data/products.json"
 import { Switch, Route, useHistory, useRouteMatch } from 'react-router'
 
-function Production() {
+function ProductionSingle() {
 
     let { path, url } = useRouteMatch();
 
@@ -33,4 +33,4 @@ function Production() {
     )
     }
 
-export default Production
+export default ProductionSingle
