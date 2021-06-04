@@ -1,0 +1,83 @@
+.ProductsPage {
+    display: flex;
+    margin: 40px 30px 100px 30px;
+    min-height: 500px;
+}
+.ProductsPage .filter {
+    width: 30%;
+}
+.ProductsPage .filter .categoriesFilterProductsPage {
+    display: grid;
+    grid-row-gap: 20px;
+    margin: 20px 0 0 10px;
+}
+.priceOption {
+    display: flex;
+    margin-left: 10px;
+    width: 100%;
+}
+.production {
+    width: 100%;
+    height: auto;
+    grid-template-rows: 40px 100%;
+    display: grid;
+}
+.productTopPart {
+    display: flex;
+    justify-content: space-between;
+    height: 40px;
+}
+.productionGrid {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    margin: 20px 0 0 10px;
+    grid-gap: 40px;
+}
+.productTypeFilter {
+    display: grid;
+    height: 100%;
+    grid-gap: 10px;
+}
+
+.option {
+    margin-left: 10px;
+    display: flex;
+    width: 40%;
+    align-items: center;
+    justify-content: inherit;
+}
+
+input[type="checkbox"] {
+    width: 20px;
+    border: unset;
+    margin-right: 10px;
+    height: 20px;
+    background-color: blue;
+}
+.CategoriesFilter {
+    display: grid;
+    height: 100%;
+    grid-gap: 10px;
+}
+.price {
+    display: grid;
+    height: 100%;
+    grid-gap: 10px;
+}
+.priceOption {
+    display: flex;
+    margin-left: 10px;
+    justify-content: space-between;
+    align-items: center;
+    width: 85%;
+}
+input[type="number"] {
+    width: 45%;
+    height: 40px;
+    padding: 10px;
+}
+
+select#product {
+    height: 40px;
+    padding: 5px;
+}

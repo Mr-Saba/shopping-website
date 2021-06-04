@@ -3,7 +3,7 @@ import {
     SIGN_OUT,
     SIGN_IN_WITH_EMAIL_PASS,
     RESET_PASS,
-    UPDATE_EMAIL
+    UPDATE_EMAIL,
     } from "./constants"
 import { auth, firebase, firestore } from "../firebase/Configuration"
 
@@ -72,5 +72,6 @@ const UpdatePassword = (data) => async dispatch => {
         }) 
     }) 
 }
+
 
 export { SignUpWithEmailAndPassword, SignOut, ResetPass, SignInWithEmailAndPassword, UpdateCredentials, UpdatePassword }

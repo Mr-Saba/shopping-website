@@ -43,7 +43,7 @@ a.MuiButtonBase-root.MuiIconButton-root.MuiIconButton-colorInherit:hover {
     background-color: unset;
 }
 ul.serach {
-    width: 60%;
+    width: auto;
     display: grid;
     justify-self: right;
     align-self: center;

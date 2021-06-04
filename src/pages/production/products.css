@@ -1,0 +1,48 @@
+.singleProductionCard {
+    width: 300px;
+    display: grid;
+    color: #ccdde7;
+    height: 410px;
+    grid-template-rows: 300px 0 auto 35px;
+    background-color: #034488;
+    align-items: center;
+}
+.singleProductionCard img {
+    width: 100%;
+    height: 100%;
+}
+.singleProductionCard p {
+    margin-left: 20px;
+    font-size: 20px;
+}
+.singleProductionCard svg.MuiSvgIcon-root {
+    position: absolute;
+    bottom: 15px;
+    padding: 6px;
+    font-size: 40px;
+    left: 80%;
+    border-radius: 50%;
+    border: 2px solid #ccdde7;
+}
+.singleProductionCard button {
+    background: no-repeat;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    color: #ccdde7;
+}
+.productCardPrice {
+    display: flex;
+    margin-left: unset !important;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    margin: 0 10px 10px 0;
+    font-size: 17px !important;
+    width: 50px;
+    justify-self: end;
+}
+.productCategoryCard {
+    color: #ccdde780;
+    font-size: 15px !important;
+}

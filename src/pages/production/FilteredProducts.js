@@ -1,22 +1,9 @@
-import React, {useEffect} from 'react'
-import "./production.css"
-import products from "../../data/products.json"
-import { Switch, Route, useHistory, useRouteMatch } from 'react-router'
+import React from 'react'
 
-function ProductionSingle() {
-
-    let { path, url } = useRouteMatch();
-
-    let pathName = window.location.pathname
-
-    useEffect(() => {
-        console.log(path)
-    }, [])
-
-
+function FilteredProducts(props) {
     return (
         <div>
-        { products.map(item => {
+        { props.filtered.map(item => {
                 return (
                     <>
                     <div>{item.title}</div>
@@ -31,6 +18,6 @@ function ProductionSingle() {
             })}
         </div>
     )
-    }
+}
 
-export default ProductionSingle
+export default FilteredProducts
