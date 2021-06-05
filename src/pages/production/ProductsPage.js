@@ -14,10 +14,10 @@ function ProductsPage() {
     return (
         <div className="ProductsPage">
             <div className="filter">
-                <h3 className="filterByProductspageP">{t('Filter by')}</h3>
+                <h3 className="filterByProductspageP">{t('Filter By')}</h3>
                 <div className="categoriesFilterProductsPage">
                     <div className="productTypeFilter">
-                        <h4>{t('Product type')}</h4>
+                        <h4>{t('Product Type')}</h4>
                         <div className="option">
                             <input id="sas" type="checkbox" id="category1" value="Earrings"/>
                             <label for="category1">{t('Earrings')}</label>

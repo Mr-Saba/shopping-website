@@ -4,6 +4,7 @@ import { Switch, Route, useHistory, useRouteMatch } from 'react-router'
 import './products.css'
 import DeathNote from '../../photos/heartwitheye1.jpg'
 import FavoriteBorderOutlinedIcon from '@material-ui/icons/FavoriteBorderOutlined';
+import { useTranslation } from "react-i18next";
  
 function Products() {
 
@@ -15,6 +16,8 @@ function Products() {
         console.log(path)
     }, [])
 
+    const {t} = useTranslation()
+
 
     return (
         <>
@@ -24,8 +27,8 @@ function Products() {
                         <img src={item.photo} />
                         <button><FavoriteBorderOutlinedIcon/></button>
                         <div className="descAndCateg">
-                            <p>{item.title}</p>
-                            <p className="productCategoryCard">{item.category}</p>
+                            <p>{t(item.title)}</p>
+                            <p className="productCategoryCard">{t(item.category)}</p>
                         </div>
                         <p className="productCardPrice">{item.price}</p>
                     </div>
