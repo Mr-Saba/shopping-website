@@ -57,9 +57,9 @@ function ProductsPage() {
                     <div className="price">
                         <h4>{t('Price')}</h4>
                         <div className="priceOption">
-                            <input type="number" min="0" step="any" placeholder="From" />
+                            <input type="number" min="0" step="any" placeholder={t('From')} />
                             <span>-</span>
-                            <input type="number" min="0"  step="any" placeholder="To" />
+                            <input type="number" min="0"  step="any" placeholder={t('To')} />
                         </div>
                     </div>
                 </div>

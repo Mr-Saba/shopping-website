@@ -48,5 +48,14 @@
     "Confirm new password": "Подтвердите новый пароль",
     "Update password": "Обновить пароль",
     "THE PAGE CAN'T BE FOUND": "Страница не найдена",
-    "Go to home page": "Вернуться на главную страницу"
+    "Go to home page": "Вернуться на главную страницу",
+    "Categories": "Категории",
+    "Price": "Цена",
+    "Sort by": "Сортировать по",
+    "A-Z": "А-Я",
+    "Z-A": "Я-А",
+    "Low to High": "Снизу вверх",
+    "High to Low": "от высокого к низкому",
+    "From": "Из",
+    "To": "к"
 }

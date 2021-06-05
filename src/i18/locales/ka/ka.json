@@ -48,5 +48,16 @@
     "Confirm new password": "დაადასტურეთ ახალი პაროლი",
     "Update password": "განაახლეთ პაროლი",
     "THE PAGE CAN'T BE FOUND": "გვერდი ვერ მოიძებნა",
-    "Go to home page": "დაბრუნდი მთავარ გვერდზე"
+    "Go to home page": "დაბრუნდი მთავარ გვერდზე",
+    "Categories": "კატეგორია",
+    "Price": "ფასი",
+    "Sort by": "სორტირება",
+    "A-Z": "ა-ზ",
+    "Z-A": "ზ-ა",
+    "Low to High": "დაბალი-მაღალი",
+    "High to Low": "მაღალი-დაბალი",
+    "From": "-დან",
+    "To": "-მდე",
+    "Filter By": "გაფილტვრა",
+    "Product Type": "პროდუქტის ტიპი"
 }

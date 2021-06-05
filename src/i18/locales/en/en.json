@@ -55,5 +55,9 @@
     "A-Z": "A-Z",
     "Z-A": "Z-A",
     "Low to High": "Low to High",
-    "High to Low": "High to Low"
+    "High to Low": "High to Low",
+    "From": "From",
+    "To": "To",
+    "Filter By": "Filter By",
+    "Product Type": "Product Type"
 }
