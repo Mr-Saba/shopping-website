@@ -1,41 +1,48 @@
 import React, {useEffect} from 'react'
 import Products from './Products'
 import './productsPage.css'
+import { useTranslation } from "react-i18next";
+
 function ProductsPage() {
+
+    useEffect(() => {
+    }, [])
+
+    const {t} = useTranslation()
 
 
     return (
         <div className="ProductsPage">
             <div className="filter">
-                <h3 className="filterByProductspageP">Filter by</h3>
+                <h3 className="filterByProductspageP">{t('Filter by')}</h3>
                 <div className="categoriesFilterProductsPage">
                     <div className="productTypeFilter">
-                        <h4>Product type</h4>
+                        <h4>{t('Product type')}</h4>
                         <div className="option">
-                            <input type="checkbox" name="category1" value="Earrings"/>
-                            <label for="category1">Earrings</label>
+                            <input id="sas" type="checkbox" id="category1" value="Earrings"/>
+                            <label for="category1">{t('Earrings')}</label>
                         </div>
                         <div className="option">
-                            <input type="checkbox" name="category2" value="Rings"/>
-                            <label for="category2">Rings</label>
+                            <input type="checkbox" id="category2" value="Rings"/>
+                            <label for="category2">{t('Rings')}</label>
                         </div>
                         <div className="option">
-                            <input type="checkbox" name="category3" value="Necklaces"/>
-                            <label for="category3">Necklaces</label>
+                            <input type="checkbox" id="category3" value="Necklaces"/>
+                            <label for="category3">{t('Necklaces')}</label>
                         </div>
                         <div className="option">
-                            <input type="checkbox" name="category4" value="Brooches"/>
-                            <label for="category4">Brooches</label>
+                            <input type="checkbox" id="category4" value="Brooches"/>
+                            <label for="category4">{t('Brooches')}</label>
                         </div>
                     </div>
                     <div className="CategoriesFilter">
-                        <h4>Categories</h4>
+                        <h4>{t('Categories')}</h4>
                         <div className="option">
-                            <input type="checkbox" name="mood1" value="idkyet"/>
+                            <input type="checkbox" id="mood1" value="idkyet"/>
                             <label for="mood1">idkyet</label>
                         </div>
                         <div className="option">
-                            <input type="checkbox" name="mood2" value="idkyet"/>
+                            <input type="checkbox" id="mood2" value="idkyet"/>
                             <label for="mood2">idkyet</label>
                         </div>
                         <div className="option">
@@ -48,7 +55,7 @@ function ProductsPage() {
                         </div>
                     </div>
                     <div className="price">
-                        <h4>Price</h4>
+                        <h4>{t('Price')}</h4>
                         <div className="priceOption">
                             <input type="number" min="0" step="any" placeholder="From" />
                             <span>-</span>
@@ -59,13 +66,13 @@ function ProductsPage() {
             </div>
             <div className="production">
                 <div className="productTopPart">
-                    <h3>Production</h3>
+                    <h3>{t('Production')}</h3>
                         <select name="sort" id="product">
-                            <option value>Sort by</option>
-                            <option value="az">A-Z</option>
-                            <option value="za">Z-A</option>
-                            <option value="lowHigh">Price: Low to High</option>
-                            <option value="highLow">Price: High to Low</option>
+                            <option value>{t('Sort by')}</option>
+                            <option value="az">{t('A-Z')}</option>
+                            <option value="za">{t('Z-A')}</option>
+                            <option value="lowHigh">{t('Price')}: {t('Low to High')}</option>
+                            <option value="highLow">{t('Price')}: {t('High to Low')}</option>
                         </select>
                 </div>
                 <div className="productionGrid">

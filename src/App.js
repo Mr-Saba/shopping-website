@@ -22,13 +22,16 @@ import Earrings from "./pages/production/earrings/Earrings"
 import Necklaces from "./pages/production/necklaces/Necklaces"
 import Brooches from "./pages/production/brooches/Brooches"
 import ProductsPage from './pages/production/ProductsPage'
-
+import {useDispatch, useSelector} from "react-redux"
 
 function App() { 
 
   const history = useHistory()
 
+  const {isLoggedIn} = useSelector(state => state)
+  
   useEffect(() => {
+    console.log(isLoggedIn)
     auth.onAuthStateChanged((user) => {
         if(user) {
             console.log("signed in")

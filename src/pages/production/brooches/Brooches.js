@@ -1,21 +1,23 @@
 import React from 'react'
 import products from "../../../data/products.json"
+import '../products.css'
+import FavoriteBorderOutlinedIcon from '@material-ui/icons/FavoriteBorderOutlined';
 
 function Brooches() {
     return (
         <div>   
         { products.map(item => {
-            if(item.category == "brooch") {
+            if(item.category == "Brooch") {
                 return (
-                    <>
-                    <div>{item.title}</div>
-                    <div>{item.category}</div>
-                    <img width="100px" height="100px" src={item.photo} />
-                    <div>{item.price}</div>
-                    <button>add to cart</button>
-                    <br/>
-                    <br/>
-                    </>
+                    <div className="singleProductionCard">
+                        <img src={item.photo} />
+                        <button><FavoriteBorderOutlinedIcon/></button>
+                        <div className="descAndCateg">
+                            <p>{item.title}</p>
+                            <p className="productCategoryCard">{item.category}</p>
+                        </div>
+                        <p className="productCardPrice">{item.price}</p>
+                    </div>
                 )
             }})}
         </div>

@@ -48,5 +48,12 @@
     "Confirm new password": "Confirm new password",
     "Update password": "Update password",
     "THE PAGE CAN'T BE FOUND": "THE PAGE CAN'T BE FOUND",
-    "Go to home page": "Go to home page"
+    "Go to home page": "Go to home page",
+    "Categories": "Categories",
+    "Price": "Price",
+    "Sort by": "Sort by",
+    "A-Z": "A-Z",
+    "Z-A": "Z-A",
+    "Low to High": "Low to High",
+    "High to Low": "High to Low"
 }
