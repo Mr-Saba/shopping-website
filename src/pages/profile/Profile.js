@@ -79,7 +79,7 @@ function Profile() {
 
       <Switch>
         <ProtectedRoute path={`${path}`} component={Settings} exact></ProtectedRoute>
-
+        
         <ProtectedRoute path={`${path}/settings`} component={Settings} exact></ProtectedRoute>
         <ProtectedRoute path={`${path}/orders`} component={Orders} exact></ProtectedRoute>
         <ProtectedRoute path={`${path}/payments`} component={Payments} exact ></ProtectedRoute>

@@ -144,7 +144,7 @@ function Settings() {
     }
 
     const onSubmit = (data) => {
-        console.log(state)
+
     }
 
     const onSubmitSecond = (data) => {
@@ -177,7 +177,7 @@ function Settings() {
                     </div>
                     <div className="settingsEditForm">
                         <p>{t('Date of birth')}</p>
-                        <input type="date" id="date"  value={state.date && state.date} /> 
+                        <input type="date" id="date"  defaultValue={state.date && state.date} /> 
                     </div>
                     <div className="settingsEditForm">
                         <p>{t('Number')}</p>

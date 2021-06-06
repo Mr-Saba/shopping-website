@@ -23,6 +23,8 @@ import Necklaces from "./pages/production/necklaces/Necklaces"
 import Brooches from "./pages/production/brooches/Brooches"
 import ProductsPage from './pages/production/ProductsPage'
 import {useDispatch, useSelector} from "react-redux"
+import Cart from './pages/cart/Cart'
+import SingleProductPage from './pages/production/SingleProductPage'
 
 function App() { 
 
@@ -57,6 +59,8 @@ function App() {
           <Route path="/production/brooches" component={Brooches} exact></Route>
           <Route path="/production/necklaces" component={Necklaces} exact></Route>
           <Route path="/production/earrings" component={Earrings} exact></Route>
+          <Route path="/cart" component={Cart} exact></Route>
+          <Route path="/production/single/:id"  component={SingleProductPage} exact/>
           <Route path="*" component={NoMatch}></Route>
         </Switch>
         <Footer/>
