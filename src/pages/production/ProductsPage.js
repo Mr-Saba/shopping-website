@@ -2,7 +2,7 @@ import React, {useEffect} from 'react'
 import Products from './Products'
 import './productsPage.css'
 import { useTranslation } from "react-i18next";
-
+import {Button} from '@material-ui/core'
 function ProductsPage() {
 
     useEffect(() => {
@@ -61,6 +61,10 @@ function ProductsPage() {
                             <span>-</span>
                             <input type="number" min="0"  step="any" placeholder={t('To')} />
                         </div>
+                    </div>
+                    <div className="productPageButtonsFilter">
+                        <Button variant="contained">{t('Filter')}</Button>
+                        <Button variant="contained">{t('Reset')}</Button>
                     </div>
                 </div>
             </div>
