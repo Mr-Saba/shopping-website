@@ -25,15 +25,15 @@ function Products() {
         { products.map(item => {
                 return (
                         <Link to={`/production/single/${item.id}`}>
-                    <div className="singleProductionCard">
-                        <img src={item.photo} />
-                        <button><FavoriteBorderOutlinedIcon/></button>
-                        <div className="descAndCateg">
-                            <p>{t(item.title)}</p>
-                            <p className="productCategoryCard">{t(item.category)}</p>
-                        </div>
-                        <p className="productCardPrice">{item.price}</p>
-                    </div>
+                            <div className="singleProductionCard">
+                                <img src={item.photo} />
+                                <button><FavoriteBorderOutlinedIcon/></button>
+                                <div className="descAndCateg">
+                                    <p>{t(item.title)}</p>
+                                    <p className="productCategoryCard">{t(item.category)}</p>
+                                </div>
+                                <p className="productCardPrice">{item.price}</p>
+                            </div>
                         </Link>
                 )
             })}

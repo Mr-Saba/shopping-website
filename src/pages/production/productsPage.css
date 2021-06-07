@@ -39,7 +39,7 @@
     grid-gap: 10px;
 }
 
-.option {
+.categoriesFilterProductsPage .CategoriesFilter .option , .productTypeFilter .option {
     margin-left: 10px;
     display: flex;
     width: 100%;
@@ -47,7 +47,14 @@
     justify-content: inherit;
 }
 
-input[type="checkbox"] {
+.categoriesFilterProductsPage .productTypeFilter .option input[type="checkbox"] {
+    width: 20px;
+    border: unset;
+    margin-right: 10px;
+    height: 20px;
+    background-color: blue;
+}
+.categoriesFilterProductsPage .CategoriesFilter .option input[type="checkbox"] {
     width: 20px;
     border: unset;
     margin-right: 10px;
@@ -59,25 +66,25 @@ input[type="checkbox"] {
     height: 100%;
     grid-gap: 10px;
 }
-.price {
+.categoriesFilterProductsPage .price {
     display: grid;
     height: 100%;
     grid-gap: 10px;
 }
-.priceOption {
+.categoriesFilterProductsPage .price .priceOption {
     display: flex;
     margin-left: 10px;
     justify-content: space-between;
     align-items: center;
     width: 85%;
 }
-input[type="number"] {
+.categoriesFilterProductsPage .price .priceOption input[type="number"] {
     width: 45%;
     height: 50px;
     padding: 10px;
 }
 
-select#product {
+.production .productTopPart select#product {
     height: 40px;
     padding: 5px;
 }

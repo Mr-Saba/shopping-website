@@ -24,7 +24,7 @@ import Brooches from "./pages/production/brooches/Brooches"
 import ProductsPage from './pages/production/ProductsPage'
 import {useDispatch, useSelector} from "react-redux"
 import Cart from './pages/cart/Cart'
-import SingleProductPage from './pages/production/SingleProductPage'
+import SingleProductPage from './pages/production/singleProductPage'
 
 function App() { 
 

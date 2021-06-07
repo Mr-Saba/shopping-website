@@ -3,84 +3,34 @@
         "title": "Death Note",
         "category": "Earring",
         "photo": "1.jpg",
+        "photo2":"2.jpg",
+        "photo3":"3.jpg",
+        "photo4":"4.jpg",
         "price": "20₾",
+        "desc":"clay earrings painted with acrilic paint",
         "id": "1"
     },
     {
         "title": "Heart with eye",
         "category": "Earring",
         "photo": "heartwitheye1.jpg",
+        "photo2":"heartwitheye1.jpg",
+        "photo3":"heartwitheye3.jpg",
+        "photo4":"heartwitheye4.jpg",
         "price": "20₾",
+        "desc":"clay earrings painted with acrilic paint",
         "id": "2"
     },
     {
         "title": "Yin and yang",
         "category": "Earring",
         "photo": "yinyang1.jpg",
+        "photo2":"yinyang2.jpg",
+        "photo3":"yinyang3.jpg",
+        "photo4":"yinyang4.jpg",
         "price": "20₾",
+        "desc":"clay earrings painted with acrilic paint",
         "id": "3"
-    },
-    {
-        "title": "Death Note",
-        "category": "Earring",
-        "photo": "1.jpg",
-        "price": "20₾",
-        "id": "4"
-    },
-    {
-        "title": "Heart with eye",
-        "category": "Earring",
-        "photo": "heartwitheye1.jpg",
-        "price": "20₾",
-        "id": "5"
-    },
-    {
-        "title": "Yin and yang",
-        "category": "Earring",
-        "photo": "yinyang1.jpg",
-        "price": "20₾",
-        "id": "6"
-    },
-    {
-        "title": "Death Note",
-        "category": "Earring",
-        "photo": "1.jpg",
-        "price": "20₾",
-        "id": "7"
-    },
-    {
-        "title": "Heart with eye",
-        "category": "Earring",
-        "photo": "heartwitheye1.jpg",
-        "price": "20₾",
-        "id": "8"
-    },
-    {
-        "title": "Yin and yang",
-        "category": "Earring",
-        "photo": "yinyang1.jpg",
-        "price": "20₾",
-        "id": "9"
-    },
-    {
-        "title": "Death Note",
-        "category": "Earring",
-        "photo": "1.jpg",
-        "price": "20₾",
-        "id": "10"
-    },
-    {
-        "title": "Heart with eye",
-        "category": "Earring",
-        "photo": "heartwitheye1.jpg",
-        "price": "20₾",
-        "id": "11"
-    },
-    {
-        "title": "Yin and yang",
-        "category": "Earring",
-        "photo": "yinyang1.jpg",
-        "price": "20₾",
-        "id": "12"
     }
 ]
+    
