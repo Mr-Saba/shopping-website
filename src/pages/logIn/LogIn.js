@@ -31,7 +31,7 @@ function LogIn() {
 
     const history = useHistory()
       
-    const {isLoggedIn} = useSelector(state => state)
+    const {isLoggedIn} = useSelector(state => state.UserReducer)
     
     const onSubmit = () => {
         if(isLoggedIn == true) {

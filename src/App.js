@@ -17,10 +17,6 @@ import Profile from './pages/profile/Profile'
 import AboutUs from './pages/aboutUs/AboutUs'
 import Terms from './pages/terms/Terms'
 import NoMatch from './pages/noMatch/noMatch.js'
-import Rings from "./pages/production/rings/Rings"
-import Earrings from "./pages/production/earrings/Earrings"
-import Necklaces from "./pages/production/necklaces/Necklaces"
-import Brooches from "./pages/production/brooches/Brooches"
 import ProductsPage from './pages/production/ProductsPage'
 import {useDispatch, useSelector} from "react-redux"
 import Cart from './pages/cart/Cart'
@@ -30,16 +26,15 @@ function App() {
 
   const history = useHistory()
 
-  const {isLoggedIn} = useSelector(state => state)
+  const {isLoggedIn} = useSelector(state => state.UserReducer)
   
   useEffect(() => {
-    console.log(isLoggedIn)
     auth.onAuthStateChanged((user) => {
-        if(user) {
-            console.log("signed in")
-        }else{
-            console.log("not signed in")
-        }
+      if(user) {
+          console.log("signed in")
+      }else{
+          console.log("not signed in")
+      }
     })
 }, [])
 
@@ -54,12 +49,8 @@ function App() {
           <Route path="/about-us" component={AboutUs} ></Route>
           <Route path="/terms-and-conditions" component={Terms} ></Route>
           <Route path="/" exact component={Main}></Route>
-          <Route path="/production" component={ProductsPage} exact></Route>
-          <Route path="/production/rings" component={Rings} exact ></Route>
-          <Route path="/production/brooches" component={Brooches} exact></Route>
-          <Route path="/production/necklaces" component={Necklaces} exact></Route>
-          <Route path="/production/earrings" component={Earrings} exact></Route>
           <Route path="/cart" component={Cart} exact></Route>
+          <Route path="/production" component={ProductsPage} exact></Route>
           <Route path="/production/single/:id"  component={SingleProductPage} exact/>
           <Route path="*" component={NoMatch}></Route>
         </Switch>

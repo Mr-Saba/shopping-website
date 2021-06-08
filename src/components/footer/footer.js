@@ -6,33 +6,34 @@ import {Button} from '@material-ui/core'
 import { useTranslation } from "react-i18next";
 import i18next from '../../i18/languages/i18n'
 import {FormControl,NativeSelect} from '@material-ui/core';
-import {useSelector} from "react-redux"
+import {useSelector, useDispatch} from "react-redux"
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
+import { FilterByCategory, GetProducts } from '../../redux/actions';
 
 function Footer() {
 
-    // const [isVisible, setIsVisible] = useState(false);
-
-    // const toggleVisibility = () => {
-    //     if (window.pageYOffset > 300) {
-    //       setIsVisible(true);
-    //     } else {
-    //       setIsVisible(false);
-    //     }
-    // };
-
-    // useEffect(() => {
-    //     window.addEventListener("scroll", toggleVisibility);
-    // }, [])
+    const dispatch = useDispatch()
 
     const scrollToTop = () => {
         window.scrollTo({
           top: 0,
           behavior: "smooth"
-        });
+        })
+    };
+    const CategoryFilter = (value) => {
+        if(value !== "") {
+            dispatch(FilterByCategory(value))
+        } else{
+            dispatch(GetProducts())
+        }
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth"
+        })
     };
 
-    const { isLoggedIn } = useSelector(state => state)
+
+    const { isLoggedIn } = useSelector(state => state.UserReducer)
 
     const {t} = useTranslation()
     
@@ -55,28 +56,38 @@ function Footer() {
             <nav className="footerNav">
                 <ul className="productionUl">
                     <li>
-                        <Link to="/production" onClick={scrollToTop}>
-                        {t('Production')}:
+                        <Link to="/production">
+                            <button onClick={(event) => CategoryFilter(event.target.value)} value="">
+                                {t('Production')}:
+                            </button>
                         </Link>
                     </li>
                     <li>
-                        <Link to="/production/earrings" onClick={scrollToTop}>
-                        {t('Earrings')}
+                        <Link to="/production">
+                            <button onClick={(event) => CategoryFilter(event.target.value)} value="Earring">
+                                {t('Earrings')}
+                            </button>
                         </Link>
                     </li>
                     <li>
-                        <Link to="/production/rings" onClick={scrollToTop}>
-                        {t('Rings')}
+                        <Link to="/production">
+                            <button onClick={(event) => CategoryFilter(event.target.value)} value="Ring">
+                                {t('Rings')}
+                            </button>
                         </Link>
                     </li>
                     <li>
-                        <Link to="/production/necklaces" onClick={scrollToTop}>
-                        {t('Necklaces')}
+                        <Link to="/production">
+                            <button onClick={(event) => CategoryFilter(event.target.value)} value="Necklace">
+                                {t('Necklaces')}
+                            </button>
                         </Link>
                     </li>
                     <li>
-                        <Link to="/production/brooches" onClick={scrollToTop}>
-                        {t('Brooches')}
+                        <Link to="/production">
+                            <button onClick={(event) => CategoryFilter(event.target.value)} value="Brooche">
+                                {t('Brooches')}
+                            </button>
                         </Link>
                     </li>
                 </ul>

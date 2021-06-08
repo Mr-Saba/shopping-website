@@ -1,23 +1,26 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import {Link, useParams} from 'react-router-dom'
-import products from "../../data/products.json"
 import './singleProductPage.css'
 import { useTranslation } from "react-i18next";
 import { Button } from '@material-ui/core';
-import DeathNote from '../../photos/heartwitheye1.jpg'
 import FavoriteBorderOutlinedIcon from '@material-ui/icons/FavoriteBorderOutlined';
+import {useSelector} from "react-redux"
 
 function SingleProductPage() {
     const {t} = useTranslation()
 
     const params = useParams()
 
-    const Product = products.find(item=>item.id == params.id)
+    const Product = useSelector(state => state.ProductReducer.products.find(item=>item.id == params.id))
+
+    useEffect(() => {
+        console.log(Product)
+    }, [])
 
     return (
         <div className="singleProductPage">
-            <div className="singleProductSlider">
-                <img src={Product.photo}/>
+            <div className="singleProductSlider"> 
+                <img src={require("../../photos/1.jpg").default} />
             </div>
             <div className="productDescSinglePage">
                 <h1>{Product.title}</h1>

@@ -1,14 +1,38 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 import Products from './Products'
 import './productsPage.css'
 import { useTranslation } from "react-i18next";
 import {Button} from '@material-ui/core'
+import {useSelector, useDispatch} from "react-redux"
+import {FilterByCategory, GetProducts} from "../../redux/actions"
+
 function ProductsPage() {
 
+    const [checked, setChecked] = useState(false)
+    const [value, setValue] = useState("")
+
+    const dispatch = useDispatch()
+
     useEffect(() => {
+        console.log(products)
     }, [])
 
     const {t} = useTranslation()
+
+    const {products} = useSelector(state => state.ProductReducer)
+
+    const handleChange = (val, check) => {
+        setChecked(check)
+        setValue(val)
+    }
+
+    const CategoryFilter = () => {
+        if(checked == true) {
+            dispatch(FilterByCategory(value))
+        } else {
+            dispatch(GetProducts())
+        }
+    }
 
 
     return (
@@ -19,19 +43,19 @@ function ProductsPage() {
                     <div className="productTypeFilter">
                         <h4>{t('Product Type')}</h4>
                         <div className="option">
-                            <input id="sas" type="checkbox" id="category1" value="Earrings"/>
+                            <input onChange={(event) => handleChange(event.target.value, event.target.checked)} id="category1" type="checkbox" value="Earring"/>
                             <label for="category1">{t('Earrings')}</label>
                         </div>
                         <div className="option">
-                            <input type="checkbox" id="category2" value="Rings"/>
+                            <input onChange={(event) => handleChange(event.target.value, event.target.checked)} id="category2" type="checkbox" value="Ring"/>
                             <label for="category2">{t('Rings')}</label>
                         </div>
                         <div className="option">
-                            <input type="checkbox" id="category3" value="Necklaces"/>
+                            <input onChange={(event) => handleChange(event.target.value, event.target.checked)} id="category3" type="checkbox" value="Necklace"/>
                             <label for="category3">{t('Necklaces')}</label>
                         </div>
                         <div className="option">
-                            <input type="checkbox" id="category4" value="Brooches"/>
+                            <input onChange={(event) => handleChange(event.target.value, event.target.checked)} id="category4" type="checkbox" value="Brooche"/>
                             <label for="category4">{t('Brooches')}</label>
                         </div>
                     </div>
@@ -63,7 +87,7 @@ function ProductsPage() {
                         </div>
                     </div>
                     <div className="productPageButtonsFilter">
-                        <Button variant="contained">{t('Filter')}</Button>
+                        <Button onClick={() => CategoryFilter()} variant="contained">{t('Filter')}</Button>
                         <Button variant="contained">{t('Reset')}</Button>
                     </div>
                 </div>

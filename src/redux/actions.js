@@ -4,6 +4,9 @@ import {
     SIGN_IN_WITH_EMAIL_PASS,
     RESET_PASS,
     UPDATE_EMAIL,
+    GET_PRODUCTS,
+    SEARCH_PRODUCTS,
+    FILTER_BY_CATEGORY
     } from "./constants"
 import { auth, firebase, firestore } from "../firebase/Configuration"
 
@@ -72,6 +75,29 @@ const UpdatePassword = (data) => async dispatch => {
         }) 
     }) 
 }
+const GetProducts = () => async dispatch => {
+    const data = await firestore.collection("products").get();
+    const products = data.docs.map(doc => ({
+        ...doc.data(),
+        id: doc.id
+    }))
+    dispatch({
+        type: GET_PRODUCTS,
+        payload: products,
+    }) 
+}
+const SearchProducts = (keyword) => async dispatch => {
+    dispatch({
+        type: SEARCH_PRODUCTS,
+        payload: keyword
+    })
+}
+const FilterByCategory = (value) => async dispatch => {
+    dispatch({
+        type: FILTER_BY_CATEGORY,
+        payload: value
+    })
+}
 
 
-export { SignUpWithEmailAndPassword, SignOut, ResetPass, SignInWithEmailAndPassword, UpdateCredentials, UpdatePassword }
+export { SignUpWithEmailAndPassword, SignOut, ResetPass, SignInWithEmailAndPassword, UpdateCredentials, UpdatePassword, GetProducts, SearchProducts, FilterByCategory }

@@ -36,7 +36,7 @@ function Profile() {
 
     let pathName = window.location.pathname
 
-    const {isLoggedIn} = useSelector(state => state)
+    const {isLoggedIn} = useSelector(state => state.UserReducer)
 
     const route = () => {
         if (pathName == "/profile/settings" || pathName == "/profile") return `${t('Edit profile')}`

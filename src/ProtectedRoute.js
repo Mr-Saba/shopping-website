@@ -6,7 +6,7 @@ function ProtectedRoute({
     component: Component
 }) {
 
-    const {isLoggedIn} = useSelector(state => state)
+    const {isLoggedIn} = useSelector(state => state.UserReducer)
 
     useEffect(() => {
 

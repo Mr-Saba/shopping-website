@@ -1,28 +1,31 @@
-import React, {useEffect} from 'react'
-import products from "../../data/products.json"
+import React, {useEffect, useState} from 'react'
 import { Switch, Route, useHistory, useRouteMatch } from 'react-router'
 import {Link} from "react-router-dom"
 import './products.css'
-import DeathNote from '../../photos/heartwitheye1.jpg'
 import FavoriteBorderOutlinedIcon from '@material-ui/icons/FavoriteBorderOutlined';
 import { useTranslation } from "react-i18next";
- 
+import {firestore} from "../../firebase/Configuration"
+import {useDispatch, useSelector} from "react-redux"
+import {GetProducts} from "../../redux/actions"
+
 function Products() {
 
     let { path, url } = useRouteMatch();
 
-    let pathName = window.location.pathname
+    const dispatch = useDispatch()
+
+    const {products} = useSelector(state => state.ProductReducer)
 
     useEffect(() => {
-        console.log(path)
+        dispatch(GetProducts())
+        console.log(products)
     }, [])
 
     const {t} = useTranslation()
 
-
     return (
         <>
-        { products.map(item => {
+        { products && products.map(item => {
                 return (
                         <Link to={`/production/single/${item.id}`}>
                             <div className="singleProductionCard">

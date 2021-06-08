@@ -6,14 +6,14 @@ import {
     UPDATE_EMAIL,
     UPDATE_PASSWORD,
     SEARCH_PRODUCTS
-} from "./constants"
+} from "../constants"
 
 const initialState = {
     user: null,
     isLoggedIn: false,
 }
 
-const Reducer = (state=initialState, action) => {
+const UserReducer = (state=initialState, action) => {
     switch(action.type) {
         case SIGN_UP_WITH_EMAIL_PASS: return {
             ...state,
@@ -49,4 +49,4 @@ const Reducer = (state=initialState, action) => {
     }
 }
 
-export default Reducer
+export default UserReducer

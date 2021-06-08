@@ -18,13 +18,13 @@ import { auth, firestore } from "../../firebase/Configuration"
 function Registration() {
 
     useEffect(() => {
-        
+        console.log(isLoggedIn)
     }, [])
 
     const [accepted, setAccepted] = useState(false)
     const [state, setState] = useState('')
 
-    const {isLoggedIn} = useSelector(state => state)
+    const {isLoggedIn} = useSelector(state => state.UserReducer)
 
     const history = useHistory()
 
