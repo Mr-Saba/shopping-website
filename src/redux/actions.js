@@ -6,9 +6,14 @@ import {
     UPDATE_EMAIL,
     GET_PRODUCTS,
     SEARCH_PRODUCTS,
-    FILTER_BY_CATEGORY
+    FILTER_BY_CATEGORY,
+    SORT_BY_AZ,
+    SORT_BY_ZA,
+    SORT_SELECT,
+    FILTER_BY_PRICE
     } from "./constants"
 import { auth, firebase, firestore } from "../firebase/Configuration"
+import { bindActionCreators } from "redux"
 
 const SignUpWithEmailAndPassword = (data) => async dispatch => {
         dispatch({
@@ -98,6 +103,18 @@ const FilterByCategory = (value) => async dispatch => {
         payload: value
     })
 }
+const SortSelect = (value) => async dispatch => {
+    dispatch({
+        type: SORT_SELECT,
+        payload: value
+    })
+}
+const FilterByPrice = (price1, price2) => async dispatch => {
+    dispatch({
+        type: FILTER_BY_PRICE,
+        payload: {price1, price2}
+    })
+}
 
 
-export { SignUpWithEmailAndPassword, SignOut, ResetPass, SignInWithEmailAndPassword, UpdateCredentials, UpdatePassword, GetProducts, SearchProducts, FilterByCategory }
+export { SignUpWithEmailAndPassword, SignOut, ResetPass, SignInWithEmailAndPassword, UpdateCredentials, UpdatePassword, GetProducts, SearchProducts, FilterByCategory, SortSelect, FilterByPrice }

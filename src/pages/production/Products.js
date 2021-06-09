@@ -18,7 +18,6 @@ function Products() {
 
     useEffect(() => {
         dispatch(GetProducts())
-        console.log(products)
     }, [])
 
     const {t} = useTranslation()
