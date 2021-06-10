@@ -72,3 +72,9 @@ ul.profileUl a.MuiButtonBase-root.MuiButton-root.MuiButton-contained {
     display: grid;
     grid-template-rows: 50px 50px;
 }
+.productionUl li a button {
+    background: unset;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+}

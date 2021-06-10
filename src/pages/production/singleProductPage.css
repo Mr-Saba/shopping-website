@@ -40,3 +40,37 @@
     height: 50px;
     padding-left: 20px;
 }
+  
+.container {
+    position: relative;
+    max-width: 800px;
+    margin: auto;
+}
+  
+.buttonBack {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    background-color: transparent;
+    border: none;
+    display: flex;
+}
+  
+.buttonNext {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    background-color: transparent;
+    border: none;
+    display: flex;
+}
+.buttonNext svg.MuiSvgIcon-root, .buttonBack svg.MuiSvgIcon-root{
+    font-size: 70px;
+    color:#dbe6eb8e;
+    transition: 0.3s;
+}
+.buttonNext svg.MuiSvgIcon-root:hover, .buttonBack svg.MuiSvgIcon-root:hover{
+    color:#dbe6eb;
+}

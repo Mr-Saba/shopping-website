@@ -70,7 +70,7 @@ function ProductsPage() {
 
     return (
         <div className="ProductsPage">
-            <div >
+            <div className="filter">
                 <h3 className="filterByProductspageP">{t('Filter By')}</h3>
                 <div className="categoriesFilterProductsPage">
                     <div className="productTypeFilter">
