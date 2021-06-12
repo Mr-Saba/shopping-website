@@ -5,7 +5,6 @@ import {
     RESET_PASS,
     UPDATE_EMAIL,
     UPDATE_PASSWORD,
-    SEARCH_PRODUCTS
 } from "../constants"
 
 const initialState = {

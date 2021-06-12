@@ -46,7 +46,6 @@ function LogIn() {
 
 
     useEffect(() => {
-        console.log(isLoggedIn)
         auth.onAuthStateChanged((user) => {
             if(user) {
                 history.push("/")

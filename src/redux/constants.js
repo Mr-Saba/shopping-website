@@ -9,5 +9,10 @@ export const SEARCH_PRODUCTS = "SEARCH_PRODUCTS"
 export const FILTER_BY_CATEGORY = "FILTER_BY_CATEGORY"
 export const SORT_SELECT = "SORT_SELECT"
 export const FILTER_BY_PRICE = "FILTER_BY_PRICE"
+export const ADD_TO_CART = "ADD_TO_CART"
+export const ADD_TO_WISHED = "ADD_TO_WISHED"
+export const NEW_ARRIVALS = "NEW_ARRIVALS"
+
+
 
 

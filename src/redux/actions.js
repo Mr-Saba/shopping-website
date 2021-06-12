@@ -10,7 +10,10 @@ import {
     SORT_BY_AZ,
     SORT_BY_ZA,
     SORT_SELECT,
-    FILTER_BY_PRICE
+    FILTER_BY_PRICE,
+    ADD_TO_CART,
+    ADD_TO_WISHED,
+    NEW_ARRIVALS
     } from "./constants"
 import { auth, firebase, firestore } from "../firebase/Configuration"
 import { bindActionCreators } from "redux"
@@ -115,6 +118,24 @@ const FilterByPrice = (price1, price2) => async dispatch => {
         payload: {price1, price2}
     })
 }
+const AddToCart = () => async dispatch => {
+    dispatch({
+        type: ADD_TO_CART,
+        payload: null
+    })
+}
+const AddToWished = () => async dispatch => {
+    dispatch({
+        type: ADD_TO_WISHED,
+        payload: null
+    })
+}
+const NewArrivals = () => async dispatch => {
+    dispatch({
+        type: NEW_ARRIVALS,
+        payload: null
+    })
+}
 
 
-export { SignUpWithEmailAndPassword, SignOut, ResetPass, SignInWithEmailAndPassword, UpdateCredentials, UpdatePassword, GetProducts, SearchProducts, FilterByCategory, SortSelect, FilterByPrice }
+export { SignUpWithEmailAndPassword, SignOut, ResetPass, SignInWithEmailAndPassword, UpdateCredentials, UpdatePassword, GetProducts, SearchProducts, FilterByCategory, SortSelect, FilterByPrice, AddToCart, AddToWished, NewArrivals }

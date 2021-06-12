@@ -1,9 +1,19 @@
 import {
-    GET_PRODUCTS, SEARCH_PRODUCTS,FILTER_BY_CATEGORY, SORT_BY_AZ, SORT_BY_ZA, SORT_SELECT, FILTER_BY_PRICE
+    GET_PRODUCTS, 
+    SEARCH_PRODUCTS,
+    FILTER_BY_CATEGORY, 
+    SORT_SELECT, 
+    FILTER_BY_PRICE,
+    ADD_TO_CART,
+    ADD_TO_WISHED,
+    NEW_ARRIVALS
 } from "../constants"
 
 const initialState = {
-    products: null
+    products: null,
+    cartData: [],
+    wishedData: [],
+    sorted: []
 }
 
 const ProductReducer = (state=initialState, action) => {
@@ -91,30 +101,19 @@ const ProductReducer = (state=initialState, action) => {
                 ...state,
                 products: [...filteredData3]
             }
+        case ADD_TO_CART:
+            return {
+                ...state,
+                cartData: action.payload
+            }
+            console.log(state.cartData)
+        case ADD_TO_WISHED:
+            return {
+                ...state,
+                wishedData: action.payload
+            }
         default: return state
-    }
-
-         
-    //     case SORT_BY_AZ: 
-    //         const sortedData = state.products.sort(function(a, b){
-    //             if(a.title < b.title) { return -1; }
-    //             if(a.title > b.title) { return 1; }
-    //             return 0;
-    //         })
-    //         return {
-    //             ...state,
-    //             products: [...sortedData]
-    //         }
-    //     case SORT_BY_ZA: 
-    //         const sortedData1 = state.products.sort(function(a, b){
-    //             if(a.title < b.title) { return 1; }
-    //             if(a.title > b.title) { return -1; }
-    //             return 0;
-    //         })
-    //         return {
-    //             ...state,
-    //             products: [...sortedData1]
-    //         }    
+    }  
           
 }
 

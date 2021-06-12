@@ -4,26 +4,39 @@ import './singleProductPage.css'
 import { useTranslation } from "react-i18next";
 import { Button } from '@material-ui/core';
 import FavoriteBorderOutlinedIcon from '@material-ui/icons/FavoriteBorderOutlined';
-import {useSelector} from "react-redux"
-import Death from '../../photos/1.jpg'
-import Death2 from '../../photos/2.jpg'
-import Death3 from '../../photos/3.jpg'
-import Death4 from '../../photos/4.jpg'
+import {useSelector, useDispatch} from "react-redux"
 import { CarouselProvider, Slider, Slide, ButtonBack, ButtonNext, Image, ImageWithZoom } from 'pure-react-carousel';
 import 'pure-react-carousel/dist/react-carousel.es.css';
 import ArrowBackIosOutlinedIcon from '@material-ui/icons/ArrowBackIosOutlined';
 import ArrowForwardIosOutlinedIcon from '@material-ui/icons/ArrowForwardIosOutlined';
+import { AddToCart } from '../../redux/actions';
+import { ControlsStrategy } from 'react-alice-carousel';
 
 function SingleProductPage() {
     const {t} = useTranslation()
+    const red = {
+        "color": "red"
+    }
+    const white = {
+        "color": "white"
+    }
 
     const params = useParams()
 
     const Product = useSelector(state => state.ProductReducer.products.find(item=>item.id == params.id))
 
+    const dispatch = useDispatch()
+    
     useEffect(() => {
-        console.log(Product)
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+          })
     }, [])
+
+    // const handleChange = (e) => {
+    //     console.log(e)
+    // }
 
     return (
         <div className="singleProductPage">
@@ -36,13 +49,19 @@ function SingleProductPage() {
                 >
                     <div className="container">
                     <Slider>
-                        <Slide index={0}><ImageWithZoom src={Death} /></Slide>
-                        <Slide index={1}><ImageWithZoom src={Death2} /></Slide>
-                        <Slide index={2}><ImageWithZoom src={Death3} /></Slide>
-                        <Slide index={3}><ImageWithZoom src={Death4} /></Slide>
+                        <Slide index={0}><ImageWithZoom src={`../../${Product.photo}`} /></Slide>
+                        <Slide index={1}><ImageWithZoom src={`../../${Product.photo1}`} /></Slide>
+                        <Slide index={2}><ImageWithZoom src={`../../${Product.photo2}`} /></Slide>
+                        <Slide index={3}><ImageWithZoom src={`../../${Product.photo3}`} /></Slide>
                     </Slider>
                     <ButtonBack className="buttonBack"><ArrowBackIosOutlinedIcon/> </ButtonBack>
                     <ButtonNext className="buttonNext"><ArrowForwardIosOutlinedIcon/></ButtonNext>
+                    </div>
+                    <div style={{"display": "flex"}}>
+                        <img width="10px" height="100px" src={`../../${Product.photo}`} />
+                        <img width="10px" height="100px" src={`../../${Product.photo1}`} />
+                        <img width="10px" height="100px" src={`../../${Product.photo2}`} />
+                        <img width="10px" height="100px" src={`../../${Product.photo3}`} />
                     </div>
                 </CarouselProvider>
             </div>
@@ -53,7 +72,7 @@ function SingleProductPage() {
                 <p>{t('Quantity')}</p>
                 <input type="number" min="1" step="number" max="5" placeholder="0" />
                 <div className="singlePageProdutsButtons">
-                    <Button variant="contained"><FavoriteBorderOutlinedIcon/></Button>
+                    <Button  variant="contained"><FavoriteBorderOutlinedIcon style={Product.wished == true ? red : white}  /></Button>
                     <Button variant="contained">Add to cart</Button>
                 </div>
             </div>

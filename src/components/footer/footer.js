@@ -84,7 +84,7 @@ function Footer() {
                         </Link>
                     </li>
                     <li>
-                        <Link to="/production">
+                        <Link onClick={() => scrollToTop()} to="/production">
                             <button onClick={(event) => CategoryFilter(event.target.value)} value="Brooche">
                                 {t('Brooches')}
                             </button>
@@ -94,12 +94,12 @@ function Footer() {
                 <ul className="otherUl">
                     <li>{t('Other')}:</li>
                     <li>
-                        <Link to="/about-us">
+                        <Link onClick={() => scrollToTop()} to="/about-us">
                         {t('AboutUs')}
                         </Link>
                     </li>
                     <li>
-                        <Link to="/terms-and-conditions">
+                        <Link onClick={() => scrollToTop()} to="/terms-and-conditions">
                         {t('TermsAndConditions')}
                         </Link>
                     </li>
@@ -109,26 +109,26 @@ function Footer() {
                 { (isLoggedIn === true) ?
                 (
                     <div className="routesFooterLogin">
-                        <Link to="/profile/settings">
+                        <Link onClick={() => scrollToTop()} to="/profile/settings">
                             {t('Settings')}
                         </Link>
-                        <Link to="/profile/orders">
+                        <Link onClick={() => scrollToTop()} to="/profile/orders">
                             {t('My orders')}
                         </Link>
-                        <Link to="/profile/payments">
+                        <Link onClick={() => scrollToTop()} to="/profile/payments">
                             {t('Payment methods')}
                         </Link>
-                        <Link to="/profile/addresses">
+                        <Link onClick={() => scrollToTop()} to="/profile/addresses">
                             {t('Delivery adresses')}
                         </Link>
                     </div>
                 ) : (
                     <div className="buttonsFooterEverybody">
                         <li>
-                            <Button component={Link} to="/log-in" variant="contained" >{t('LogIn')}</Button>
+                            <Button onClick={() => scrollToTop()} component={Link} to="/log-in" variant="contained" >{t('LogIn')}</Button>
                         </li>
                         <li>
-                            <Button component={Link} to="/sign-up" variant="contained" >{t('SignUp')}</Button>
+                            <Button onClick={() => scrollToTop()} component={Link} to="/sign-up" variant="contained" >{t('SignUp')}</Button>
                         </li>
                     </div>
                 )
