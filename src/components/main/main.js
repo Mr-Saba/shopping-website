@@ -90,8 +90,14 @@ function Main() {
                         <Products/>
                     </div>
                 </div>
-                <div>
-                    <button>new arrivals</button>
+                <div className="newArrivalsMainPage">
+                    <div className="mainPageProductsTitle">
+                        <p className="title">New arrivals</p>
+                        <Link onClick={() => scrollToTop()} to="/production">
+                            <span>See all <ArrowForwardIcon/></span>
+                        </Link>
+                    </div>
+                    <div className="productionGridMain">
                     {state && state.map(item => {
                         return (
                             <Link onClick={() => scrollToTop()} to={`/production/single/${item.id}`}>
@@ -107,6 +113,7 @@ function Main() {
                         </Link>
                         )
                     })}
+                    </div>
                 </div>
         </div>
     )
