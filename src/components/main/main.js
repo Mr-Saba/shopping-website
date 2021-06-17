@@ -13,6 +13,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { NewArrivals } from '../../redux/actions'
 import { useTranslation } from 'react-i18next'
 import FavoriteBorderOutlinedIcon from '@material-ui/icons/FavoriteBorderOutlined';
+import {firestore} from "../../firebase/Configuration" 
 
 
 function Main() {
@@ -28,7 +29,7 @@ function Main() {
 
     const {products} = useSelector(state => state.ProductReducer)
 
-    const [state, setState] = useState(null)
+    const [state, setState] = useState([])
 
     const dispatch = useDispatch()
 
@@ -37,17 +38,20 @@ function Main() {
     }
     
     const newArrivals = () => {
-        const sliced = products.slice().sort((a, b) => b.fullDate - a.fullDate).slice(0,6)
+        const sliced = products.slice().sort((a, b) => b.fullDate.seconds - a.fullDate.seconds).slice(0,6)
         setState(sliced)
-        console.log(sliced)
+
     }
     useEffect(() => {
-        newArrivals()
+       newArrivals()
+       console.log(state)
     }, [])
 
 
 
-    return (
+
+
+    return ( 
         <div className="main">
             <div className="sliderAndContent">
                 <Link onClick={() => scrollToTop()} to="/production">

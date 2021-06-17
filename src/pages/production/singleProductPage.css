@@ -74,3 +74,12 @@
 .buttonNext svg.MuiSvgIcon-root:hover, .buttonBack svg.MuiSvgIcon-root:hover{
     color:#dbe6eb;
 }
+.carousel__dot {
+    border: none;
+}
+.carousel__dot img {
+    opacity: 0.5;
+}
+.carousel__dot--selected img {
+    opacity: 1;
+}
