@@ -1,0 +1,89 @@
+.shoppingCartPage {
+    display: grid;
+    grid-template-columns: 67% 30%;
+    grid-column-gap: 3%;
+    margin: 40px 30px 100px 30px;
+}
+
+.CartWishedDiv {
+    display: grid;
+    grid-template-rows: auto auto;
+    grid-row-gap: 40px;
+}
+.cart, .wished {
+    display: grid;
+    grid-row-gap: 40px;
+    grid-template-rows: auto auto;
+}
+
+.singleCartProduct {
+    display: grid;
+    grid-template-columns: 140px auto 140px 140px 20px;
+    margin-left: 20px;
+    grid-template-rows: 140px;
+    grid-column-gap: 40px;
+    padding: 25px;
+    color: #ccdde7;
+    background: #034488;
+}
+.singleCartProduct img{
+    height: 100%;
+}
+.singleCartProduct div {
+    display: grid;
+    grid-template-rows: 50px auto;
+    align-items: center;
+}
+.singleCartProductNumberButton input[type="number"] {
+    height: 50px;
+    width: 70px;
+    padding: 5px;
+}
+.singleCartProduct .singleCartProductNumberButton button {
+    background: none;
+    border: unset;
+    font-size: 16px;
+    cursor: pointer;
+    height: 23px;
+    text-align: left;
+    color: #ccdde7;
+}
+.clearButoonCart {
+    height: 29px;
+    width: 29px;
+    background: none;
+    bottom: 12px;
+    border: unset;
+    cursor: pointer;
+    position: relative;
+    color: #ccdde7;
+}
+
+.clearButoonCart svg.MuiSvgIcon-root {
+    font-size: 20px;
+}
+.subtotalCheckout .MuiButton-contained:hover {
+    box-shadow: 0px 2px 4px -1px rgb(0 0 0 / 20%), 0px 4px 5px 0px rgb(0 0 0 / 14%), 0px 1px 10px 0px rgb(0 0 0 / 12%);
+    background-color: #ccdde7;
+}
+
+.subtotalCheckout button.MuiButtonBase-root.MuiButton-root.MuiButton-contained {
+    background: #ccdde7;
+    color: #034488;
+}
+.subtotalCheckout div {
+    display: flex;
+    align-items: center;
+    color: #ccdde7;
+    justify-content: space-between;
+    /* padding: 0 15px; */
+}
+
+.subtotalCheckout {
+    display: grid;
+    background: #034488;
+    padding: 25px;
+    grid-row-gap: 30px;
+    height: 310px;
+    grid-template-rows: 30px 30px 60px 50px;
+}
