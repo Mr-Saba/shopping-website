@@ -57,18 +57,18 @@ function SingleProductPage() {
                     <ButtonBack className="buttonBack"><ArrowBackIosOutlinedIcon/> </ButtonBack>
                     <ButtonNext className="buttonNext"><ArrowForwardIosOutlinedIcon/></ButtonNext>
                     </div>
-                    <div onClick={console.log("hello")} style={{"display": "flex"}}>
+                    <div onClick={console.log("hello")} style={{"display": "flex", "height":"140px"}}>
                         <Dot slide={0}>
-                            <img width="10px" height="100px" src={`../../${Product.photo}`} />
+                            <img  style={{"object-fit": "cover" , "height":"100%"}}  src={`../../${Product.photo}`} />
                         </Dot>
                         <Dot slide={1}>
-                        <img width="10px" height="100px" src={`../../${Product.photo1}`} />
+                        <img  objectFit="cover" style={{"object-fit": "cover" , "height":"100%"}} src={`../../${Product.photo1}`} />
                         </Dot>
                         <Dot slide={2}>
-                            <img width="10px" height="100px" src={`../../${Product.photo2}`} />
+                            <img  objectFit="cover" style={{"object-fit": "cover" , "height":"100%"}} src={`../../${Product.photo2}`} />
                         </Dot>
                         <Dot slide={3}>
-                            <img width="10px" height="100px" src={`../../${Product.photo3}`} />
+                            <img  style={{"object-fit": "cover" , "height":"100%"}} src={`../../${Product.photo3}`} />
                         </Dot>
                     </div>
                 </CarouselProvider>
