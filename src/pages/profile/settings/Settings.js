@@ -82,26 +82,22 @@ function Settings() {
 
     const getCredentials = async () => {
         await firestore.collection("users").doc(auth.currentUser?.uid).get().then( async doc => {
-            const x = await doc.data()
-            console.log(x)
-            console.log(doc)
-            console.log("1")
-            // setState(
-            //     {
-            //     ...state,
-            //     // firstName: doc.data().firstname,
-            //     lastName: doc.data().lastname,
-            //     // date: doc.data().dateofbirth,
-            //     // nation: doc.data().nation,
-            //     // number: doc.data().number,
-            //     // password: doc.data().password
-            // })
+            console.log(auth.currentUser)
+            setState(
+                {
+                ...state,
+                firstName: doc.data().firstname,
+                lastName: doc.data().lastname,
+                date: doc.data().dateofbirth,
+                nation: doc.data().nation,
+                number: doc.data().number,
+                password: doc.data().password
+            })
         })   
     }
     useEffect(() => {
         getCredentials()
-        console.log(state)
-    }, [auth.currentUser])
+    }, [])
     
 
     const changeCredentials = async () => {
