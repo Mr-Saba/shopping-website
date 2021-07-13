@@ -9,7 +9,7 @@ import { Dot, CarouselProvider, Slider, Slide, ButtonBack, ButtonNext, Image, Im
 import 'pure-react-carousel/dist/react-carousel.es.css';
 import ArrowBackIosOutlinedIcon from '@material-ui/icons/ArrowBackIosOutlined';
 import ArrowForwardIosOutlinedIcon from '@material-ui/icons/ArrowForwardIosOutlined';
-import { AddToCart } from '../../redux/actions';
+import { AddToCart, AddToWished } from '../../redux/actions';
 import { ControlsStrategy } from 'react-alice-carousel';
 
 function SingleProductPage() {
@@ -36,8 +36,13 @@ function SingleProductPage() {
             behavior: "smooth"
         })
     }, [])
-    let isActive
 
+    const handleCartClick = (id) => {
+        dispatch(AddToCart(id))
+    }
+    const handleWishClick = (id) => {
+        dispatch(AddToWished(id))
+    }
     return (
         <div className="singleProductPage">
             <div className="singleProductSlider"> 
@@ -80,8 +85,8 @@ function SingleProductPage() {
                 <p>{t('Quantity')}</p>
                 <input type="number" min="1" step="number" max="5" placeholder="0" />
                 <div className="singlePageProdutsButtons">
-                    <Button  variant="contained"><FavoriteBorderOutlinedIcon style={Product.wished == true ? red : white}  /></Button>
-                    <Button variant="contained">Add to cart</Button>
+                    <Button onClick={() => handleWishClick(Product.id)}  variant="contained"><FavoriteBorderOutlinedIcon style={Product.wished == true ? red : white}  /></Button>
+                    <Button onClick={() => handleCartClick(Product.id)} variant="contained">Add to cart</Button>
                 </div>
             </div>
         </div>

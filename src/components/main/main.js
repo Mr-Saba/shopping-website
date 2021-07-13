@@ -10,7 +10,7 @@ import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import './main.css'
 import Products from '../../pages/production/Products'
 import { useDispatch, useSelector } from 'react-redux'
-import { NewArrivals } from '../../redux/actions'
+import { AddToWished, NewArrivals } from '../../redux/actions'
 import { useTranslation } from 'react-i18next'
 import FavoriteBorderOutlinedIcon from '@material-ui/icons/FavoriteBorderOutlined';
 import {firestore} from "../../firebase/Configuration" 
@@ -33,8 +33,8 @@ function Main() {
 
     const dispatch = useDispatch()
 
-    const handleClick = () => {
-        dispatch(NewArrivals())
+    const handleClick = (id) => {
+        dispatch(AddToWished(id))
     }
     
     const newArrivals = () => {
@@ -44,7 +44,6 @@ function Main() {
     }
     useEffect(() => {
        newArrivals()
-       console.log(state)
     }, [])
 
 
@@ -107,7 +106,7 @@ function Main() {
                             <Link onClick={() => scrollToTop()} to={`/production/single/${item.id}`}>
                             <div className="singleProductionCard">
                                 <img src={item.photo} />
-                                <button><FavoriteBorderOutlinedIcon/></button>
+                                <button onClick={() => handleClick(item.id)}><FavoriteBorderOutlinedIcon/></button>
                                 <div className="descAndCateg">
                                     <p>{t(item.title)}</p>
                                     <p className="productCategoryCard">{t(item.category)}</p>

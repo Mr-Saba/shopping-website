@@ -4,7 +4,7 @@ import './productsPage.css'
 import { useTranslation } from "react-i18next";
 import { Button } from '@material-ui/core'
 import { useSelector, useDispatch } from "react-redux"
-import { FilterByCategory, GetProducts, SortSelect, FilterByPrice } from "../../redux/actions"
+import { FilterByCategory, GetProducts, SortSelect, FilterByPrice, AddToWished } from "../../redux/actions"
 import ReactPaginate from "react-paginate"
 import { Link } from "react-router-dom"
 import FavoriteBorderOutlinedIcon from '@material-ui/icons/FavoriteBorderOutlined';
@@ -19,14 +19,13 @@ function ProductsPage() {
     const [price1, setPrice1] = useState(null)
     const [price2, setPrice2] = useState(null)
 
+    const { products } = useSelector(state => state.ProductReducer)
 
     const [pageNumber, setPageNumber] = useState(0)
 
     const productsPerPage = 9
 
     const pagesVisited = pageNumber * productsPerPage
-
-    const { products } = useSelector(state => state.ProductReducer)
 
     const pageCount = Math.ceil(products.length / productsPerPage)
 
@@ -81,13 +80,13 @@ function ProductsPage() {
         document.getElementById("category2").checked = false
         document.getElementById("category3").checked = false
         document.getElementById("category4").checked = false
-        // document.getElementById("mood1").checked = false
-        // document.getElementById("mood2").checked = false
-        // document.getElementById("mood3").checked = false
-        // document.getElementById("mood4").checked = false
         document.getElementById("price1").value = ""
         document.getElementById("price2").value = ""
         dispatch(GetProducts())
+    }
+
+    const handleCLick = (id) => {
+        dispatch(AddToWished(id))
     }
 
 
@@ -166,7 +165,7 @@ function ProductsPage() {
                             <Link to={`/production/single/${item.id}`}>
                                 <div className="singleProductionCard">
                                     <img src={item.photo} />
-                                    <button><FavoriteBorderOutlinedIcon /></button>
+                                    <button onClick={() => handleCLick(item.id)}><FavoriteBorderOutlinedIcon /></button>
                                     <div className="descAndCateg">
                                         <p>{t(item.title)}</p>
                                         <p className="productCategoryCard">{t(item.category)}</p>

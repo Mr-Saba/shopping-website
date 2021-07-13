@@ -13,8 +13,25 @@ const firebaseConfig = {
   firebase.initializeApp(firebaseConfig);
   firebase.analytics();
 
+  const remoteConfig = firebase.remoteConfig();
+  remoteConfig.settings.minimumFetchIntervalMillis = 3600000;
+
+  remoteConfig.defaultConfig = {
+    "WebMode": "light"
+  };
+
+  remoteConfig.fetchAndActivate()
+    .then(() => {
+      // ...
+    })
+    .catch((err) => {
+      // ...
+  });
+
+  const webmode = remoteConfig.getString("WebMode")
+
   const firestore = firebase.firestore()
   const auth = firebase.auth()
   const storage = firebase.storage()
 
-  export {firestore, auth, firebase, storage}
+  export {firestore, auth, firebase, storage, webmode}

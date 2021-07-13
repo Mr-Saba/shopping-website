@@ -15,6 +15,7 @@ import {useSelector} from "react-redux"
 import ProductsPage from '../../pages/production/ProductsPage';
 import InputBase from "@material-ui/core/InputBase";
 import { fade, makeStyles } from "@material-ui/core/styles";
+import firebase from "firebase"
 
 
 const useStyles = makeStyles((theme) => ({
@@ -65,6 +66,8 @@ function Header() {
     const dispatch = useDispatch()
 
     const { isLoggedIn } = useSelector(state => state.UserReducer)
+    const { cartData, wishedData } = useSelector(state => state.ProductReducer)
+
 
     const LogOut = () => {
         dispatch(SignOut())
@@ -72,6 +75,12 @@ function Header() {
 
     const {t} = useTranslation()
 
+
+    
+
+    useEffect(() => {
+        console.log()
+    }, [])
 
 
     const searchHandler = (keyword,key) => {
@@ -121,12 +130,14 @@ function Header() {
                 <ul className="rightUl">
                    <li>
                        <Link to="/cart">
-                           <FavoriteBorderIcon/>
+                            <Badge badgeContent={wishedData.length} color='secondary'>
+                                <FavoriteBorderIcon/>
+                            </Badge>
                        </Link>
                    </li>
                    <li>
                         <IconButton  component={Link} to='/cart' area-label='Show cart items' color='inherit'>
-                            <Badge badgeContent="0" color='secondary'>
+                            <Badge badgeContent={cartData.length} color='secondary'>
                                 <ShoppingCartOutlinedIcon/>
                             </Badge>
                         </IconButton>

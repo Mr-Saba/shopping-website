@@ -12,8 +12,14 @@ import {
     SORT_SELECT,
     FILTER_BY_PRICE,
     ADD_TO_CART,
+    REMOVE_FROM_CART,
     ADD_TO_WISHED,
-    NEW_ARRIVALS
+    NEW_ARRIVALS,
+    REMOVE_FROM_WISHED,
+    CHANGE_QUANTITY,
+    MOVE_TO_CART,
+    MOVE_TO_WISHED,
+
     } from "./constants"
 import { auth, firebase, firestore } from "../firebase/Configuration"
 import { bindActionCreators } from "redux"
@@ -118,24 +124,40 @@ const FilterByPrice = (price1, price2) => async dispatch => {
         payload: {price1, price2}
     })
 }
-const AddToCart = () => async dispatch => {
+const AddToCart = (id) => async dispatch => {
     dispatch({
         type: ADD_TO_CART,
-        payload: null
+        payload: id
     })
 }
-const AddToWished = () => async dispatch => {
+const RemoveFromCart = (id) => async dispatch => {
+    dispatch({
+        type: REMOVE_FROM_CART,
+        payload: id
+    })
+}
+const AddToWished = (id) => async dispatch => {
     dispatch({
         type: ADD_TO_WISHED,
-        payload: null
+        payload: id
     })
 }
-const NewArrivals = () => async dispatch => {
+const RemoveFromWished = (id) => async dispatch => {
     dispatch({
-        type: NEW_ARRIVALS,
-        payload: null
+        type: REMOVE_FROM_WISHED,
+        payload: id
+    })
+}
+const ChangeQuantity = (id, value) => async dispatch => {
+    dispatch({
+        type: CHANGE_QUANTITY,
+        payload: {
+            id: id,
+            value: value
+        }
     })
 }
 
 
-export { SignUpWithEmailAndPassword, SignOut, ResetPass, SignInWithEmailAndPassword, UpdateCredentials, UpdatePassword, GetProducts, SearchProducts, FilterByCategory, SortSelect, FilterByPrice, AddToCart, AddToWished, NewArrivals }
+
+export { SignUpWithEmailAndPassword, SignOut, ResetPass, SignInWithEmailAndPassword, UpdateCredentials, UpdatePassword, GetProducts, SearchProducts, FilterByCategory, SortSelect, FilterByPrice, AddToCart, RemoveFromCart, AddToWished, RemoveFromWished, ChangeQuantity}
