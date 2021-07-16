@@ -16,7 +16,7 @@ function Cart() {
     const dispatch = useDispatch()
 
     useEffect(() => {
-        
+        console.log(cartData)
     }, [])
 
     const handleCartedRemove = (id) => {
@@ -116,7 +116,7 @@ function Cart() {
                         <p style={{ fontWeight: "bold", fontSize: "30px" }}>Total:</p>
                         <p style={{ fontWeight: "bold" }}>{total() + 5}₾</p>
                     </div>
-                    <Button variant="contained">Checkout</Button>
+                    <Button style={cartData.length == 0 ? {"opacity": "0.6", "cursor": " not-allowed"} : {}} variant="contained">Checkout</Button>             
                 </div>
             </div>
         </div>

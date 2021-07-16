@@ -131,6 +131,7 @@ function Header() {
                 </ul>
                 <ul className="rightUl">
                    <li>
+                       {console.log(cartData)}
                        <Link to="/cart">
                             <Badge 
                             badgeContent={wishedData.length} 
@@ -140,7 +141,7 @@ function Header() {
                        </Link>
                    </li>
                    <li>
-                        <IconButton  component={Link} to='/cart' area-label='Show cart items' color='inherit'>
+                        <IconButton component={Link} to='/cart' area-label='Show cart items' color='inherit'>
                             <Badge 
                             badgeContent={cartData.length} 
                             color='secondary'>
