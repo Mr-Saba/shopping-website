@@ -158,7 +158,7 @@ function Settings() {
     }
 
     
-   return (  state.firstName !== "" ? (
+   return (  state.firstName == "" ? (
         <div className="redactOfProfile">
             <div className="redactCenter">
                     <h1>{t('My details')}</h1>
@@ -226,7 +226,7 @@ function Settings() {
                 </form>
             </div>
         </div>
-        ) : ("")
+        ) : ("იიი")
     )
 }
 

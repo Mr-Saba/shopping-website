@@ -63,6 +63,7 @@ function Main() {
                     isPlaying={true}
                     interval={5000}
                     visibleSlides={2}
+                    infinite
                 >
                     <div className="container">
                     <Slider>
