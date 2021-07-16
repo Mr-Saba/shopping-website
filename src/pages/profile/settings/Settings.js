@@ -79,10 +79,11 @@ function Settings() {
 
     const {user} = useSelector(state => state.UserReducer)
 
-
+    
     const getCredentials = async () => {
         await firestore.collection("users").doc(auth.currentUser?.uid).get().then( async doc => {
-            console.log(auth.currentUser)
+            debugger
+            console.log(doc.data())
             setState(
                 {
                 ...state,
@@ -97,7 +98,8 @@ function Settings() {
     }
     useEffect(() => {
         getCredentials()
-    }, [])
+        console.log(state)
+    }, [auth.currentUser])
     
 
     const changeCredentials = async () => {
@@ -154,7 +156,7 @@ function Settings() {
     }
 
     
-   return (  state.firstName !== "" ? (
+   return (  state.firstName !== '' ? (
         <div className="redactOfProfile">
             <div className="redactCenter">
                     <h1>{t('My details')}</h1>

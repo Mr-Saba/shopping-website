@@ -22,6 +22,7 @@ import {useDispatch, useSelector} from "react-redux"
 import Cart from './pages/cart/Cart'
 import SingleProductPage from './pages/production/singleProductPage'
 
+
 function App() { 
 
   const history = useHistory()

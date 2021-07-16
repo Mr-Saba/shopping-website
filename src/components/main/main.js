@@ -38,16 +38,13 @@ function Main() {
     }
     
     const newArrivals = () => {
-        const sliced = products.slice().sort((a, b) => b.fullDate.seconds - a.fullDate.seconds).slice(0,6)
+        const sliced = products.slice().sort((a, b) => b.fullDate.seconds - a.fullDate.seconds).slice(0,3)
         setState(sliced)
 
     }
     useEffect(() => {
        newArrivals()
     }, [])
-
-
-
 
 
     return ( 

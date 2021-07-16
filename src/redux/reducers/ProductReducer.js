@@ -13,6 +13,7 @@ import {
 
 const initialState = {
     products: null,
+    filteredProducts: null,
     cartData: [],
     wishedData: [],
 }
@@ -31,7 +32,7 @@ const ProductReducer = (state = initialState, action) => {
             })
             return {
                 ...state,
-                products: [...filteredData]
+                filteredProducts: [...filteredData]
             }
         case FILTER_BY_CATEGORY:
             const filteredData1 = state.products.filter(item => {
@@ -41,30 +42,30 @@ const ProductReducer = (state = initialState, action) => {
             })
             return {
                 ...state,
-                products: [...filteredData1]
+                filteredProducts: [...filteredData1]
             }
         case SORT_SELECT:
             let sortedData
             if (action.payload == "az") {
                 sortedData = state.products.sort(function (a, b) {
-                    if (a.title < b.title) { return -1; }
-                    if (a.title > b.title) { return 1; }
+                    if (a.title.toLowerCase() < b.title.toLowerCase()) { return -1; }
+                    if (a.title.toLowerCase() > b.title.toLowerCase()) { return 1; }
                     return 0;
                 })
                 return {
                     ...state,
-                    products: [...sortedData]
+                    filteredProducts: [...sortedData]
                 }
             }
             if (action.payload == "za") {
                 sortedData = state.products.sort(function (a, b) {
-                    if (a.title < b.title) { return 1; }
-                    if (a.title > b.title) { return -1; }
+                    if (a.title.toLowerCase() < b.title.toLowerCase()) { return 1; }
+                    if (a.title.toLowerCase() > b.title.toLowerCase()) { return -1; }
                     return 0;
                 })
                 return {
                     ...state,
-                    products: [...sortedData]
+                    filteredProducts: [...sortedData]
                 }
             }
             if (action.payload == "lowHigh") {
@@ -75,7 +76,7 @@ const ProductReducer = (state = initialState, action) => {
                 })
                 return {
                     ...state,
-                    products: [...sortedData]
+                    filteredProducts: [...sortedData]
                 }
             }
             if (action.payload == "highLow") {
@@ -86,7 +87,7 @@ const ProductReducer = (state = initialState, action) => {
                 })
                 return {
                     ...state,
-                    products: [...sortedData]
+                    filteredProducts: [...sortedData]
                 }
             }
         case FILTER_BY_PRICE:
@@ -100,7 +101,7 @@ const ProductReducer = (state = initialState, action) => {
             })
             return {
                 ...state,
-                products: [...filteredData3]
+                filteredProducts: [...filteredData3]
             }
         case ADD_TO_CART:
             let carted = state.products.find(item => item.id === action.payload)

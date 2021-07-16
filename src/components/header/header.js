@@ -82,9 +82,11 @@ function Header() {
         console.log()
     }, [])
 
+    const history = useHistory()
 
     const searchHandler = (keyword,key) => {
         if(key=="Enter" && keyword !== "") {
+          history.push("/production")  
           dispatch(SearchProducts(keyword))
         }else if(keyword == "") {
           dispatch(GetProducts())

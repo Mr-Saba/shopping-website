@@ -19,11 +19,11 @@ function ProductsPage() {
     const [price1, setPrice1] = useState(null)
     const [price2, setPrice2] = useState(null)
 
-    const { products } = useSelector(state => state.ProductReducer)
+    const { products, filteredProducts } = useSelector(state => state.ProductReducer)
 
     const [pageNumber, setPageNumber] = useState(0)
 
-    const productsPerPage = 9
+    const productsPerPage = 12
 
     const pagesVisited = pageNumber * productsPerPage
 
@@ -160,6 +160,7 @@ function ProductsPage() {
                     </select>
                 </div>
                 <div className="productionGrid">
+                    {/* or filtered products ?  */}
                     {products.slice(pagesVisited, pagesVisited + productsPerPage).map(item => {
                         return (
                             <Link to={`/production/single/${item.id}`}>
