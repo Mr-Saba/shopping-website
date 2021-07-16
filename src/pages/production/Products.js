@@ -6,7 +6,7 @@ import FavoriteBorderOutlinedIcon from '@material-ui/icons/FavoriteBorderOutline
 import { useTranslation } from "react-i18next";
 import {firestore} from "../../firebase/Configuration"
 import {useDispatch, useSelector} from "react-redux"
-import {GetProducts} from "../../redux/actions"
+import {AddToWished, GetProducts} from "../../redux/actions"
 
 function Products() {
 
@@ -22,6 +22,10 @@ function Products() {
 
     const {t} = useTranslation()
 
+    const handleClick = (id) => {
+        dispatch(AddToWished(id))
+    }
+
     return (
         <>
         { products && products.map(item => {
@@ -29,7 +33,7 @@ function Products() {
                         <Link to={`/production/single/${item.id}`}>
                             <div className="singleProductionCard">
                                 <img src={item.photo} />
-                                <button><FavoriteBorderOutlinedIcon/></button>
+                                <button onClick={() => handleClick(item.id)}><FavoriteBorderOutlinedIcon/></button>
                                 <div className="descAndCateg">
                                     <p>{t(item.title)}</p>
                                     <p className="productCategoryCard">{t(item.category)}</p>
