@@ -17,7 +17,7 @@ const initialState = {
     cartData: [],
     wishedData: [],
 }
-
+//sda
 const ProductReducer = (state = initialState, action) => {
     switch (action.type) {
         case GET_PRODUCTS: return {
