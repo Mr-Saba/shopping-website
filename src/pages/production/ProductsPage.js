@@ -36,7 +36,7 @@ function ProductsPage() {
             behavior: "smooth"
         })
     }
-
+    
     const { t } = useTranslation()
 
     const dispatch = useDispatch()

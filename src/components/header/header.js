@@ -132,14 +132,18 @@ function Header() {
                 <ul className="rightUl">
                    <li>
                        <Link to="/cart">
-                            <Badge badgeContent={wishedData.length} color='secondary'>
+                            <Badge 
+                            badgeContent={wishedData.length} 
+                            color='secondary'>
                                 <FavoriteBorderIcon/>
                             </Badge>
                        </Link>
                    </li>
                    <li>
                         <IconButton  component={Link} to='/cart' area-label='Show cart items' color='inherit'>
-                            <Badge badgeContent={cartData.length} color='secondary'>
+                            <Badge 
+                            badgeContent={cartData.length} 
+                            color='secondary'>
                                 <ShoppingCartOutlinedIcon/>
                             </Badge>
                         </IconButton>
