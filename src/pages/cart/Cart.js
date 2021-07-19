@@ -11,12 +11,11 @@ import { AddToCart, AddToWished, RemoveFromCart, RemoveFromWished, ChangeQuantit
 function Cart() {
     const { t } = useTranslation()
 
-    const { cartData, wishedData } = useSelector(state => state.ProductReducer)
+    const { cartData, wishedData } = useSelector(state => state.CartReducer)
 
     const dispatch = useDispatch()
 
     useEffect(() => {
-        console.log(cartData)
     }, [])
 
     const handleCartedRemove = (id) => {

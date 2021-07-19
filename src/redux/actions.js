@@ -20,7 +20,8 @@ import {
     MOVE_TO_CART,
     MOVE_TO_WISHED,
     ADD_ADDRESS,
-
+    REMOVE_ADDRESS,
+    MAKE_ADDRESS_DEFAULT
     } from "./constants"
 import { auth, firebase, firestore } from "../firebase/Configuration"
 import { bindActionCreators } from "redux"
@@ -125,11 +126,12 @@ const FilterByPrice = (price1, price2) => async dispatch => {
         payload: {price1, price2}
     })
 }
-const AddToCart = (id) => async dispatch => {
-    dispatch({
-        type: ADD_TO_CART,
-        payload: id
-    })
+const AddToCart = (id) => async (dispatch, getState) => {
+        const productslist = getState().ProductReducer.products;
+        dispatch({ 
+            type: ADD_TO_CART, 
+            payload: {id, productslist} 
+        })
 }
 const RemoveFromCart = (id) => async dispatch => {
     dispatch({
@@ -137,24 +139,27 @@ const RemoveFromCart = (id) => async dispatch => {
         payload: id
     })
 }
-const AddToWished = (id) => async dispatch => {
+const AddToWished = (id) => async (dispatch, getState) => {
+    const productslist = getState().ProductReducer.products;
     dispatch({
         type: ADD_TO_WISHED,
-        payload: id
+        payload: {id, productslist} 
     })
 }
-const RemoveFromWished = (id) => async dispatch => {
+const RemoveFromWished = (id) => async (dispatch) => {
     dispatch({
         type: REMOVE_FROM_WISHED,
         payload: id
     })
 }
-const ChangeQuantity = (id, value) => async dispatch => {
+const ChangeQuantity = (id, value) => async (dispatch, getState) => {
+    const productslist = getState().ProductReducer.products;
     dispatch({
         type: CHANGE_QUANTITY,
         payload: {
             id: id,
-            value: value
+            value: value,
+            productslist: productslist
         }
     })
 }
@@ -164,7 +169,18 @@ const AddAddress = (cred) => async dispatch => {
         payload: cred
     })
 }
-
+const RemoveAddress = (id) => async dispatch => {
+    dispatch({
+        type: REMOVE_ADDRESS,
+        payload: id
+    })
+}
+const MakeAddressDefault = (id) => async dispatch => {
+    dispatch({
+        type: MAKE_ADDRESS_DEFAULT,
+        payload: id
+    })
+}
 
 export { 
     SignUpWithEmailAndPassword, 
@@ -183,5 +199,7 @@ export {
     AddToWished, 
     RemoveFromWished, 
     ChangeQuantity, 
-    AddAddress
+    AddAddress,
+    RemoveAddress,
+    MakeAddressDefault
 }

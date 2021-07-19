@@ -10,7 +10,7 @@ import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import './main.css'
 import Products from '../../pages/production/Products'
 import { useDispatch, useSelector } from 'react-redux'
-import { AddToWished, NewArrivals } from '../../redux/actions'
+import { AddToWished, GetProducts, NewArrivals } from '../../redux/actions'
 import { useTranslation } from 'react-i18next'
 import FavoriteBorderOutlinedIcon from '@material-ui/icons/FavoriteBorderOutlined';
 import { firestore } from "../../firebase/Configuration"
@@ -30,14 +30,7 @@ export default function Main() {
     const handleClick = (id) => {
         dispatch(AddToWished(id))
     }
-    const newArrivals = () => {
-        const sliced = products?.slice().sort((a, b) => b.fullDate.seconds - a.fullDate.seconds).slice(0,3)
-        setState(sliced)
-    }
-    useEffect(() => {
-        newArrivals()
-    }, [])
-
+    
     return (
         <div className="main">
             <div className="sliderAndContent">
@@ -89,21 +82,21 @@ export default function Main() {
                     </Link>
                 </div>
                 <div className="productionGridMain">
-                    {state && state.map(item => {
-                        return (
-                            <Link onClick={() => scrollToTop()} to={`/production/single/${item.id}`}>
-                                <div className="singleProductionCard">
-                                    <img src={item.photo} />
-                                    <button onClick={() => handleClick(item.id)}><FavoriteBorderOutlinedIcon /></button>
-                                    <div className="descAndCateg">
-                                        <p>{t(item.title)}</p>
-                                        <p className="productCategoryCard">{t(item.category)}</p>
-                                    </div>
-                                    <p className="productCardPrice">{item.price}</p>
+                { products && products.slice().sort((a, b) => b.fullDate.seconds - a.fullDate.seconds).slice(0,3).map(item => {
+                    return (
+                        <Link to={`/production/single/${item.id}`}>
+                            <div className="singleProductionCard">
+                                <img src={item.photo} />
+                                <button onClick={() => handleClick(item.id)}><FavoriteBorderOutlinedIcon/></button>
+                                <div className="descAndCateg">
+                                    <p>{t(item.title)}</p>
+                                    <p className="productCategoryCard">{t(item.category)}</p>
                                 </div>
-                            </Link>
-                        )
-                    })}
+                                <p className="productCardPrice">{item.price}</p>
+                            </div>
+                        </Link>
+                )
+                })}
                 </div>
             </div>
         </div>

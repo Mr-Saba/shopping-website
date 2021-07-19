@@ -42,6 +42,7 @@ function ProductsPage() {
     const dispatch = useDispatch()
 
     useEffect(() => {
+        dispatch(GetProducts())
     }, [])
 
 
@@ -161,7 +162,7 @@ function ProductsPage() {
                 </div>
                 <div className="productionGrid">
                     {/* or filtered products ?  */}
-                    {products?.slice(pagesVisited, pagesVisited + productsPerPage).map(item => {
+                    {products && products.slice(pagesVisited, pagesVisited + productsPerPage).map(item => {
                         return (
                             <Link to={`/production/single/${item.id}`}>
                                 <div className="singleProductionCard">

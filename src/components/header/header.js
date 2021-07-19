@@ -66,7 +66,7 @@ function Header() {
     const dispatch = useDispatch()
 
     const { isLoggedIn } = useSelector(state => state.UserReducer)
-    const { cartData, wishedData } = useSelector(state => state.ProductReducer)
+    const { cartData, wishedData } = useSelector(state => state.CartReducer)
 
 
     const LogOut = () => {
