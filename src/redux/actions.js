@@ -19,6 +19,7 @@ import {
     CHANGE_QUANTITY,
     MOVE_TO_CART,
     MOVE_TO_WISHED,
+    ADD_ADDRESS,
 
     } from "./constants"
 import { auth, firebase, firestore } from "../firebase/Configuration"
@@ -157,7 +158,30 @@ const ChangeQuantity = (id, value) => async dispatch => {
         }
     })
 }
+const AddAddress = (cred) => async dispatch => {
+    dispatch({
+        type: ADD_ADDRESS,
+        payload: cred
+    })
+}
 
 
-
-export { SignUpWithEmailAndPassword, SignOut, ResetPass, SignInWithEmailAndPassword, UpdateCredentials, UpdatePassword, GetProducts, SearchProducts, FilterByCategory, SortSelect, FilterByPrice, AddToCart, RemoveFromCart, AddToWished, RemoveFromWished, ChangeQuantity}
+export { 
+    SignUpWithEmailAndPassword, 
+    SignOut, 
+    ResetPass, 
+    SignInWithEmailAndPassword, 
+    UpdateCredentials, 
+    UpdatePassword, 
+    GetProducts, 
+    SearchProducts,
+    FilterByCategory, 
+    SortSelect, 
+    FilterByPrice, 
+    AddToCart, 
+    RemoveFromCart, 
+    AddToWished, 
+    RemoveFromWished, 
+    ChangeQuantity, 
+    AddAddress
+}

@@ -79,7 +79,6 @@ function Header() {
     
 
     useEffect(() => {
-        console.log()
     }, [])
 
     const history = useHistory()
@@ -131,7 +130,6 @@ function Header() {
                 </ul>
                 <ul className="rightUl">
                    <li>
-                       {console.log(cartData)}
                        <Link to="/cart">
                             <Badge 
                             badgeContent={wishedData.length} 

@@ -31,9 +31,8 @@ export default function Main() {
         dispatch(AddToWished(id))
     }
     const newArrivals = () => {
-        const sliced = products.slice().sort((a, b) => b.fullDate.seconds - a.fullDate.seconds).slice(0,3)
+        const sliced = products?.slice().sort((a, b) => b.fullDate.seconds - a.fullDate.seconds).slice(0,3)
         setState(sliced)
-
     }
     useEffect(() => {
         newArrivals()

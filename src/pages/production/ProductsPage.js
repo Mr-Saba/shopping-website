@@ -27,7 +27,7 @@ function ProductsPage() {
 
     const pagesVisited = pageNumber * productsPerPage
 
-    const pageCount = Math.ceil(products.length / productsPerPage)
+    const pageCount = Math.ceil(products / productsPerPage)
 
     const changePage = ({ selected }) => {
         setPageNumber(selected)
@@ -161,7 +161,7 @@ function ProductsPage() {
                 </div>
                 <div className="productionGrid">
                     {/* or filtered products ?  */}
-                    {products.slice(pagesVisited, pagesVisited + productsPerPage).map(item => {
+                    {products?.slice(pagesVisited, pagesVisited + productsPerPage).map(item => {
                         return (
                             <Link to={`/production/single/${item.id}`}>
                                 <div className="singleProductionCard">

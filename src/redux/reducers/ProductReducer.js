@@ -8,7 +8,8 @@ import {
     REMOVE_FROM_CART,
     ADD_TO_WISHED,
     REMOVE_FROM_WISHED,
-    CHANGE_QUANTITY
+    CHANGE_QUANTITY,
+    ADD_ADDRESS
 } from "../constants"
 
 const initialState = {
@@ -16,8 +17,8 @@ const initialState = {
     filteredProducts: null,
     cartData: [],
     wishedData: [],
+    addresses: []
 }
-//sda
 const ProductReducer = (state = initialState, action) => {
     switch (action.type) {
         case GET_PRODUCTS: return {
@@ -105,6 +106,7 @@ const ProductReducer = (state = initialState, action) => {
             }
         case ADD_TO_CART:
             let carted = state.products.find(item => item.id === action.payload)
+            console.log(carted)
             let existed_item = state.cartData.find(item => action.payload === item.id)
             if (existed_item == undefined) {
                 return {
@@ -152,7 +154,20 @@ const ProductReducer = (state = initialState, action) => {
             return {
                 ...state,
             }
-        default: return state
+        case ADD_ADDRESS:
+            state.addresses = undefined
+            console.log(action.payload)
+            let added = state.addresses.find(item => item.id === action.payload.id)
+            return {
+                ...state,
+                addresses: [state.addresses, action.payload]
+            }
+
+            default: {
+                return {
+                  ...state
+                }
+              }
     }
 }
 
