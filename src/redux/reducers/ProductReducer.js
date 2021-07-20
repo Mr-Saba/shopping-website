@@ -98,11 +98,7 @@ const ProductReducer = (state = initialState, action) => {
                 ...state,
                 filteredProducts: [...filteredData3]
             }
-            default: {
-                return {
-                  ...state
-                }
-              }
+        default: return state
     }
 }
 

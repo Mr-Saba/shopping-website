@@ -19,7 +19,7 @@ const AddressReducer = (state = initialState, action) => {
             }
             return {
                 ...state,
-                addresses: [...state.addresses, action.payload]
+                addresses: [action.payload, ...state.addresses]
             }
         case REMOVE_ADDRESS:
             let new_addresses = state.addresses.filter(item => action.payload !== item.id)
@@ -37,11 +37,7 @@ const AddressReducer = (state = initialState, action) => {
                 ...state,
                 addresses: [...state.addresses]
             }
-        default: {
-            return {
-                ...state
-            }
-        }
+        default: return state
     }
 }
 
