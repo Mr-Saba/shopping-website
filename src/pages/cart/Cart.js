@@ -12,14 +12,21 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 
 function Cart() {
+
+    const hiddenStyle = {
+        visibility: "hidden"
+    }
     const { t } = useTranslation()
 
     const { cartData, wishedData } = useSelector(state => state.CartReducer)
     const { addresses } = useSelector(state => state.AddressReducer)
 
+    const [fee, setFee] = useState("")
+
     const dispatch = useDispatch()
 
     useEffect(() => {
+        
     }, [])
 
     const handleCartedRemove = (id) => {
@@ -71,6 +78,11 @@ function Cart() {
     const { register, formState: { errors }, handleSubmit } = useForm({
         resolver: yupResolver(schema)
     })
+
+    // const handleFunction = (id) => {
+    //     // setFee(addresses.find(item => id === item.id).cityFee)
+    //     console.log(id) 
+    // }
 
     return (
         <div className="shoppingCartPage">
@@ -130,7 +142,7 @@ function Cart() {
                     </div>
                     <div>
                         <p>Delivery (2-4 working days):</p>
-                        <p>5$</p>
+                        <p>5₾</p>
                     </div>
                     <div>
                         <p style={{ fontWeight: "bold", fontSize: "30px" }}>Total:</p>
@@ -139,11 +151,11 @@ function Cart() {
                     <h2>Choose Address</h2>
                     {addresses.map(item => {
                         return (
-                            <>
-                                <label htmlFor={item.id}>{item.address}</label>
-                                {item.default == true ?
-                                    <input defaultChecked type="radio" id={item.id} /> :
-                                    <input type="radio" id={item.id} />}
+                            <>  
+                                <label htmlFor={item.id}>{item.address}{item.default == true ? <span style={{"marginLeft": "5px", "opacity": "0.7"}}>(default)</span> : ""}</label>                               
+                                {item.default == true ? 
+                                <input defaultChecked type="radio" id={item.id} /> :
+                                <input type="radio" id={item.id} /> }                                    
                             </>
                         )
                     })}
@@ -151,7 +163,7 @@ function Cart() {
                     {addresses.length == 0 ?
                         <input defaultChecked type="radio" id="newone" /> :
                         <input type="radio" id="newone" />}
-                        <form className="adressForm" onSubmit={handleSubmit(onSubmit)}>
+                        <form className={"adressForm"} onSubmit={handleSubmit(onSubmit)}>
                             <div className="addressFormInputs">
                                 <p>{t('City')}</p>
                                 <select name="city" id="city">

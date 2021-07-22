@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import { useParams } from 'react-router'
 import './adresses.css'
 import { Button } from '@material-ui/core'
@@ -10,10 +10,11 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 import { v4 as uuidv4 } from 'uuid';
+import { connect } from 'react-redux'
 
 
 
-function Adresses() {
+function Adresses(props) {
 
     const schema = yup.object().shape({
         address: yup.string()
@@ -29,6 +30,10 @@ function Adresses() {
 
     const { t } = useTranslation()
 
+    useEffect(() => {
+        // console.log(props.addresses)
+    }, [])
+
     const dispatch = useDispatch()
 
     const { addresses } = useSelector(state => state.AddressReducer)
@@ -37,7 +42,7 @@ function Adresses() {
         if (data) {
             const cred = {
                 id: uuidv4(),
-                city: document.getElementById("city").value,
+                cityFee: document.getElementById("city").value,
                 address: document.getElementById("address").value,
                 code: document.getElementById("code").value,
                 default: document.getElementById("default").checked,
@@ -77,10 +82,10 @@ function Adresses() {
                 <div className="addressFormInputs">
                     <p>{t('City')}</p>
                     <select name="city" id="city">
-                        <option value="Tbilisi">Tbilisi</option>
-                        <option value="Kutaisi">Kutaisi</option>
-                        <option value="Rustavi">Rustavi</option>
-                        <option value="Chiatura">Chiatura</option>
+                        <option value="5">Tbilisi</option>
+                        <option value="8">Kutaisi</option>
+                        <option value="7">Rustavi</option>
+                        <option value="8">Chiatura</option>
                     </select>
                 </div>
                 <div className="addressFormInputs" >
@@ -100,5 +105,16 @@ function Adresses() {
         </div>
     )
 }
+const mapStateToProps = (state)=>{
+    return {
+      addresses: state.AddressReducer.addresses
+    }
+}
+const mapDispatchToProps= (dispatch)=>{
+    
+    return{
+        AddAddress: (cred)=>{dispatch(AddAddress(cred))}
+    }
+}  
 
-export default Adresses
+export default connect(mapStateToProps,mapDispatchToProps)(Adresses)
