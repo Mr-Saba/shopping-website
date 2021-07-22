@@ -5,16 +5,21 @@ import { persistStore, persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage' 
 import ProductReducer from './reducers/ProductReducer'
 import UserReducer from './reducers/UserReducer'
+import CartReducer from './reducers/CartReducer'
+import AddressReducer from './reducers/AddressReducer'
+
 
 const persistConfig = {
     key: 'root',
     // blacklist: ['products'],
-    storage,
+    storage: storage,
 }
 
 const rootReducer = combineReducers({
     ProductReducer,
-    UserReducer
+    UserReducer,
+    CartReducer,
+    AddressReducer
 })
 
 const persistedRootReducer = persistReducer(persistConfig, rootReducer)

@@ -66,7 +66,7 @@ function Header() {
     const dispatch = useDispatch()
 
     const { isLoggedIn } = useSelector(state => state.UserReducer)
-    const { cartData, wishedData } = useSelector(state => state.ProductReducer)
+    const { cartData, wishedData } = useSelector(state => state.CartReducer)
 
 
     const LogOut = () => {
@@ -79,7 +79,6 @@ function Header() {
     
 
     useEffect(() => {
-        console.log()
     }, [])
 
     const history = useHistory()
@@ -131,7 +130,6 @@ function Header() {
                 </ul>
                 <ul className="rightUl">
                    <li>
-                       {console.log(cartData)}
                        <Link to="/cart">
                             <Badge 
                             badgeContent={wishedData && wishedData.length} 

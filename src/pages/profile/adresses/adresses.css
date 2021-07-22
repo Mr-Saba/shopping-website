@@ -15,7 +15,7 @@
 .adressForm {
     display: grid;
     grid-template-columns: 100%;
-    grid-template-rows: 100px 100px 100px 50px;
+    grid-template-rows: 100px 100px 100px 30px 50px;
     grid-row-gap: 20px;
     margin: 20px 0;
 }
@@ -35,7 +35,11 @@
     margin-top: 10px;
     height: 60%;
 }
-
+.adressForm .addressFormInputs .errorAdressFormInput {
+    font-size: 14px;
+    color: #f50057;
+    padding: 4px 5px;
+}
 .singleAddress {
     display: grid;
     margin-bottom: 40px;
@@ -50,10 +54,45 @@
 }
 .singleAddress svg.MuiSvgIcon-root {
     grid-column: 2;
-    grid-row: 1/2;
+    grid-row: 1/3;
     color: #034388af;
     transition: 0.3s;
 }
 .singleAddress svg.MuiSvgIcon-root:hover {
     color: #034388;
+}
+
+.addressFormInputsCheckbox {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin-left: 5px;
+}
+
+.addressFormInputsCheckbox label {
+    width: 50%;
+}
+
+.addressFormInputsCheckbox input#terms {
+    width: 15px;
+    height: 15px;
+    position: relative;
+}
+
+.defaultAdressCheckbox {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin-top: 20px;
+    font-size: 15px;
+}
+.defaultAdressCheckbox label {
+    width: 100%;
+    margin-left: 10px;
+}
+
+.defaultAdressCheckbox input#terms {
+    width: 15px;
+    height: 15px;
+    position: relative;
 }

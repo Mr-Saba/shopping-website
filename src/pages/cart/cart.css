@@ -3,6 +3,7 @@
     grid-template-columns: 67% 30%;
     grid-column-gap: 3%;
     margin: 40px 30px 100px 30px;
+    align-items: flex-start;
 }
 
 .CartWishedDiv {
@@ -70,8 +71,9 @@
 .subtotalCheckout button.MuiButtonBase-root.MuiButton-root.MuiButton-contained {
     background: #ccdde7;
     color: #034488;
+    height: 50px;
 }
-.subtotalCheckout div {
+.subtotalCheckout .subtotalCheckoutHorisontal {
     display: flex;
     align-items: center;
     color: #ccdde7;
@@ -84,6 +86,37 @@
     background: #034488;
     padding: 25px;
     grid-row-gap: 30px;
-    height: 310px;
-    grid-template-rows: 30px 30px 60px 50px;
+    color: #ccdde7;
+    grid-template-rows: 30px 30px 60px auto auto;
+}
+.adressFormCheckout {
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 100px 100px 100px 20px 50px;
+    grid-row-gap: 20px;
+    color: #f1f1f1;
+}
+
+.adressFormCheckout .addressFormInputs input, .adressFormCheckout .addressFormInputs select {
+    padding: 0px 20px;
+    width: 100%;
+    margin-top: 10px;
+    height: 60%;
+}
+.adressFormCheckout .addressFormInputs .errorAdressFormInput {
+    font-size: 14px;
+    color: #f50057;
+    padding: 4px 5px;
+}
+.addressChooseCheckout h4{
+    margin-bottom: 20px;
+}
+p.noproductsIncart {
+    width: 100%;
+    background: #034488;
+    color: #ccdde7;
+    height: 50px;
+    display: flex;
+    padding-left: 20px;
+    align-items: center;
 }

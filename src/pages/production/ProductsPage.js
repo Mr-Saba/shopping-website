@@ -8,6 +8,7 @@ import { FilterByCategory, GetProducts, SortSelect, FilterByPrice, AddToWished }
 import ReactPaginate from "react-paginate"
 import { Link } from "react-router-dom"
 import FavoriteBorderOutlinedIcon from '@material-ui/icons/FavoriteBorderOutlined';
+import FavoriteIcon from '@material-ui/icons/Favorite';
 
 
 
@@ -27,7 +28,7 @@ function ProductsPage() {
 
     const pagesVisited = pageNumber * productsPerPage
 
-    const pageCount = Math.ceil(products.length / productsPerPage)
+    const pageCount = Math.ceil(products / productsPerPage)
 
     const changePage = ({ selected }) => {
         setPageNumber(selected)
@@ -42,6 +43,7 @@ function ProductsPage() {
     const dispatch = useDispatch()
 
     useEffect(() => {
+        dispatch(GetProducts())
     }, [])
 
 
@@ -161,19 +163,21 @@ function ProductsPage() {
                 </div>
                 <div className="productionGrid">
                     {/* or filtered products ?  */}
-                    {products.slice(pagesVisited, pagesVisited + productsPerPage).map(item => {
+                    {products && products.slice(pagesVisited, pagesVisited + productsPerPage).map(item => {
                         return (
-                            <Link to={`/production/single/${item.id}`}>
-                                <div className="singleProductionCard">
-                                    <img src={item.photo} />
+                            <div className="singleProductionCard">
+                                    <Link to={`/production/single/${item.id}`}>
+                                        <img src={item.photo} />
+                                    </Link>
                                     <button onClick={() => handleCLick(item.id)}><FavoriteBorderOutlinedIcon /></button>
-                                    <div className="descAndCateg">
-                                        <p>{t(item.title)}</p>
-                                        <p className="productCategoryCard">{t(item.category)}</p>
-                                    </div>
-                                    <p className="productCardPrice">{item.price}</p>
+                                    {/* საბა თუ დააჭირა უბრალოდ დაგულებას 
+                                    გამოჩნდეს ეს <FavoriteIcon style={{ color: "#f50057" }} /> <FavoriteBorderOutlinedIcon />-ის მაგივრად*/}
+                                        <div className="descAndCateg">
+                                            <p>{t(item.title)}</p>
+                                            <p className="productCategoryCard">{t(item.category)}</p>
+                                        </div>
+                                        <p className="productCardPrice">{item.price}</p>
                                 </div>
-                            </Link>
                         )
                     })
                     }
