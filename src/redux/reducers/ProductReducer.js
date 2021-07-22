@@ -126,20 +126,21 @@ const ProductReducer = (state = initialState, action) => {
                 cartData: new_items,
             }
         case ADD_TO_WISHED:
-            let wished = state.products.find(item => item.id === action.payload)
-            let existed_item1 = state.wishedData.find(item => action.payload === item.id)
-            console.log(existed_item1)
-            if (existed_item1 == undefined) {
-                return {
-                    ...state,
-                    wishedData: [...state.wishedData, wished]
-                }
-            }
-            else {
-                return {
-                    ...state
-                }
-            }
+            // let wished = state.products.find(item => item.id === action.payload)
+            // let existed_item1 = state.wishedData.find(item => action.payload === item.id)
+            // console.log(existed_item1)
+            // if (existed_item1 == undefined) {
+            //     return {
+            //         ...state,
+            //         wishedData: [...state.wishedData, wished]
+            //     }
+            // }
+            // else {
+            //     return {
+            //         ...state
+            //     }
+            console.log(state.wishedData)
+            // }
         case REMOVE_FROM_WISHED:
             let new_items1 = state.wishedData.filter(item => action.payload !== item.id)
             return {
