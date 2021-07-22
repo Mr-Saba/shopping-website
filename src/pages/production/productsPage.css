@@ -1,7 +1,7 @@
 .ProductsPage {
     display: flex;
     margin: 40px 30px 100px 30px;
-    min-height: 500px;
+    align-items: flex-start;
 }
 .ProductsPage .filter {
     width: 30%;
@@ -19,7 +19,6 @@
 .production {
     width: 100%;
     height: auto;
-    grid-template-rows: 40px 100%;
     display: grid;
 }
 .productTopPart {

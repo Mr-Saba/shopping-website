@@ -20,7 +20,7 @@ function Adresses(props) {
         address: yup.string()
             .required('You should enter an address*'),
         code: yup.string()
-            .matches(/^[0-9]{4}$/, 'a postal code must contain 4 digits*')
+            .matches(/^[0-9]{4}$/, 'A postal code must contain 4 digits*')
             .required('You should enter a postal code*'),
     })
 
@@ -69,10 +69,10 @@ function Adresses(props) {
                                 <p>{item.address}</p>
                                 <p>{item.code}</p>
                                 <DeleteForeverOutlinedIcon style={{ "cursor": "pointer" }} onClick={() => handleDelete(item.id)} />
-                                {item.default == true ? <p>This is your default address</p> : <>
+                                {item.default == true ? <p>This is your default address</p> : <div className="defaultAdressCheckbox">
                                     <input onChange={() => func(item.id)} type="checkbox" id="defmaker" />
                                     <label for="defmaker">Make this address default</label>
-                                </>}
+                                </div>}
                             </div>
                         )
                     }) : <p>You have not added addresses yet</p>
@@ -91,15 +91,17 @@ function Adresses(props) {
                 <div className="addressFormInputs" >
                     <p>{t('Address')}</p>
                     <input id="address" type="text" placeholder="Rustaveli ave. 132/a" {...register("address")} />
+                    {errors.address && <p className="errorAdressFormInput">{errors.address?.message}</p>}
                 </div>
-                {errors.address && <p>{errors.address?.message}</p>}
                 <div className="addressFormInputs">
                     <p>{t('Postal code')}</p>
                     <input id="code" type="text" placeholder="0001" {...register("code")} />
+                    {errors.code && <p className="errorAdressFormInput">{errors.code?.message}</p>}
                 </div>
-                {errors.code && <p>{errors.code?.message}</p>}
-                <label for="default">make this address default</label>
-                <input type="checkbox" id="default" />
+                <div className="addressFormInputsCheckbox">
+                    <label for="default">Make this address default</label>
+                    <input type="checkbox" id="default" />
+                </div>
                 <Button type="submit" variant="contained" >{t('Add address')}</Button>
             </form>
         </div>

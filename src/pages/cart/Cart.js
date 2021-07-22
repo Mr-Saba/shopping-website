@@ -71,7 +71,7 @@ function Cart() {
         address: yup.string()
             .required('You should enter an address*'),
         code: yup.string()
-            .matches(/^[0-9]{4}$/, 'a postal code must contain 4 digits*')
+            .matches(/^[0-9]{4}$/, 'A postal code must contain 4 digits*')
             .required('You should enter a postal code*'),
     })
 
@@ -107,7 +107,7 @@ function Cart() {
                                 <button onClick={() => handleCartedRemove(item.id)} className="clearButoonCart"><ClearIcon /></button>
                             </div>
                         )
-                    }) : <h2>your dont have any products in your cart</h2>}
+                    }) : <p className="noproductsIncart">You don't have any products in your cart</p>}
                 </div>
                 <div className="wished">
                     <p style={{ fontSize: "30px", color: "#034488" }}>{t('Wish List')}</p>
@@ -130,21 +130,21 @@ function Cart() {
                                 <button onClick={() => handleWishedRemove(item.id)} className="clearButoonCart"><ClearIcon /></button>
                             </div>
                         )
-                    }) : <h2>You dont have favorite products yet</h2>}
+                    }) : <p className="noproductsIncart">You don't have favorite products yet</p>}
                 </div>
             </div>
             <div className="subtotal">
                 <p style={{ fontSize: "30px", color: "#034488", marginBottom: "40px" }}>Subtotal</p>
                 <div className="subtotalCheckout">
-                    <div>
+                    <div className="subtotalCheckoutHorisontal">
                         <p>Items({cartData.length}):</p>
                         <p>{total()}₾</p>
                     </div>
-                    <div>
+                    <div className="subtotalCheckoutHorisontal">
                         <p>Delivery (2-4 working days):</p>
                         <p>5₾</p>
                     </div>
-                    <div>
+                    <div className="subtotalCheckoutHorisontal">
                         <p style={{ fontWeight: "bold", fontSize: "30px" }}>Total:</p>
                         <p style={{ fontWeight: "bold" }}>{total() + 5}₾</p>
                     </div>

@@ -132,7 +132,7 @@ function Header() {
                    <li>
                        <Link to="/cart">
                             <Badge 
-                            badgeContent={wishedData.length} 
+                            badgeContent={wishedData && wishedData.length} 
                             color='secondary'>
                                 <FavoriteBorderIcon/>
                             </Badge>
@@ -141,7 +141,7 @@ function Header() {
                    <li>
                         <IconButton component={Link} to='/cart' area-label='Show cart items' color='inherit'>
                             <Badge 
-                            badgeContent={cartData.length} 
+                            badgeContent={cartData && cartData.length} 
                             color='secondary'>
                                 <ShoppingCartOutlinedIcon/>
                             </Badge>
