@@ -59,7 +59,7 @@ function Cart() {
     const onSubmit = (data) => {
 
     }
-
+// დებილობა კომენტარი
     const schema = yup.object().shape({
         address: yup.string()
             .required('You should enter an address*'),
