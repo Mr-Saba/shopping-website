@@ -108,9 +108,7 @@
     color: #f50057;
     padding: 4px 5px;
 }
-.addressChooseCheckout h4{
-    margin-bottom: 20px;
-}
+
 p.noproductsIncart {
     width: 100%;
     background: #034488;
@@ -119,4 +117,13 @@ p.noproductsIncart {
     display: flex;
     padding-left: 20px;
     align-items: center;
+}
+
+.addressChooseCheckout {
+    display: grid;
+    row-gap: 20px;
+}
+.addressCheckoutGridCart {
+    display: grid;
+    row-gap: 20px;
 }

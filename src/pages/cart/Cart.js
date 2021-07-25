@@ -138,15 +138,15 @@ function Cart() {
                     </div>
                     <div className="addressChooseCheckout">
                     <h4>Choose Address</h4>
-                        <div className="subtotalCheckoutHorisontal">
+                        <div className="addressCheckoutGridCart">
                             {addresses.map(item => {
                                 return (
-                                    <>
+                                    <div className="subtotalCheckoutHorisontal">
                                         <label htmlFor={item.id}>{item.address}</label>
                                         {item.default == true ?
                                             <input defaultChecked type="radio" id={item.id} /> :
                                             <input type="radio" id={item.id} />}
-                                    </>
+                                    </div>
                                 )
                             })}
                         </div>
