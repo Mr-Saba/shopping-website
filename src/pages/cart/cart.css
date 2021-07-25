@@ -110,12 +110,12 @@
 }
 
 p.noproductsIncart {
-    width: 100%;
     background: #034488;
     color: #ccdde7;
     height: 50px;
     display: flex;
     padding-left: 20px;
+    margin-left: 20px;
     align-items: center;
 }
 
