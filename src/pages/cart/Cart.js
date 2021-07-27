@@ -13,20 +13,17 @@ import * as yup from "yup";
 
 function Cart() {
 
-    const hiddenStyle = {
-        visibility: "hidden"
-    }
+    const [deliveryPrice, setDeliveryPrice] = useState(5)
+
     const { t } = useTranslation()
 
     const { cartData, wishedData } = useSelector(state => state.CartReducer)
     const { addresses } = useSelector(state => state.AddressReducer)
 
-    const [fee, setFee] = useState("")
-
     const dispatch = useDispatch()
 
     useEffect(() => {
-        
+
     }, [])
 
     const handleCartedRemove = (id) => {
@@ -45,8 +42,8 @@ function Cart() {
     }
 
     const moveToCart = (id) => {
-        dispatch(RemoveFromWished(id))
         dispatch(AddToCart(id))
+        dispatch(RemoveFromWished(id))
     }
 
     const handleChange = (id, value) => {
@@ -79,10 +76,24 @@ function Cart() {
         resolver: yupResolver(schema)
     })
 
-    // const handleFunction = (id) => {
-    //     // setFee(addresses.find(item => id === item.id).cityFee)
-    //     console.log(id) 
-    // }
+    const func = () => {
+        document.getElementById("form").style.visibility = "visible"
+        for(let i=0; i <= addresses.length - 1; i++) {
+            document.getElementById(addresses[i].id).checked = false
+        }
+    }
+    const func1 = (id) => {
+        document.getElementById("form").style.visibility = "hidden"
+        document.getElementById("newone").checked = false
+        let addressesToRemove = addresses.filter(item => item.id !== id)
+        for(let i=0; i <= addressesToRemove.length - 1; i++) {
+            document.getElementById(addressesToRemove[i].id).checked = false
+        }
+        setDeliveryPrice(parseInt(addresses.find(item => item.id = id).cityFee))
+    }
+    const handlePrice = (val) => {
+        setDeliveryPrice(parseInt(val))    
+    }   
 
     return (
         <div className="shoppingCartPage">
@@ -130,7 +141,7 @@ function Cart() {
                                 <button onClick={() => handleWishedRemove(item.id)} className="clearButoonCart"><ClearIcon /></button>
                             </div>
                         )
-                    }) : <p className="noproductsIncart">You don't have favorite products yet</p>}
+                    }) : <p className="noproductsIncart">You don't have any products in your wish list</p>}
                 </div>
             </div>
             <div className="subtotal">
@@ -142,49 +153,54 @@ function Cart() {
                     </div>
                     <div className="subtotalCheckoutHorisontal">
                         <p>Delivery (2-4 working days):</p>
-                        <p>5₾</p>
+                        <p>{deliveryPrice}₾</p>
                     </div>
                     <div className="subtotalCheckoutHorisontal">
                         <p style={{ fontWeight: "bold", fontSize: "30px" }}>Total:</p>
-                        <p style={{ fontWeight: "bold" }}>{total() + 5}₾</p>
+                        <p style={{ fontWeight: "bold" }}>{total() + deliveryPrice}₾</p>
                     </div>
-                    <h2>Choose Address</h2>
-                    {addresses.map(item => {
-                        return (
-                            <>  
-                                <label htmlFor={item.id}>{item.address}{item.default == true ? <span style={{"marginLeft": "5px", "opacity": "0.7"}}>(default)</span> : ""}</label>                               
-                                {item.default == true ? 
-                                <input defaultChecked type="radio" id={item.id} /> :
-                                <input type="radio" id={item.id} /> }                                    
-                            </>
-                        )
-                    })}
-                    <label htmlFor="newone">Add to new address</label>
-                    {addresses.length == 0 ?
-                        <input defaultChecked type="radio" id="newone" /> :
-                        <input type="radio" id="newone" />}
-                        <form className={"adressForm"} onSubmit={handleSubmit(onSubmit)}>
-                            <div className="addressFormInputs">
-                                <p>{t('City')}</p>
-                                <select name="city" id="city">
-                                    <option value="Tbilisi">Tbilisi</option>
-                                    <option value="Kutaisi">Kutaisi</option>
-                                    <option value="Rustavi">Rustavi</option>
-                                    <option value="Chiatura">Chiatura</option>
-                                </select>
-                            </div>
-                            <div className="addressFormInputs" >
-                                <p>{t('Address')}</p>
-                                <input id="address" type="text" placeholder="Rustaveli ave. 132/a" {...register("address")} />
-                            </div>
-                            {errors.address && <p>{errors.address?.message}</p>}
-                            <div className="addressFormInputs">
-                                <p>{t('Postal code')}</p>
-                                <input id="code" type="text" placeholder="0001" {...register("code")} />
-                            </div>
-                            {errors.code && <p>{errors.code?.message}</p>}
-                            <Button type="submit" style={cartData.length == 0 ? { "opacity": "0.6", "cursor": " not-allowed" } : {}} variant="contained">Checkout</Button>
-                        </form>
+                    <div className="addressChooseCheckout">
+                    <h4>Choose Address</h4>
+                        <div className="subtotalCheckoutHorisontal">
+                            {addresses.map(item => {
+                                return (
+                                    <>
+                                        <label htmlFor={item.id} style={{"cursor": "pointer"}}>{item.address}{item.default ? <span style={{"opacity": "0.5", "marginLeft": "10px"}}>(default)</span> : ""}</label>
+                                            <input onClick={() => func1(item.id)} type="radio" id={item.id} style={{"cursor": "pointer"}}/>
+                                    </>
+                                )
+                            })}
+                        </div>
+                        <div className="subtotalCheckoutHorisontal">
+                            <label htmlFor="newone" style={{"cursor": "pointer"}}>Deliver to new address</label>
+                            {addresses.length == 0 ?
+                            <input defaultChecked type="radio" id="newone" style={{"cursor": "pointer"}}/> :
+                            <input onClick={() => func()} type="radio" id="newone" style={{"cursor": "pointer"}}/>}
+                        </div>
+                    </div>
+                    <form id="form" style={document.getElementById("newone")?.checked ? {"visibility": "visible"} : {"visibility": "hidden"}} className="adressFormCheckout" onSubmit={handleSubmit(onSubmit)}>
+                        <div className="addressFormInputs">
+                            <p>{t('City')}</p>
+                            <select onChange={(e) =>handlePrice(e.target.value)} name="city" id="city">
+                                <option defaultChecked value="5">Tbilisi (5₾)</option>
+                                <option value="8">Kutaisi (8₾)</option>
+                                <option value="7">Rustavi (7₾)</option>
+                                <option value="8">Chiatura (8₾)</option>
+                            </select>
+                        </div>
+                        <div className="addressFormInputs" >
+                            <p>{t('Address')}</p>
+                            <input id="address" type="text" placeholder="Rustaveli ave. 132/a" {...register("address")} />
+                            {errors.address && <p className="errorAdressFormInput">{errors.address?.message}</p>}
+                        </div>
+                        <div className="addressFormInputs">
+                            <p>{t('Postal code')}</p>
+                            <input id="code" type="text" placeholder="0001" {...register("code")} />
+                            {errors.code && <p className="errorAdressFormInput">{errors.code?.message}</p>}
+                        </div>
+                        <div></div>
+                        <Button type="submit" style={cartData.length == 0 ? { "opacity": "0.6", "cursor": " not-allowed", "width": "100%", "height": "50px" } : {}} variant="contained">Checkout</Button>
+                    </form>
                 </div>
             </div>
         </div>

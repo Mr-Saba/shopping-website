@@ -75,7 +75,15 @@ function Header() {
 
     const {t} = useTranslation()
 
-
+    const scrollToWished = () => {
+        for(let i=0; i <= cartData.length; i++){
+        console.log(i)
+        window.scrollTo({
+            top: 250 + i*150 ,
+            behavior: "smooth"
+          })
+        }
+    }
     
 
     useEffect(() => {
@@ -130,7 +138,7 @@ function Header() {
                 </ul>
                 <ul className="rightUl">
                    <li>
-                       <Link to="/cart">
+                       <Link onClick={() => scrollToWished()} to="/cart">
                             <Badge 
                             badgeContent={wishedData && wishedData.length} 
                             color='secondary'>

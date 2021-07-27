@@ -13,6 +13,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { AddToWished, GetProducts, NewArrivals } from '../../redux/actions'
 import { useTranslation } from 'react-i18next'
 import FavoriteBorderOutlinedIcon from '@material-ui/icons/FavoriteBorderOutlined';
+import FavoriteOutlinedIcon from '@material-ui/icons/FavoriteOutlined';
 import { firestore } from "../../firebase/Configuration"
 
 
@@ -25,12 +26,14 @@ export default function Main() {
     };
     const { t } = useTranslation()
     const { products } = useSelector(state => state.ProductReducer)
+    const { wishedData } = useSelector(state => state.CartReducer)
+
     const [state, setState] = useState([])
     const dispatch = useDispatch()
     const handleClick = (id) => {
         dispatch(AddToWished(id))
     }
-    
+
     return (
         <div className="main">
             <div className="sliderAndContent">
@@ -71,7 +74,27 @@ export default function Main() {
                     </Link>
                 </div>
                 <div className="productionGridMain">
-                    <Products />
+                    {products && products.slice(0, 6).map(item => {
+                        return (
+                            <div className="singleProductionCard">
+                                <Link to={`/production/single/${item.id}`}>
+                                    <img src={item.photo} />
+                                </Link>
+                                <button onClick={() => handleClick(item.id)}>
+                                    {
+                                    wishedData.find(x => x.id === item.id) ? 
+                                    <FavoriteOutlinedIcon style={{ "color": "#f50057" }} /> :
+                                    <FavoriteBorderOutlinedIcon /> 
+                                    }
+                                </button>
+                                <div className="descAndCateg">
+                                    <p>{t(item.title)}</p>
+                                    <p className="productCategoryCard">{t(item.category)}</p>
+                                </div>
+                                <p className="productCardPrice">{item.price}</p>
+                            </div>
+                        )
+                    })}
                 </div>
             </div>
             <div className="newArrivalsMainPage">
@@ -82,21 +105,27 @@ export default function Main() {
                     </Link>
                 </div>
                 <div className="productionGridMain">
-                { products && products.slice().sort((a, b) => b.fullDate.seconds - a.fullDate.seconds).slice(0,3).map(item => {
-                    return (
-                        <Link to={`/production/single/${item.id}`}>
+                    {products && products.slice().sort((a, b) => b.fullDate.seconds - a.fullDate.seconds).slice(0, 3).map(item => {
+                        return (
                             <div className="singleProductionCard">
-                                <img src={item.photo} />
-                                <button onClick={() => handleClick(item.id)}><FavoriteBorderOutlinedIcon/></button>
+                                <Link to={`/production/single/${item.id}`}>
+                                    <img src={item.photo} />
+                                </Link>
+                                <button onClick={() => handleClick(item.id)}>
+                                    {
+                                    wishedData.find(x => x.id === item.id) ? 
+                                    <FavoriteOutlinedIcon style={{ "color": "#f50057" }} /> :
+                                    <FavoriteBorderOutlinedIcon /> 
+                                    }
+                                </button>
                                 <div className="descAndCateg">
                                     <p>{t(item.title)}</p>
                                     <p className="productCategoryCard">{t(item.category)}</p>
                                 </div>
                                 <p className="productCardPrice">{item.price}</p>
                             </div>
-                        </Link>
-                )
-                })}
+                        )
+                    })}
                 </div>
             </div>
         </div>

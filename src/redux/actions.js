@@ -21,7 +21,9 @@ import {
     MOVE_TO_WISHED,
     ADD_ADDRESS,
     REMOVE_ADDRESS,
-    MAKE_ADDRESS_DEFAULT
+    MAKE_ADDRESS_DEFAULT,
+    CHOOSE_ADDRESS,
+    CHOOSE_NEW_ADDRESS
     } from "./constants"
 import { auth, firebase, firestore } from "../firebase/Configuration"
 import { bindActionCreators } from "redux"
@@ -146,10 +148,11 @@ const AddToWished = (id) => async (dispatch, getState) => {
         payload: {id, productslist} 
     })
 }
-const RemoveFromWished = (id) => async (dispatch) => {
+const RemoveFromWished = (id) => async (dispatch, getState) => {
+    const productslist = getState().ProductReducer.products;
     dispatch({
         type: REMOVE_FROM_WISHED,
-        payload: id
+        payload: {id, productslist} 
     })
 }
 const ChangeQuantity = (id, value) => async (dispatch, getState) => {
@@ -181,6 +184,18 @@ const MakeAddressDefault = (id) => async dispatch => {
         payload: id
     })
 }
+// const ChooseAddress = (id) => async dispatch => {
+//     dispatch({
+//         type: CHOOSE_ADDRESS,
+//         payload: id
+//     })
+// }
+// const ChooseNewAddress = (id) => async dispatch => {
+//     dispatch({
+//         type: CHOOSE_NEW_ADDRESS,
+//         payload: id
+//     })
+// }
 
 export { 
     SignUpWithEmailAndPassword, 
@@ -201,5 +216,7 @@ export {
     ChangeQuantity, 
     AddAddress,
     RemoveAddress,
-    MakeAddressDefault
+    MakeAddressDefault,
+    // ChooseAddress,
+    // ChooseNewAddress
 }

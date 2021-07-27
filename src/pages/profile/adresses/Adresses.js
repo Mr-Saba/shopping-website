@@ -46,6 +46,7 @@ function Adresses(props) {
                 address: document.getElementById("address").value,
                 code: document.getElementById("code").value,
                 default: document.getElementById("default").checked,
+                // checked: false
             }
             dispatch(AddAddress(cred))
         }
@@ -70,8 +71,8 @@ function Adresses(props) {
                                 <p>{item.code}</p>
                                 <DeleteForeverOutlinedIcon style={{ "cursor": "pointer" }} onClick={() => handleDelete(item.id)} />
                                 {item.default == true ? <p>This is your default address</p> : <div className="defaultAdressCheckbox">
-                                    <input onChange={() => func(item.id)} type="checkbox" id="defmaker" />
-                                    <label for="defmaker">Make this address default</label>
+                                    <input onChange={() => func(item.id)} type="checkbox" id={item.id} />
+                                    <label for={item.id}>Make this address default</label>
                                 </div>}
                             </div>
                         )

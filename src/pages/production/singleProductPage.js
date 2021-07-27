@@ -4,6 +4,7 @@ import './singleProductPage.css'
 import { useTranslation } from "react-i18next";
 import { Button } from '@material-ui/core';
 import FavoriteBorderOutlinedIcon from '@material-ui/icons/FavoriteBorderOutlined';
+import FavoriteOutlinedIcon from '@material-ui/icons/FavoriteOutlined';
 import { useSelector, useDispatch } from "react-redux"
 import { Dot, CarouselProvider, Slider, Slide, ButtonBack, ButtonNext, Image, ImageWithZoom } from 'pure-react-carousel';
 import 'pure-react-carousel/dist/react-carousel.es.css';
@@ -15,14 +16,12 @@ import { ControlsStrategy } from 'react-alice-carousel';
 function SingleProductPage() {
     const { t } = useTranslation()
 
-
-
-    const red = {
-        "color": "red"
+    const makeStyle = () => {
+        return {
+            "color": "#f50057"
+        } 
     }
-    const white = {
-        "color": "white"
-    }
+
 
     const params = useParams()
 
@@ -34,11 +33,11 @@ function SingleProductPage() {
 
     useEffect(() => {
         dispatch(GetProducts())
+        makeStyle()
         window.scrollTo({
             top: 0,
             behavior: "smooth"
         })
-
     }, [])
 
 
@@ -92,7 +91,13 @@ function SingleProductPage() {
                 <p>{t('Quantity')}</p>
                 <input type="number" min="1" step="number" max="5" placeholder="0" />
                 <div className="singlePageProdutsButtons">
-                    <Button onClick={() => handleWishClick(Product.id)} variant="contained"><FavoriteBorderOutlinedIcon /></Button>
+                    <Button onClick={() => handleWishClick(Product.id)} variant="contained">
+                        {
+                            wishedData.find(x => x.id === Product.id) ? 
+                            <FavoriteOutlinedIcon style={{ "color": "#f50057" }} /> :
+                            <FavoriteBorderOutlinedIcon /> 
+                        }
+                    </Button>
                     <Button onClick={() => handleCartClick(Product.id)} variant="contained">Add to cart</Button>
                 </div>
             </div>

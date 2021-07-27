@@ -8,7 +8,7 @@ import { FilterByCategory, GetProducts, SortSelect, FilterByPrice, AddToWished }
 import ReactPaginate from "react-paginate"
 import { Link } from "react-router-dom"
 import FavoriteBorderOutlinedIcon from '@material-ui/icons/FavoriteBorderOutlined';
-import FavoriteIcon from '@material-ui/icons/Favorite';
+import FavoriteOutlinedIcon from '@material-ui/icons/FavoriteOutlined';
 
 
 
@@ -21,6 +21,8 @@ function ProductsPage() {
     const [price2, setPrice2] = useState(null)
 
     const { products, filteredProducts } = useSelector(state => state.ProductReducer)
+    const { wishedData } = useSelector(state => state.CartReducer)
+
 
     const [pageNumber, setPageNumber] = useState(0)
 
@@ -90,7 +92,6 @@ function ProductsPage() {
     const handleCLick = (id) => {
         dispatch(AddToWished(id))
     }
-
 
 
     return (
@@ -169,7 +170,13 @@ function ProductsPage() {
                                     <Link to={`/production/single/${item.id}`}>
                                         <img src={item.photo} />
                                     </Link>
-                                    <button onClick={() => handleCLick(item.id)}><FavoriteBorderOutlinedIcon /></button>
+                                    <button onClick={() => handleCLick(item.id)}>
+                                    {
+                                    wishedData.find(x => x.id === item.id) ? 
+                                    <FavoriteOutlinedIcon style={{ "color": "#f50057" }} /> :
+                                    <FavoriteBorderOutlinedIcon /> 
+                                    }
+                                    </button>
                                     {/* საბა თუ დააჭირა უბრალოდ დაგულებას 
                                     გამოჩნდეს ეს <FavoriteIcon style={{ color: "#f50057" }} /> <FavoriteBorderOutlinedIcon />-ის მაგივრად*/}
                                         <div className="descAndCateg">

@@ -3,8 +3,7 @@ import {
     SEARCH_PRODUCTS,
     FILTER_BY_CATEGORY,
     SORT_SELECT,
-    FILTER_BY_PRICE,
-    
+    FILTER_BY_PRICE,    
     ADD_ADDRESS,
     REMOVE_ADDRESS
 } from "../constants"
@@ -15,7 +14,8 @@ const initialState = {
 }
 const ProductReducer = (state = initialState, action) => {
     switch (action.type) {
-        case GET_PRODUCTS: return {
+        case GET_PRODUCTS:         
+        return {
             ...state,
             products: action.payload
         }
