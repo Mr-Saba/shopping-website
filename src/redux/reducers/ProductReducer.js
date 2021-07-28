@@ -17,7 +17,7 @@ const ProductReducer = (state = initialState, action) => {
         case GET_PRODUCTS:         
         return {
             ...state,
-            products: action.payload
+            filteredProducts: action.payload
         }
         case SEARCH_PRODUCTS:
             const filteredData = state.products.filter(item => {
@@ -30,6 +30,7 @@ const ProductReducer = (state = initialState, action) => {
                 filteredProducts: [...filteredData]
             }
         case FILTER_BY_CATEGORY:
+            
             const filteredData1 = state.products.filter(item => {
                 if (item.category == action.payload) {
                     return item
@@ -42,7 +43,7 @@ const ProductReducer = (state = initialState, action) => {
         case SORT_SELECT:
             let sortedData
             if (action.payload == "az") {
-                sortedData = state.products.sort(function (a, b) {
+                sortedData = state.filteredProducts.sort(function (a, b) {
                     if (a.title.toLowerCase() < b.title.toLowerCase()) { return -1; }
                     if (a.title.toLowerCase() > b.title.toLowerCase()) { return 1; }
                     return 0;
@@ -53,7 +54,7 @@ const ProductReducer = (state = initialState, action) => {
                 }
             }
             if (action.payload == "za") {
-                sortedData = state.products.sort(function (a, b) {
+                sortedData = state.filteredProducts.sort(function (a, b) {
                     if (a.title.toLowerCase() < b.title.toLowerCase()) { return 1; }
                     if (a.title.toLowerCase() > b.title.toLowerCase()) { return -1; }
                     return 0;
@@ -64,7 +65,7 @@ const ProductReducer = (state = initialState, action) => {
                 }
             }
             if (action.payload == "lowHigh") {
-                sortedData = state.products.sort(function (a, b) {
+                sortedData = state.filteredProducts.sort(function (a, b) {
                     const intA = parseInt(a.price.slice(0, -1))
                     const intB = parseInt(b.price.slice(0, -1))
                     return intA - intB
@@ -75,7 +76,7 @@ const ProductReducer = (state = initialState, action) => {
                 }
             }
             if (action.payload == "highLow") {
-                sortedData = state.products.sort(function (a, b) {
+                sortedData = state.filteredProducts.sort(function (a, b) {
                     const intA = parseInt(a.price.slice(0, -1))
                     const intB = parseInt(b.price.slice(0, -1))
                     return intB - intA
@@ -86,8 +87,7 @@ const ProductReducer = (state = initialState, action) => {
                 }
             }
         case FILTER_BY_PRICE:
-            const filteredData3 = state.products.filter(item => {
-                console.log(action.payload)
+            const filteredData3 = state.filteredProducts.filter(item => {
                 let productPrice = parseInt(item.price.slice(0, -1))
                 if (productPrice >= action.payload.price1 && productPrice <= action.payload.price2) {
                     console.log(item)

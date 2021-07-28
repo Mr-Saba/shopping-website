@@ -113,12 +113,18 @@
     margin-bottom: 20px;
     color: #f1f1f1;
 }
+
 p.noproductsIncart {
-    width: 100%;
     background: #034488;
     color: #ccdde7;
     height: 50px;
     display: flex;
     padding-left: 20px;
+    margin-left: 20px;
     align-items: center;
+}
+
+.addressCheckoutGridCart {
+    display: grid;
+    row-gap: 20px;
 }

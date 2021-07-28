@@ -63,7 +63,7 @@ function Cart() {
     const onSubmit = (data) => {
 
     }
-
+    // დებილობა კომენტარი
     const schema = yup.object().shape({
         address: yup.string()
             .required('You should enter an address*'),
@@ -78,22 +78,21 @@ function Cart() {
 
     const func = () => {
         document.getElementById("form").style.visibility = "visible"
-        for(let i=0; i <= addresses.length - 1; i++) {
-            document.getElementById(addresses[i].id).checked = false
+        setDeliveryPrice(parseInt(document.getElementById("city").value))
+        let all = document.getElementsByName("address")
+        for (let i = 0; i <= all.length - 1; i++) {
+            all[i].checked = false
         }
     }
     const func1 = (id) => {
         document.getElementById("form").style.visibility = "hidden"
         document.getElementById("newone").checked = false
-        let addressesToRemove = addresses.filter(item => item.id !== id)
-        for(let i=0; i <= addressesToRemove.length - 1; i++) {
-            document.getElementById(addressesToRemove[i].id).checked = false
-        }
+        console.log(parseInt(addresses.find(item => item.id = id).cityFee))
         setDeliveryPrice(parseInt(addresses.find(item => item.id = id).cityFee))
     }
     const handlePrice = (val) => {
-        setDeliveryPrice(parseInt(val))    
-    }   
+        setDeliveryPrice(parseInt(val))
+    }
 
     return (
         <div className="shoppingCartPage">
@@ -160,48 +159,58 @@ function Cart() {
                         <p style={{ fontWeight: "bold" }}>{total() + deliveryPrice}₾</p>
                     </div>
                     <div className="addressChooseCheckout">
-                    <h4>Choose Address</h4>
-                        <div className="subtotalCheckoutHorisontal">
+                        <h4>Choose Address</h4>
+                        <div className="addressCheckoutGridCart">
                             {addresses.map(item => {
                                 return (
-                                    <>
-                                        <label htmlFor={item.id} style={{"cursor": "pointer"}}>{item.address}{item.default ? <span style={{"opacity": "0.5", "marginLeft": "10px"}}>(default)</span> : ""}</label>
-                                            <input onClick={() => func1(item.id)} type="radio" id={item.id} style={{"cursor": "pointer"}}/>
-                                    </>
+                                    <div className="subtotalCheckoutHorisontal">
+                                        {item.default == true ?
+                                            <>
+                                                <label htmlFor={item.id + "default"} style={{ "cursor": "pointer" }}>{item.address}<span style={{ "opacity": "0.5", "marginLeft": "10px" }}>(default)</span></label>
+                                                <input onClick={() => func1(item.id)} type="radio" defaultChecked id={item.id + "default"} name="address" style={{ "cursor": "pointer" }} />
+                                            </> :
+                                            <>
+                                                <label htmlFor={item.id} style={{ "cursor": "pointer" }}>{item.address}</label>
+                                                <input onClick={() => func1(item.id)} type="radio" id={item.id} name="address" style={{ "cursor": "pointer" }} />
+                                            </>
+                                        }
+                                    </div>
                                 )
                             })}
                         </div>
                         <div className="subtotalCheckoutHorisontal">
-                            <label htmlFor="newone" style={{"cursor": "pointer"}}>Deliver to new address</label>
+                            <label htmlFor="newone" style={{ "cursor": "pointer" }}>Deliver to new address</label>
                             {addresses.length == 0 ?
-                            <input defaultChecked type="radio" id="newone" style={{"cursor": "pointer"}}/> :
-                            <input onClick={() => func()} type="radio" id="newone" style={{"cursor": "pointer"}}/>}
+                                <input onClick={() => func()} defaultChecked type="radio" id="newone" style={{ "cursor": "pointer" }} /> :
+                                <input onClick={() => func()} type="radio" id="newone" style={{ "cursor": "pointer" }} />}
                         </div>
                     </div>
-                    <form id="form" style={document.getElementById("newone")?.checked ? {"visibility": "visible"} : {"visibility": "hidden"}} className="adressFormCheckout" onSubmit={handleSubmit(onSubmit)}>
-                        <div className="addressFormInputs">
-                            <p>{t('City')}</p>
-                            <select onChange={(e) =>handlePrice(e.target.value)} name="city" id="city">
-                                <option defaultChecked value="5">Tbilisi (5₾)</option>
-                                <option value="8">Kutaisi (8₾)</option>
-                                <option value="7">Rustavi (7₾)</option>
-                                <option value="8">Chiatura (8₾)</option>
-                            </select>
+                    <form className="adressFormCheckout" onSubmit={handleSubmit(onSubmit)}>
+                        <div id="form" style={addresses.length == 0 ? { "visibility": "visible" } : { "visibility": "hidden" }}>
+                            <div className="addressFormInputs">
+                                <p>{t('City')}</p>
+                                <select onChange={(e) => handlePrice(e.target.value)} name="city" id="city">
+                                    <option defaultChecked value="5">Tbilisi (5₾)</option>
+                                    <option value="8">Kutaisi (8₾)</option>
+                                    <option value="7">Rustavi (7₾)</option>
+                                    <option value="8">Chiatura (8₾)</option>
+                                </select>
+                            </div>
+                            <div className="addressFormInputs" >
+                                <p>{t('Address')}</p>
+                                <input id="address" type="text" placeholder="Rustaveli ave. 132/a" {...register("address")} />
+                                {errors.address && <p className="errorAdressFormInput">{errors.address?.message}</p>}
+                            </div>
+                            <div className="addressFormInputs">
+                                <p>{t('Postal code')}</p>
+                                <input id="code" type="text" placeholder="0001" {...register("code")} />
+                                {errors.code && <p className="errorAdressFormInput">{errors.code?.message}</p>}
+                            </div>
                         </div>
-                        <div className="addressFormInputs" >
-                            <p>{t('Address')}</p>
-                            <input id="address" type="text" placeholder="Rustaveli ave. 132/a" {...register("address")} />
-                            {errors.address && <p className="errorAdressFormInput">{errors.address?.message}</p>}
-                        </div>
-                        <div className="addressFormInputs">
-                            <p>{t('Postal code')}</p>
-                            <input id="code" type="text" placeholder="0001" {...register("code")} />
-                            {errors.code && <p className="errorAdressFormInput">{errors.code?.message}</p>}
-                        </div>
-                        <div></div>
                         <Button type="submit" style={cartData.length == 0 ? { "opacity": "0.6", "cursor": " not-allowed", "width": "100%", "height": "50px" } : {}} variant="contained">Checkout</Button>
                     </form>
-                </div>
+                    {/* <Button style={cartData.length == 0 ? { "opacity": "0.6", "cursor": " not-allowed", "width": "100%", "height": "50px" } : {}} variant="contained">Checkout</Button> */}
+                    </div>
             </div>
         </div>
     )

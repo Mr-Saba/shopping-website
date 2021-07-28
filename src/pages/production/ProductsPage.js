@@ -53,6 +53,7 @@ function ProductsPage() {
     const handleChange = (val, check) => {
         setChecked(check)
         setValue(val)
+        console.log(value)
     }
     const handlePrice1Change = (val) => {
         setPrice1(val)
@@ -62,9 +63,17 @@ function ProductsPage() {
     }
 
     const CategoryFilter = () => {
-        if (checked == true) {
+        if (checked == true && price1 == null && price2 == null ) {
             dispatch(FilterByCategory(value))
-        } else if (price1 !== null && price2 !== null) {
+            console.log("here1")
+        } else if (price1 !== null && price2 !== null && checked !== true) {
+            dispatch(FilterByPrice(price1, price2))
+            setPrice1(null)
+            setPrice2(null)
+        }
+        else if (price1 !== null && price2 !== null && checked == true) {
+            console.log("here")
+            dispatch(FilterByCategory(value))
             dispatch(FilterByPrice(price1, price2))
         }
         else {
@@ -164,7 +173,7 @@ function ProductsPage() {
                 </div>
                 <div className="productionGrid">
                     {/* or filtered products ?  */}
-                    {products && products.slice(pagesVisited, pagesVisited + productsPerPage).map(item => {
+                    {filteredProducts && filteredProducts.slice(pagesVisited, pagesVisited + productsPerPage).map(item => {
                         return (
                             <div className="singleProductionCard">
                                     <Link to={`/production/single/${item.id}`}>
@@ -177,8 +186,6 @@ function ProductsPage() {
                                     <FavoriteBorderOutlinedIcon /> 
                                     }
                                     </button>
-                                    {/* საბა თუ დააჭირა უბრალოდ დაგულებას 
-                                    გამოჩნდეს ეს <FavoriteIcon style={{ color: "#f50057" }} /> <FavoriteBorderOutlinedIcon />-ის მაგივრად*/}
                                         <div className="descAndCateg">
                                             <p>{t(item.title)}</p>
                                             <p className="productCategoryCard">{t(item.category)}</p>
@@ -189,6 +196,8 @@ function ProductsPage() {
                     })
                     }
                 </div>
+                <br/>
+                <br/>
                     <ReactPaginate
                         previousLabel={"Previous"}
                         nextLabel={"Next"}
