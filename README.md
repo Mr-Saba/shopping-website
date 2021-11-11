@@ -1,3 +1,6 @@
+### საიტი ლინკი :
+* https://relaxed-mirzakhani-12f178.netlify.app/  
+
 ## საიტი შედგება გვერდებისგან :
 * მთავარი/Home გვერდი
 * პროდუქტები/Products გვერდი
