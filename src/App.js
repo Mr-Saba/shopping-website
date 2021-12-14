@@ -15,6 +15,7 @@ import Payments from './pages/profile/payments/Payments.js'
 import Adresses from './pages/profile/adresses/Adresses.js'
 import Profile from './pages/profile/Profile'
 import AboutUs from './pages/aboutUs/AboutUs'
+import Checkout from './pages/checkout/Checkout'
 import Terms from './pages/terms/Terms'
 import NoMatch from './pages/noMatch/noMatch.js'
 import ProductsPage from './pages/production/ProductsPage'
@@ -52,6 +53,7 @@ function App() {
           <Route path="/" exact component={Main}></Route>
           <Route path="/cart" component={Cart} exact></Route>
           <Route path="/production" component={ProductsPage} exact></Route>
+          <ProtectedRoute path="/checkout" component={Checkout} exact></ProtectedRoute>
           <Route path="/production/single/:id"  component={SingleProductPage} exact/>
           <Route path="*" component={NoMatch}></Route>
         </Switch>

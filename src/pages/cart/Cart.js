@@ -5,15 +5,31 @@ import { useTranslation } from "react-i18next";
 import Photo from '../../photos/1.jpg'
 import ClearIcon from '@material-ui/icons/Clear';
 import { Button } from '@material-ui/core'
+import { makeStyles } from '@material-ui/core';
 import Products from '../production/Products';
-import { AddToCart, AddToWished, RemoveFromCart, RemoveFromWished, ChangeQuantity } from "../../redux/actions"
+import { AddToCart, AddToWished, RemoveFromCart, RemoveFromWished, ChangeQuantity, GoToCheckout } from "../../redux/actions"
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
+import { v4 as uuidv4 } from 'uuid';
+import {useHistory} from 'react-router'
+import { firestore } from '../../firebase/Configuration';
 
 function Cart() {
 
+    const history = useHistory()
+
     const [deliveryPrice, setDeliveryPrice] = useState(5)
+    const [shown, SetShown] = useState(false) 
+
+    const [quantity, setQuantity] = useState(1)
+
+    const useStyles = makeStyles({
+        fullWidth: {
+          width: '100%'
+        },
+      });
+    const classes = useStyles();
 
     const { t } = useTranslation()
 
@@ -23,7 +39,12 @@ function Cart() {
     const dispatch = useDispatch()
 
     useEffect(() => {
-
+        if(document.getElementById('newone').checked) {
+            document.getElementById('lastButt').style.visibility = 'hidden'
+            SetShown(true)
+        } else {
+            document.getElementById('lastButt').style.visibility = 'visible'
+        }
     }, [])
 
     const handleCartedRemove = (id) => {
@@ -38,16 +59,17 @@ function Cart() {
 
     const moveToWished = (id) => {
         dispatch(RemoveFromCart(id))
-        dispatch(AddToWished(id))
+        dispatch(AddToWished(id, quantity))
     }
 
     const moveToCart = (id) => {
-        dispatch(AddToCart(id))
         dispatch(RemoveFromWished(id))
+        dispatch(AddToCart(id, quantity))
     }
 
     const handleChange = (id, value) => {
         dispatch(ChangeQuantity(id, value))
+        setQuantity(value)
         cartData.find(item => id === item.id).quantity = value
     }
 
@@ -60,10 +82,26 @@ function Cart() {
         return sum
     }
 
-    const onSubmit = (data) => {
-
+    const { user } = useSelector(state => state.UserReducer)
+   
+    const onSubmit = async (data) => {
+        if(!user) history.push('/log-in')
+        else {
+        const info = {
+            name: user.name,
+            surname:  user.surname,
+            email: user?.email,
+            city: document.getElementById("city").value.substring(1),
+            address: document.getElementById("address").value,
+            postal_code: document.getElementById("code").value,
+            fullFee: total() + deliveryPrice,
+            phone: user.number
+        }
+        dispatch(GoToCheckout(info))
+        if(data) history.push("/checkout")
     }
-    // დებილობა კომენტარი
+    }
+    
     const schema = yup.object().shape({
         address: yup.string()
             .required('You should enter an address*'),
@@ -76,31 +114,45 @@ function Cart() {
         resolver: yupResolver(schema)
     })
 
-    const func = () => {
-        document.getElementById("form").style.visibility = "visible"
-        setDeliveryPrice(parseInt(document.getElementById("city").value))
+    const func = (e) => {
+        if(e.target.checked === true) {
+            SetShown(true)
+        }
         let all = document.getElementsByName("address")
         for (let i = 0; i <= all.length - 1; i++) {
             all[i].checked = false
         }
+        document.getElementById("lastButt").style.display = 'none';
     }
     const func1 = (id) => {
-        document.getElementById("form").style.visibility = "hidden"
+        SetShown(false)
+
+        document.getElementById("lastButt").style.display = "inherit"
+        document.getElementById("lastButt").style.visibility = "visible"
+
         document.getElementById("newone").checked = false
-        console.log(parseInt(addresses.find(item => item.id = id).cityFee))
-        setDeliveryPrice(parseInt(addresses.find(item => item.id = id).cityFee))
     }
     const handlePrice = (val) => {
         setDeliveryPrice(parseInt(val))
+    }
+
+    const findTrueInAddresses = () => {
+        for(let i = 0; i<addresses.length; i++) {
+            if(addresses[i].default === false) {
+                continue;
+            }
+            return addresses[i].default
+        }
     }
 
     return (
         <div className="shoppingCartPage">
             <div className="CartWishedDiv">
                 <div className="cart">
-                    <p style={{ fontSize: "30px", color: "#034488" }}>{t('Cart')}</p>
+                    <p style={{ marginLeft: "15px", fontSize: "30px", color: "#034488" }}>{t('Cart')}</p>
                     {cartData.length !== 0 ? cartData.map(item => {
                         return (
+
                             <div className="singleCartProduct">
                                 <img src={item.photo} alt="" />
                                 <div className="singleCartProductTitlePrice">
@@ -120,7 +172,7 @@ function Cart() {
                     }) : <p className="noproductsIncart">You don't have any products in your cart</p>}
                 </div>
                 <div className="wished">
-                    <p style={{ fontSize: "30px", color: "#034488" }}>{t('Wish List')}</p>
+                    <p style={{marginLeft: "15px", fontSize: "30px", color: "#034488" }}>{t('Wish List')}</p>
                     {wishedData.length !== 0 ? wishedData.map(item => {
                         return (
                             <div className="singleCartProduct">
@@ -145,7 +197,7 @@ function Cart() {
             </div>
             <div className="subtotal">
                 <p style={{ fontSize: "30px", color: "#034488", marginBottom: "40px" }}>Subtotal</p>
-                <div className="subtotalCheckout">
+                <div className='subtotalCheckout'>
                     <div className="subtotalCheckoutHorisontal">
                         <p>Items({cartData.length}):</p>
                         <p>{total()}₾</p>
@@ -164,7 +216,7 @@ function Cart() {
                             {addresses.map(item => {
                                 return (
                                     <div className="subtotalCheckoutHorisontal">
-                                        {item.default == true ?
+                                        {item.default === true ?
                                             <>
                                                 <label htmlFor={item.id + "default"} style={{ "cursor": "pointer" }}>{item.address}<span style={{ "opacity": "0.5", "marginLeft": "10px" }}>(default)</span></label>
                                                 <input onClick={() => func1(item.id)} type="radio" defaultChecked id={item.id + "default"} name="address" style={{ "cursor": "pointer" }} />
@@ -178,39 +230,42 @@ function Cart() {
                                 )
                             })}
                         </div>
-                        <div className="subtotalCheckoutHorisontal">
-                            <label htmlFor="newone" style={{ "cursor": "pointer" }}>Deliver to new address</label>
-                            {addresses.length == 0 ?
-                                <input onClick={() => func()} defaultChecked type="radio" id="newone" style={{ "cursor": "pointer" }} /> :
-                                <input onClick={() => func()} type="radio" id="newone" style={{ "cursor": "pointer" }} />}
+                        <div style={{ "marginTop": "19px"}} className="subtotalCheckoutHorisontal">
+                            <label htmlFor="newone" style={{ "cursor": "pointer"}}>Deliver to new address</label>
+                            {findTrueInAddresses() ?
+                                <input onClick={(e) => func(e)} type="radio" id="newone" style={{ "cursor": "pointer" }} /> :
+                                <input onClick={(e) => func(e)} defaultChecked type="radio" id="newone" style={{ "cursor": "pointer" }} /> }
                         </div>
                     </div>
                     <form className="adressFormCheckout" onSubmit={handleSubmit(onSubmit)}>
-                        <div id="form" style={addresses.length == 0 ? { "visibility": "visible" } : { "visibility": "hidden" }}>
+                    {shown && shown === true ?
+                        <div id="form">
                             <div className="addressFormInputs">
                                 <p>{t('City')}</p>
-                                <select onChange={(e) => handlePrice(e.target.value)} name="city" id="city">
-                                    <option defaultChecked value="5">Tbilisi (5₾)</option>
-                                    <option value="8">Kutaisi (8₾)</option>
-                                    <option value="7">Rustavi (7₾)</option>
-                                    <option value="8">Chiatura (8₾)</option>
+                                <select className="inp" onChange={(e) => handlePrice(e.target.value)} name="city" id="city">
+                                    <option defaultChecked value="5Tbilisi">Tbilisi (5₾)</option>
+                                    <option value="8Kutaisi">Kutaisi (8₾)</option>
+                                    <option value="7Rustavi">Rustavi (7₾)</option>
+                                    <option value="8Chiatura">Chiatura (8₾)</option>
                                 </select>
                             </div>
                             <div className="addressFormInputs" >
                                 <p>{t('Address')}</p>
-                                <input id="address" type="text" placeholder="Rustaveli ave. 132/a" {...register("address")} />
+                                <input  className="inp" id="address" type="text" placeholder="Rustaveli ave. 132/a" {...register("address")} />
                                 {errors.address && <p className="errorAdressFormInput">{errors.address?.message}</p>}
                             </div>
                             <div className="addressFormInputs">
                                 <p>{t('Postal code')}</p>
-                                <input id="code" type="text" placeholder="0001" {...register("code")} />
+                                <input  className="inp" id="code" type="text" placeholder="0001" {...register("code")} />
                                 {errors.code && <p className="errorAdressFormInput">{errors.code?.message}</p>}
                             </div>
+                            <Button className={classes.fullWidth} id="butt1" type="submit" style={cartData.length == 0 ? { "opacity": "0.6", "cursor": " not-allowed", "width": "100%", "height": "50px" } : {}} variant="contained">Checkout</Button>
                         </div>
-                        <Button type="submit" style={cartData.length == 0 ? { "opacity": "0.6", "cursor": " not-allowed", "width": "100%", "height": "50px" } : {}} variant="contained">Checkout</Button>
+                        : '' }
+                        {/* amis onklikis onsuccessze moxdes addorder */}
                     </form>
-                    {/* <Button style={cartData.length == 0 ? { "opacity": "0.6", "cursor": " not-allowed", "width": "100%", "height": "50px" } : {}} variant="contained">Checkout</Button> */}
-                    </div>
+                    <Button id="lastButt" style={cartData.length === 0 ? { "opacity": "0.6", "cursor": " not-allowed", "width": "100%", "height": "50px" } : {}} variant="contained">Checkout</Button>
+                </div>
             </div>
         </div>
     )

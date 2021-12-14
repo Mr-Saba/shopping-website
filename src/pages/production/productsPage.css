@@ -1,3 +1,6 @@
+.cursor {
+    cursor: pointer;
+}
 .ProductsPage {
     display: flex;
     margin: 40px 30px 100px 30px;
@@ -38,29 +41,34 @@
     grid-gap: 10px;
 }
 
-.categoriesFilterProductsPage .CategoriesFilter .option , .productTypeFilter .option {
-    margin-left: 10px;
+.categoriesFilterProductsPage .ColorsFilter .option , .productTypeFilter .option {
     display: flex;
     width: 100%;
     align-items: center;
     justify-content: inherit;
+    /* cursor: pointer; */
 }
 
 .categoriesFilterProductsPage .productTypeFilter .option input[type="checkbox"] {
-    width: 20px;
+    width: 17px;
     border: unset;
     margin-right: 10px;
-    height: 20px;
+    height: 17px;
     background-color: blue;
+    margin-left: 10px;
+    /* cursor: pointer; */
+
 }
-.categoriesFilterProductsPage .CategoriesFilter .option input[type="checkbox"] {
-    width: 20px;
+.categoriesFilterProductsPage .ColorsFilter .option input[type="checkbox"] {
+    width: 17px;
     border: unset;
     margin-right: 10px;
-    height: 20px;
+    height: 17px;
     background-color: blue;
+    margin-left: 10px;
+
 }
-.CategoriesFilter {
+.ColorsFilter {
     display: grid;
     height: 100%;
     grid-gap: 10px;
@@ -72,10 +80,9 @@
 }
 .categoriesFilterProductsPage .price .priceOption {
     display: flex;
-    margin-left: 10px;
     justify-content: space-between;
     align-items: center;
-    width: 85%;
+    width: 75%;
 }
 .categoriesFilterProductsPage .price .priceOption input[type="number"] {
     width: 45%;
@@ -141,3 +148,23 @@
     background-color: #ccdde7;
     color: grey;
   }
+  .colorContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+}
+.color {
+    margin-left: 10px;
+    width: 22px;
+    height: 22px;
+    border: 1px solid black;
+    border-radius: 3px;
+    cursor: pointer;
+}
+.color:hover {
+    opacity: 0.5;
+}
+.color:focus {
+    outline: none;
+    /* box-shadow: 0 0 0 3px rgb(66 153 225 / 50%); */
+}

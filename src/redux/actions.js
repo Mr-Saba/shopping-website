@@ -23,7 +23,14 @@ import {
     REMOVE_ADDRESS,
     MAKE_ADDRESS_DEFAULT,
     CHOOSE_ADDRESS,
-    CHOOSE_NEW_ADDRESS
+    CHOOSE_NEW_ADDRESS,
+    ADD_ORDER,
+    SET_PRICE,
+    COLOR_FILTER,
+    ADD_CARD,
+    REMOVE_CARD,
+    MAKE_CARD_DEFAULT,
+    GO_TO_CHECKOUT
     } from "./constants"
 import { auth, firebase, firestore } from "../firebase/Configuration"
 import { bindActionCreators } from "redux"
@@ -111,9 +118,14 @@ const SearchProducts = (keyword) => async dispatch => {
     })
 }
 const FilterByCategory = (value) => async dispatch => {
+    const data = await firestore.collection("products").get();
+    const products = data.docs.map(doc => ({
+        ...doc.data(),
+        id: doc.id
+    }))
     dispatch({
         type: FILTER_BY_CATEGORY,
-        payload: value
+        payload: {value, products}
     })
 }
 const SortSelect = (value) => async dispatch => {
@@ -128,11 +140,11 @@ const FilterByPrice = (price1, price2) => async dispatch => {
         payload: {price1, price2}
     })
 }
-const AddToCart = (id) => async (dispatch, getState) => {
+const AddToCart = (id, quantity) => async (dispatch, getState) => {
         const productslist = getState().ProductReducer.products;
         dispatch({ 
             type: ADD_TO_CART, 
-            payload: {id, productslist} 
+            payload: {id, productslist, quantity} 
         })
 }
 const RemoveFromCart = (id) => async dispatch => {
@@ -141,11 +153,11 @@ const RemoveFromCart = (id) => async dispatch => {
         payload: id
     })
 }
-const AddToWished = (id) => async (dispatch, getState) => {
+const AddToWished = (id, quantity) => async (dispatch, getState) => {
     const productslist = getState().ProductReducer.products;
     dispatch({
         type: ADD_TO_WISHED,
-        payload: {id, productslist} 
+        payload: {id, productslist, quantity} 
     })
 }
 const RemoveFromWished = (id) => async (dispatch, getState) => {
@@ -184,6 +196,24 @@ const MakeAddressDefault = (id) => async dispatch => {
         payload: id
     })
 }
+const AddCard = (cred) => async dispatch => {
+    dispatch({
+        type: ADD_CARD,
+        payload: cred
+    })
+}
+const RemoveCard = (id) => async dispatch => {
+    dispatch({
+        type: REMOVE_CARD,
+        payload: id
+    })
+}
+const MakeCardDefault = (id) => async dispatch => {
+    dispatch({
+        type: MAKE_CARD_DEFAULT,
+        payload: id
+    })
+}
 // const ChooseAddress = (id) => async dispatch => {
 //     dispatch({
 //         type: CHOOSE_ADDRESS,
@@ -196,7 +226,31 @@ const MakeAddressDefault = (id) => async dispatch => {
 //         payload: id
 //     })
 // }
+const GoToCheckout = (info) => async dispatch => {
+    dispatch({
+        type: GO_TO_CHECKOUT,
+        payload: info
+    })
+}
 
+const AddOrder = (data) => async dispatch => {
+    dispatch({
+        type: ADD_ORDER,
+        payload: data
+    })
+}
+const SetPrice = (id) => async dispatch => {
+    dispatch({
+        type: SET_PRICE,
+        payload: id
+    })
+}
+const ColorFilter = (data) => async dispatch => {
+    dispatch({
+        type: COLOR_FILTER,
+        payload: data
+    })
+}
 export { 
     SignUpWithEmailAndPassword, 
     SignOut, 
@@ -218,5 +272,12 @@ export {
     RemoveAddress,
     MakeAddressDefault,
     // ChooseAddress,
-    // ChooseNewAddress
+    // ChooseNewAddress,
+    AddOrder,
+    SetPrice,
+    ColorFilter,
+    AddCard,
+    RemoveCard,
+    MakeCardDefault,
+    GoToCheckout
 }

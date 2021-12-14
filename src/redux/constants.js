@@ -17,8 +17,15 @@ export const CHANGE_QUANTITY = "CHANGE_QUANTITY"
 export const ADD_ADDRESS = "ADD_ADDRESS"
 export const REMOVE_ADDRESS = "REMOVE_ADDRESS"
 export const MAKE_ADDRESS_DEFAULT = "MAKE_ADDRESS_DEFAULT"
-// export const CHOOSE_NEW_ADDRESS = "CHOOSE_NEW_ADDRESS"
-// export const CHOOSE_ADDRESS = "CHOOSE_ADDRESS"
+export const ADD_ORDER = "ADD_ORDER"
+export const SET_PRICE = "SET_PRICE"
+export const COLOR_FILTER = "COLOR_FILTER"
+export const ADD_CARD = "ADD_CART"
+export const MAKE_CARD_DEFAULT = "MAKE_CARD_DEFAULT"
+export const REMOVE_CARD = "REMOVE_CARD"
+export const GO_TO_CHECKOUT = "GO_TO_CHECKOUT"
+
+
 
 
 

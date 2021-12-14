@@ -5,11 +5,21 @@
     grid-column-gap: 40px;
 }
 .productDescSinglePage {
-    display: grid;
-    width: 80%;
-    grid-row-gap: 20px;
-    padding: 60px 0 60px 60px;
-    grid-template-rows: 50px 20px 40px 20px 50px auto;
+}
+.titlee {
+    color: rgb(51, 51, 51);
+    font-weight: 700;
+    font-size: 40px; 
+}
+.pricee {
+    color: rgb(51, 51, 51);
+    font-weight: 700;
+    font-size: 30px;
+    margin-bottom: 20px;
+}
+.singlePageProdutsButtons {
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 .singlePageProdutsButtons .MuiButton-contained:hover {
     box-shadow: 0px 2px 4px -1px rgb(0 0 0 / 20%), 0px 4px 5px 0px rgb(0 0 0 / 14%), 0px 1px 10px 0px rgb(0 0 0 / 12%);
@@ -20,21 +30,15 @@
     background: #034488;
     color: #f1f1f1;
     height: 50px;
-    margin-left: 22px;
+}
+.singlePageProdutsButtons button.MuiButtonBase-root.MuiButton-root.MuiButton-contained:nth-child(2) {
+    margin-left: 20px;
+    margin-right: 20px;
 }
 .singleProductSlider img{
     width: 100%;
 }
-.productDescSinglePage .price {
-    display: flex;
-    justify-content: flex-end;
-    font-size: 25px;
-}
-.singlePageProdutsButtons {
-    align-self: self-end;
-    display: flex;
-    justify-content: flex-end;
-}
+
 .productDescSinglePage input[type="number"] {
     width: 25%;
     height: 50px;
@@ -83,3 +87,4 @@
 .carousel__dot--selected img {
     opacity: 1;
 }
+

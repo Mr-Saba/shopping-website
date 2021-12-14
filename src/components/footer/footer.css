@@ -21,6 +21,7 @@ footer {
     background: #dbe6eb;
     border-bottom: 2px solid #034488;
     height: auto;
+    min-width: 850px;
 }
 nav.footerNav {
     display: grid;
@@ -77,4 +78,26 @@ ul.profileUl a.MuiButtonBase-root.MuiButton-root.MuiButton-contained {
     border: none;
     font-size: 16px;
     cursor: pointer;
+}
+
+@media screen and (max-width: 500px) {
+    .footer {
+        width: 100%;
+        display: flex;
+    }
+    .logoUl {
+        font-size: 25px;
+    }
+    .centerUl {
+        font-size: 17px;
+        display: flex;
+        width: 250px;
+        justify-content: space-between;
+    }
+    .rightUl {
+        font-size: 20px;
+        width: 100px;
+        display: flex;
+        justify-content: space-between;
+    }
 }

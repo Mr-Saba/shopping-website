@@ -9,6 +9,7 @@
     border-bottom: 2px solid #034488;
     align-items: center;
     justify-content: center;
+    min-width: 850px;
 }
 .logoUl {
     grid-template-columns: 100%;
@@ -84,4 +85,26 @@ ul.rightUl button {
     width: 100%;
     border: none;
     color: #034488;
+}
+@media screen and (max-width: 500px) {
+    .header {
+        width: 100%;
+        display: flex;
+
+    }
+    .logoUl {
+        font-size: 25px;
+    }
+    .centerUl {
+        font-size: 17px;
+        display: flex;
+        width: 250px;
+        justify-content: space-between;
+    }
+    .rightUl {
+        font-size: 20px;
+        width: 100px;
+        display: flex;
+        justify-content: space-between;
+    }
 }

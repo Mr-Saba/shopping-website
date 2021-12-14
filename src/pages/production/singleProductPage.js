@@ -12,8 +12,14 @@ import ArrowBackIosOutlinedIcon from '@material-ui/icons/ArrowBackIosOutlined';
 import ArrowForwardIosOutlinedIcon from '@material-ui/icons/ArrowForwardIosOutlined';
 import { AddToCart, AddToWished, GetProducts } from '../../redux/actions';
 import { ControlsStrategy } from 'react-alice-carousel';
+import {
+    FacebookShareButton
+  } from "react-share";
 
 function SingleProductPage() {
+
+    const [quantity, setQuantity] = useState(1)
+
     const { t } = useTranslation()
 
     const makeStyle = () => {
@@ -40,12 +46,15 @@ function SingleProductPage() {
         })
     }, [])
 
+    const handleChange = (val) => {
+        setQuantity(val)
+    }
 
     const handleCartClick = (id) => {
-        dispatch(AddToCart(id))
+        dispatch(AddToCart(id, quantity))
     }
     const handleWishClick = (id) => {
-        dispatch(AddToWished(id))
+        dispatch(AddToWished(id, quantity))
     }
     return (
     <div className="singleProductPage">
@@ -68,9 +77,9 @@ function SingleProductPage() {
                         <ButtonBack className="buttonBack"><ArrowBackIosOutlinedIcon /> </ButtonBack>
                         <ButtonNext className="buttonNext"><ArrowForwardIosOutlinedIcon /></ButtonNext>
                     </div>
-                    <div onClick={console.log("hello")} style={{ "display": "flex", "height": "140px" }}>
+                    <div style={{ "display": "flex", "height": "140px", width: "500px" }}>
                         <Dot slide={0}>
-                            <img style={{ "object-fit": "cover", "height": "100%" }} src={`../../${Product.photo}`} />
+                            <img style={{"object-fit": "cover", "height": "100%" }} src={`../../${Product.photo}`} />
                         </Dot>
                         <Dot slide={1}>
                             <img objectFit="cover" style={{ "object-fit": "cover", "height": "100%" }} src={`../../${Product.photo1}`} />
@@ -85,11 +94,17 @@ function SingleProductPage() {
                 </CarouselProvider>
             </div>
             <div className="productDescSinglePage">
-                <h1>{Product.title}</h1>
-                <p>{Product.desc}</p>
-                <p className="price">{Product.price}</p>
-                <p>{t('Quantity')}</p>
-                <input type="number" min="1" step="number" max="5" placeholder="0" />
+                <div className="titlee" >{Product.title}</div>
+                <div className="pricee" >{Product.price}</div>
+                {/* <p>Size</p>
+                <select>
+                    <option defaultChecked value="5">Select...</option>
+                    <option value="S">S</option>
+                    <option value="M">M</option>
+                    <option value="L">L</option>
+                </select> */}
+                <p style={{marginBottom: "7px", fontWeight: "bold", fontSize: '17px'}}>{t('Quantity')}</p>
+                <input value={quantity} onChange={(e) => handleChange(e.target.value)} type="number" min="1" step="number" max="9" placeholder="1" defaultValue="1" />
                 <div className="singlePageProdutsButtons">
                     <Button onClick={() => handleWishClick(Product.id)} variant="contained">
                         {
@@ -98,8 +113,18 @@ function SingleProductPage() {
                             <FavoriteBorderOutlinedIcon /> 
                         }
                     </Button>
+                    <Button variant="contained">
+                    <FacebookShareButton 
+                        url="https://relaxed-mirzakhani-12f178.netlify.app/production/single/rkxtTsN7RRX3PRjVDhIg"
+                        quote={Product.title}
+                    >
+                        SHARE ON MESSENGER
+                    </FacebookShareButton> 
+                    </Button>
                     <Button onClick={() => handleCartClick(Product.id)} variant="contained">Add to cart</Button>
                 </div>
+                <p style={{fontWeight: "bold", fontSize: '17px', marginBottom: "5px"}}>Description</p>
+                <p style={{opacity: "0.7", width: "410px"}}>{Product.desc}</p>
             </div>
             </>
         ) : ("") }

@@ -18,6 +18,7 @@ function Settings() {
 
     const [errorMessage, setErrorMessage] = useState(null)
     const [successMessage, setSuccessMessage] = useState(null)
+    const [successMessage1, setSuccessMessage1] = useState(null)
     const [blankName, setBlankName] = useState(null)
     const [blankLastName, setBlankLastName] = useState(null)
     const [state, setState] = useState({
@@ -120,6 +121,7 @@ function Settings() {
             setBlankLastName("this field is required")
         } else {
             dispatch(UpdateCredentials(data))
+            // setSuccessMessage1("credentials has changed successfully")
             setBlankName("")
             setBlankLastName("")
         }
@@ -161,6 +163,7 @@ function Settings() {
             <div className="redactCenter">
                 <h1>{t('My details')}</h1>
                 <h3>{t('Personal information')}</h3>
+                {successMessage1 && <p style={{ color: "green" }}>{successMessage1}</p>}
                 <form className="redactProfile" onSubmit={handleSubmit(onSubmit)}>
                     <div className="settingsEditForm">
                         <p>{t('Email')}</p>

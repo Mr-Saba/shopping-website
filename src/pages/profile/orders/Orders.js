@@ -8,9 +8,13 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import './orders.css'
 import { useTranslation } from "react-i18next";
+import {useSelector} from "react-redux"
 
 function Orders() {
     const {t} = useTranslation()
+
+    const {orders} = useSelector(state => state.OrderReducer)
+    
     return (
         <div className="orderSettings">
             <h1>{t('My orders')}</h1>
@@ -18,16 +22,16 @@ function Orders() {
                 <Table>
                     <TableHead>
                     <TableRow>
-                        <TableCell>{t('Order ID')}</TableCell>
-                        <TableCell>{t('Date Shipped')}</TableCell>
-                        <TableCell>{t('Address')}</TableCell>
+                        <TableCell style={{fontWeight: "700"}}>{t('Order ID')}</TableCell>
+                        <TableCell style={{fontWeight: "700"}}>{t('Date Shipped')}</TableCell>
+                        <TableCell style={{fontWeight: "700"}}>{t('Address')}</TableCell>
                     </TableRow>
                     </TableHead>
                     <TableBody>
                         <TableRow>
-                            <TableCell align="left">42567438</TableCell>
-                            <TableCell align="left">24-03-2004</TableCell>
-                            <TableCell align="left">test adress</TableCell>
+                            <TableCell align="left">{orders?.orderId}</TableCell>
+                            <TableCell align="left">{orders?.date}</TableCell>
+                            <TableCell align="left">{orders?.address}</TableCell>
                         </TableRow>
                     </TableBody>
                 </Table>

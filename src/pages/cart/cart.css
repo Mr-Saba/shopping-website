@@ -26,6 +26,7 @@
     padding: 25px;
     color: #ccdde7;
     background: #034488;
+    min-width: 400px;
 }
 .singleCartProduct img{
     height: 100%;
@@ -38,7 +39,7 @@
 .singleCartProductNumberButton input[type="number"] {
     height: 50px;
     width: 70px;
-    padding: 5px;
+    /* padding: 5px; */
 }
 .singleCartProduct .singleCartProductNumberButton button {
     background: none;
@@ -86,20 +87,27 @@
     display: grid;
     background: #034488;
     padding: 25px;
-    grid-row-gap: 30px;
+    grid-row-gap: 25px;
     color: #ccdde7;
-    grid-template-rows: 30px 30px 60px auto auto;
+    /* grid-template-rows: 30px 30px 60px auto auto; */
+    /* height: 720px; */
+    /* height: 500px; */
 }
 .adressFormCheckout {
     display: grid;
-    grid-template-columns: 100%;
-    grid-template-rows: 100px 100px 100px 20px 50px;
-    grid-row-gap: 20px;
+    /* grid-template-columns: 100%; */
+    /* grid-template-rows: 100px 100px 100px 20px 50px; */
+    height: auto;
+    grid-row-gap: 25px;
     color: #f1f1f1;
 }
 
+.addressFormInputs {
+    margin-bottom: 30px;
+}
+
 .adressFormCheckout .addressFormInputs input, .adressFormCheckout .addressFormInputs select {
-    padding: 0px 20px;
+    padding: 10px;
     width: 100%;
     margin-top: 10px;
     height: 60%;
@@ -128,3 +136,8 @@ p.noproductsIncart {
     display: grid;
     row-gap: 20px;
 }
+/* .checkButt{
+    padding-top: 2500px;
+    color: black;
+} */
+

@@ -46,7 +46,7 @@ function Adresses(props) {
                 address: document.getElementById("address").value,
                 code: document.getElementById("code").value,
                 default: document.getElementById("default").checked,
-                // checked: false
+                checked: document.getElementById("default").checked ? true : false
             }
             dispatch(AddAddress(cred))
         }
@@ -61,8 +61,8 @@ function Adresses(props) {
     }
     return (
         <div className="adressesSettings">
-            <h1>{t('My adresses')}</h1>
             <div className="adressGrid">
+            <h1 style={{color: "black"}}>My Adresses</h1>
                 {
                     addresses.length > 0 ? addresses.map(item => {
                         return (
@@ -76,7 +76,7 @@ function Adresses(props) {
                                 </div>}
                             </div>
                         )
-                    }) : <p>You have not added addresses yet</p>
+                    }) : <p style={{color: "black"}}>You have not added addresses yet</p>
                 }
             </div>
             <form className="adressForm" onSubmit={handleSubmit(onSubmit)}>
@@ -100,8 +100,8 @@ function Adresses(props) {
                     {errors.code && <p className="errorAdressFormInput">{errors.code?.message}</p>}
                 </div>
                 <div className="addressFormInputsCheckbox">
-                    <label for="default">Make this address default</label>
                     <input type="checkbox" id="default" />
+                    <label for="default">Make this address default</label>
                 </div>
                 <Button type="submit" variant="contained" >{t('Add address')}</Button>
             </form>

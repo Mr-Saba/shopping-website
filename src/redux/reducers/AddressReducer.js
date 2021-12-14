@@ -3,11 +3,13 @@ import {
     CHOOSE_ADDRESS,
     CHOOSE_NEW_ADDRESS,
     MAKE_ADDRESS_DEFAULT,
-    REMOVE_ADDRESS
+    REMOVE_ADDRESS,
+    SET_PRICE
 } from "../constants"
 
 const initialState = {
-    addresses: []
+    addresses: [],
+    fee: 0
 }
 
 const AddressReducer = (state = initialState, action) => {
@@ -40,25 +42,7 @@ const AddressReducer = (state = initialState, action) => {
             return {
                 ...state,
                 addresses: [...state.addresses]
-            }
-        // case CHOOSE_NEW_ADDRESS:
-        //     state.addresses.forEach(item => item.checked = false)
-        //     return {
-        //         ...state,
-        //         addresses: [...state.addresses]
-        //     }
-        // case CHOOSE_ADDRESS:
-        //     let selected = state.addresses.find(item => item.id === action.payload)
-        //     selected.checked = true
-        //     console.log(selected)
-        //     // let restedAddresses = state.addresses.filter(item => item.id !== action.payload)
-        //     // restedAddresses.forEach(item => {
-        //     //     item.default = false
-        //     // })
-        //     // return {
-        //     //     ...state,
-        //     //     addresses: [...state.addresses]
-        //     // }    
+            } 
         default: return state
     }
 }

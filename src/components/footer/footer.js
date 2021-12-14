@@ -22,6 +22,7 @@ function Footer() {
     };
     const CategoryFilter = (value) => {
         if(value !== "") {
+            dispatch(GetProducts())
             dispatch(FilterByCategory(value))
         } else{
             dispatch(GetProducts())
