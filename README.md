@@ -1,4 +1,2 @@
 ## საიტის ლინკი :
-* https://relaxed-mirzakhani-12f178.netlify.app/  
-
-react-share
+* https://distracted-roentgen-73ad67.netlify.app/production
