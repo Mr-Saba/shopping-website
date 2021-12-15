@@ -46,7 +46,9 @@ const ProductReducer = (state = initialState, action) => {
       } else {
         filteredData1 = state.filteredProducts.filter((item) => {
           if (item.category === action.payload.value) {
-            state.filteredProducts.push(item);
+            if(state.filteredProducts.length < 3) {
+              state.filteredProducts.push(item)
+            }
             return item;
           }
         });
@@ -131,8 +133,14 @@ const ProductReducer = (state = initialState, action) => {
             productPrice >= action.payload.price1 &&
             productPrice <= action.payload.price2
           ) {
-            state.filteredProducts.push(item)
+            if(state.filteredProducts.length < 3) {
+              state.filteredProducts.push(item)
+            }
+            console.log(item)
             return item;
+          }
+          else {
+            return null;
           }
         })
       }
@@ -148,8 +156,6 @@ const ProductReducer = (state = initialState, action) => {
           for(let i=0; i<action.payload.length; i++) {
             if (item.color.toLowerCase().includes(action.payload[i].toLowerCase())) {
             state.filteredProducts.push(item);
-            console.log(state.filteredProducts)
-            console.log(state.filteredProducts.length)
             return item;
             }
           }
@@ -158,7 +164,9 @@ const ProductReducer = (state = initialState, action) => {
           filteredData4 = state.filteredProducts.filter((item) => {
             for(let i=0; i<action.payload.length; i++) {
               if (item.color.toLowerCase().includes(action.payload[i].toLowerCase())) {
-              state.filteredProducts.push(item);
+                if(state.filteredProducts.length < 3) {
+                  state.filteredProducts.push(item)
+                }
               return item;
               }
             }

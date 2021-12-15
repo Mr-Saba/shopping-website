@@ -2,18 +2,14 @@ import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import './cart.css'
 import { useTranslation } from "react-i18next";
-import Photo from '../../photos/1.jpg'
 import ClearIcon from '@material-ui/icons/Clear';
 import { Button } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core';
-import Products from '../production/Products';
 import { AddToCart, AddToWished, RemoveFromCart, RemoveFromWished, ChangeQuantity, GoToCheckout } from "../../redux/actions"
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
-import { v4 as uuidv4 } from 'uuid';
 import {useHistory} from 'react-router'
-import { firestore } from '../../firebase/Configuration';
 
 function Cart() {
 
@@ -21,8 +17,9 @@ function Cart() {
 
     const [deliveryPrice, setDeliveryPrice] = useState(5)
     const [shown, SetShown] = useState(false) 
+    const [checked, SetChecked] = useState(false) 
 
-    const [quantity, setQuantity] = useState(1)
+
 
     const useStyles = makeStyles({
         fullWidth: {
@@ -48,29 +45,27 @@ function Cart() {
     }, [])
 
     const handleCartedRemove = (id) => {
-        dispatch(RemoveFromCart(id))
         cartData.find(item => id === item.id).quantity = 1
+        dispatch(RemoveFromCart(id))
     }
 
     const handleWishedRemove = (id) => {
-        dispatch(RemoveFromWished(id))
         wishedData.find(item => id === item.id).quantity = 1
-    }
-
-    const moveToWished = (id) => {
-        dispatch(RemoveFromCart(id))
-        dispatch(AddToWished(id, quantity))
-    }
-
-    const moveToCart = (id) => {
         dispatch(RemoveFromWished(id))
-        dispatch(AddToCart(id, quantity))
+    }
+
+    const moveToWished = (id, amount) => {
+        dispatch(RemoveFromCart(id))
+        dispatch(AddToWished(id, amount))
+    }
+
+    const moveToCart = (id, amount) => {
+        dispatch(RemoveFromWished(id))
+        dispatch(AddToCart(id, amount))
     }
 
     const handleChange = (id, value) => {
         dispatch(ChangeQuantity(id, value))
-        setQuantity(value)
-        cartData.find(item => id === item.id).quantity = value
     }
 
     const total = () => {
@@ -91,7 +86,7 @@ function Cart() {
             name: user.name,
             surname:  user.surname,
             email: user?.email,
-            city: document.getElementById("city").value.substring(1),
+            // city: document.getElementById("city").value.substring(1),
             address: document.getElementById("address").value,
             postal_code: document.getElementById("code").value,
             fullFee: total() + deliveryPrice,
@@ -100,6 +95,33 @@ function Cart() {
         dispatch(GoToCheckout(info))
         if(data) history.push("/checkout")
     }
+    }
+    const ClickFunction = async (data) => {
+        let checkedAdress        
+        let all = document.getElementsByName("address")
+        for (let i = 0; i <= all.length - 1; i++) {
+            if(all[i].checked === true) {
+                checkedAdress = all[i]
+            }
+        }
+        let checked = addresses.find(item => item.id === checkedAdress.id)
+        if(!user) history.push('/log-in')
+        else {
+            console.log(addresses)
+            const info = {
+                name: user.name,
+                surname:  user.surname,
+                email: user?.email,
+                // city: document.getElementById("city").value.substring(1),
+                address: checked.address,
+                postal_code: checked.code,
+                fullFee: total() + deliveryPrice,
+                phone: user.number
+            }
+            dispatch(GoToCheckout(info))
+            console.log(document.getElementById)
+            if(cartData.length !==0)  history.push("/checkout")
+        }
     }
     
     const schema = yup.object().shape({
@@ -160,8 +182,8 @@ function Cart() {
                                     <p>Price: {item.price}</p>
                                 </div>
                                 <div className="singleCartProductNumberButton">
-                                    <input onChange={(e) => handleChange(item.id, e.target.value)} defaultValue={item.quantity} type="number" min="1" step="number" max="5" placeholder="1" />
-                                    <button onClick={() => moveToWished(item.id)} style={{ color: "#ccdde79f" }}>{t('Move to wish list')}</button>
+                                    <input onChange={(e) => handleChange(item.id, e.target.value)} value={item.quantity} type="number" min="1" step="number" max="5" placeholder="1" />
+                                    <button onClick={() => moveToWished(item.id, item.quantity)} style={{ color: "#ccdde79f" }}>{t('Move to wish list')}</button>
                                 </div>
                                 <div>
                                     <p>Total amount: {item.quantity * parseInt(item.price.slice(0, -1))}₾</p>
@@ -183,7 +205,7 @@ function Cart() {
                                 </div>
                                 <div className="singleCartProductNumberButton">
                                     <div>quantity: {item.quantity}</div>
-                                    <button onClick={() => moveToCart(item.id)} style={{ color: "#ccdde79f" }}>{t('Move to cart')}</button>
+                                    <button onClick={() => moveToCart(item.id, item.quantity)} style={{ color: "#ccdde79f" }}>{t('Move to cart')}</button>
                                 </div>
 
                                 <div>
@@ -218,8 +240,8 @@ function Cart() {
                                     <div className="subtotalCheckoutHorisontal">
                                         {item.default === true ?
                                             <>
-                                                <label htmlFor={item.id + "default"} style={{ "cursor": "pointer" }}>{item.address}<span style={{ "opacity": "0.5", "marginLeft": "10px" }}>(default)</span></label>
-                                                <input onClick={() => func1(item.id)} type="radio" defaultChecked id={item.id + "default"} name="address" style={{ "cursor": "pointer" }} />
+                                                <label htmlFor={item.id} style={{ "cursor": "pointer" }}>{item.address}<span style={{ "opacity": "0.5", "marginLeft": "10px" }}>(default)</span></label>
+                                                <input onClick={() => func1(item.id)} type="radio" defaultChecked id={item.id} name="address" style={{ "cursor": "pointer" }} />
                                             </> :
                                             <>
                                                 <label htmlFor={item.id} style={{ "cursor": "pointer" }}>{item.address}</label>
@@ -264,7 +286,7 @@ function Cart() {
                         : '' }
                         {/* amis onklikis onsuccessze moxdes addorder */}
                     </form>
-                    <Button id="lastButt" style={cartData.length === 0 ? { "opacity": "0.6", "cursor": " not-allowed", "width": "100%", "height": "50px" } : {}} variant="contained">Checkout</Button>
+                    <Button onClick={() => ClickFunction()} id="lastButt" style={cartData.length === 0 ? { "opacity": "0.6", "cursor": " not-allowed", "width": "100%", "height": "50px" } : {}} variant="contained">Checkout</Button>
                 </div>
             </div>
         </div>

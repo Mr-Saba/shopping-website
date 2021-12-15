@@ -30,6 +30,7 @@ class CheckoutForm extends React.Component {
   handleSubmit = async (ev) => {
 
     const {name, surname, email, phone, postal_code, city, address, fullFee} = this.props.info;
+    console.log(this.props.info)
 
     ev.preventDefault()
     

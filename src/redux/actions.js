@@ -93,7 +93,6 @@ const UpdatePassword = (data) => async dispatch => {
         firestore.collection("users").doc(user.uid).update({
             password: bcrypt.hashSync(data.password, bcrypt.genSaltSync())
         })
-        console.log("pass changed")       
         dispatch({
             type: UPDATE_EMAIL,
             payload: user,
@@ -150,7 +149,7 @@ const AddToCart = (id, quantity) => async (dispatch, getState) => {
 const RemoveFromCart = (id) => async dispatch => {
     dispatch({
         type: REMOVE_FROM_CART,
-        payload: id
+        payload: {id}
     })
 }
 const AddToWished = (id, quantity) => async (dispatch, getState) => {

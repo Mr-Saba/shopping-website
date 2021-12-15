@@ -24,7 +24,6 @@ function ProductsPage() {
   const [price1, setPrice1] = useState(null);
   const [price2, setPrice2] = useState(null);
   const [color, setColor] = useState([])
-  const [disabled, setDisabled] = useState(false)
 
 
   const { products, filteredProducts } = useSelector(
@@ -69,20 +68,18 @@ function ProductsPage() {
   };
 
   const CategoryFilter = (e) => {
-    if(color.length > 0) {
-      dispatch(ColorFilter(color))
-    }
     if(checked === true) {
       dispatch(FilterByCategory(value))
+    }
+    if(color.length > 0) {
+      dispatch(ColorFilter(color))
     }
     if(price1 !== null && price2 !== null) {
       dispatch(FilterByPrice(price1, price2))
     }
     else {
       GetProducts()
-      setDisabled(false)
     }
-    setDisabled(true)
   };
 
   const sorting = (val) => {
@@ -93,8 +90,6 @@ function ProductsPage() {
     }
   };
   const Reset = () => {
-    setDisabled(false)
-
     document.getElementById("category1").checked = false;
     document.getElementById("category2").checked = false;
     document.getElementById("category3").checked = false;
@@ -110,8 +105,8 @@ function ProductsPage() {
     }
   };
 
-  const handleCLick = (id) => {
-    dispatch(AddToWished(id));
+  const handleCLick = (id, amount) => {
+    dispatch(AddToWished(id, amount));
   };
 
   const colorsFunc = (e) => {
@@ -216,7 +211,7 @@ function ProductsPage() {
             </div>
           </div>
           <div className="productPageButtonsFilter">
-            <Button disabled={disabled} id="filterButton" onClick={(e) => CategoryFilter(e)} variant="contained">
+            <Button id="filterButton" onClick={(e) => CategoryFilter(e)} variant="contained">
               {t("Filter")}
             </Button>
             <Button onClick={() => Reset()} variant="contained">
@@ -255,7 +250,7 @@ function ProductsPage() {
                     <Link to={`/production/single/${item.id}`}>
                       <img src={item.photo} />
                     </Link>
-                    <button onClick={() => handleCLick(item.id)}>
+                    <button onClick={() => handleCLick(item.id, item.quantity)}>
                       {wishedData.find((x) => x.id === item.id) ? (
                         <FavoriteOutlinedIcon style={{ color: "#f50057" }} />
                       ) : (

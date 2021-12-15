@@ -22,7 +22,7 @@ const CartReducer = (state = initialState, action) => {
       let existed_item = state.cartData.find(
         (item) => action.payload.id === item.id
       );
-      if (existed_item == undefined) {
+      if (existed_item === undefined) {
         return {
           ...state,
           cartData: [...state.cartData, carted],
@@ -33,26 +33,24 @@ const CartReducer = (state = initialState, action) => {
         };
       }
     case REMOVE_FROM_CART:
-      // let itemToRemove = state.cartData.find(item => action.payload === item.id)
+      // state.cartData = []
       let new_items = state.cartData.filter(
-        (item) => action.payload !== item.id
+        (item) => action.payload.id !== item.id
       );
       return {
         ...state,
         cartData: new_items,
       };
     case ADD_TO_WISHED:
-      let clicked = action.payload.productslist.find(
-        (item) => item.id === action.payload.id
-      );
-      // clicked.quantity = action.payload.quantity
+      let clicked = action.payload.productslist.find((item) => item.id === action.payload.id);
+        clicked.quantity = action.payload.quantity
       let existed_item1 = state.wishedData.find(
         (item) => action.payload.id === item.id
       );
       let new_items2 = state.wishedData.filter(
         (item) => action.payload.id !== item.id
       );
-      if (existed_item1 == undefined) {
+      if (existed_item1 === undefined) {
         return {
           ...state,
           wishedData: [...state.wishedData, clicked],
@@ -74,7 +72,7 @@ const CartReducer = (state = initialState, action) => {
         wishedData: new_items1,
       };
     case CHANGE_QUANTITY:
-      let addedItem = action.payload.productslist.find(
+      let addedItem = state.cartData.find(
         (item) => item.id === action.payload.id
       );
       addedItem.quantity = action.payload.value;
