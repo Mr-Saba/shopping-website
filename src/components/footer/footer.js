@@ -145,7 +145,6 @@ function Footer() {
                             >
                             <option value="en">{t('English')}</option>
                             <option value="ka">{t('Georgian')}</option>
-                            <option value="ru">{t('Russian')}</option>
                             </NativeSelect>
                         </FormControl>
                     </li>

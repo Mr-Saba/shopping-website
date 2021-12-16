@@ -115,7 +115,7 @@ function SingleProductPage() {
                     </Button>
                     <Button variant="contained">
                     <FacebookShareButton 
-                        url="https://relaxed-mirzakhani-12f178.netlify.app/production/single/rkxtTsN7RRX3PRjVDhIg"
+                        url={window.location.href}
                         quote={Product.title}
                     >
                         SHARE ON MESSENGER
