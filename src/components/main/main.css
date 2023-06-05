@@ -1,7 +1,7 @@
 .main .sliderAndContent {
     display: grid;
     grid-template-columns: 62% 38%;
-    padding: 40px 30px 0px 30px;
+    padding: 40px 20% 0px 20%;
     min-width: 450px;
 }
 .main{
